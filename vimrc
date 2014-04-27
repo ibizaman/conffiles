@@ -82,3 +82,10 @@ inoremap <right> <nop>
 inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
+
+" NERDTree
+nnoremap <leader>k :NERDTreeToggle<return>
+let NERDTreeWinPos = "right"
+let NERDTreeWinSize = 50
+let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam']
+let NERDTreeQuitOnOpen = 1
