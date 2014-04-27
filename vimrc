@@ -8,6 +8,7 @@ set autoindent
 
 " syntax
 syntax enable
+colorscheme mustang
 
 " filetypes
 set nocompatible
