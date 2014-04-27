@@ -13,6 +13,7 @@ colorscheme mustang
 " filetypes
 set nocompatible
 filetype plugin indent on
+au FileType gitcommit set foldmethod=manual
 
 set showmode
 set showcmd
