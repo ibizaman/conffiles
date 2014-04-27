@@ -9,6 +9,7 @@ set autoindent
 " syntax
 syntax enable
 colorscheme mustang
+au BufNewFile,BufRead *.cpp set syntax=cpp11
 
 " filetypes
 set nocompatible
