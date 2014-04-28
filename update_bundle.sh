@@ -14,6 +14,6 @@ branch="$1"
 
 git checkout "$branch" \
 && git pull \
-&& git checkout master \
+&& git checkout "@{-1}" \
 && git merge --squash -s subtree --no-commit "$branch" \
 || exit 1
