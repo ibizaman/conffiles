@@ -1,0 +1,23 @@
+[user]
+	email = ibizapeanut@gmail.com
+	name = Pierre Penninckx
+[color]
+	ui = true
+[alias]
+        lol1 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        lol = log --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        lola = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	d = difftool
+        st = status -sb
+[core]
+	excludesfile = ~/.gitignore
+	ignorecase = false
+[credential]
+	helper = osxkeychain
+[diff]
+	tool = vimdiff
+        algorithm = histogram
+[difftool]
+	prompt = false
+[push]
+	default = simple
