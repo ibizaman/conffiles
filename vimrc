@@ -90,3 +90,6 @@ let NERDTreeWinPos = "right"
 let NERDTreeWinSize = 50
 let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam']
 let NERDTreeQuitOnOpen = 1
+
+" easy-align
+vmap <Enter> <Plug>(EasyAlign)
