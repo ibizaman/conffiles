@@ -17,3 +17,7 @@ To add a bundle, run:
 To update a bundle later on, run:
 
     ./update_bundle.sh nerdtree
+
+And don't forget to reload the helptags afterwards with:
+
+    :Helptags   # in vim
