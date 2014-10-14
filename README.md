@@ -9,6 +9,8 @@ included with a simple `git clone`, so install with:
     ln -s .vim/vimrc .vimrc
     ln -s .vim/.gitignore .
     ln -s .vim/.gitconfig .
+    # install youcompleteme's submodules
+    git submodule update --init --recursive
 
 To add a bundle, run:
 
