@@ -18,6 +18,7 @@ filetype plugin indent on
 set showmode
 set showcmd
 set wildmenu
+set wildmode=list:longest
 set ttyfast
 set ruler
 set backspace=indent,eol,start
