@@ -14,7 +14,6 @@ au BufNewFile,BufRead *.cpp set syntax=cpp11
 " filetypes
 set nocompatible
 filetype plugin indent on
-au FileType gitcommit set foldmethod=manual
 
 set showmode
 set showcmd
@@ -26,6 +25,10 @@ set laststatus=2
 set history=200
 
 set nocompatible
+
+" disable Background Color Erase
+" http://stackoverflow.com/a/15095377/1013628
+set t_ut=
 
 " paste
 set pt=<F11>
