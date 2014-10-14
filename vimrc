@@ -30,10 +30,6 @@ set nocompatible
 " paste
 set pt=<F11>
 
-" code
-set foldmethod=syntax
-set foldnestmax=2
-
 " search
 set ignorecase
 set smartcase
