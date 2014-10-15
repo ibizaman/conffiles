@@ -10,7 +10,10 @@ included with a simple `git clone`, so install with:
     ln -s .vim/.gitignore .
     ln -s .vim/.gitconfig .
     # install youcompleteme's submodules
+    cd .vim
     git submodule update --init --recursive
+    cd bundle/youcompleteme
+    [EXTRA_CMAKE_ARGS='...'] ./install.sh [--clang-completer [--system-libclang]] [--omnisharp-completer]
 
 To add a bundle, run:
 
