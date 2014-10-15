@@ -99,3 +99,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " make youcompleteme compatible with snipmate
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+
+" allow per-project .vimrc
+set exrc
+set secure " disable unsafe commands in local .vimrc
