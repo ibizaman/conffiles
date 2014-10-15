@@ -94,3 +94,8 @@ let NERDTreeQuitOnOpen = 1
 
 " easy-align
 vmap <Enter> <Plug>(EasyAlign)
+
+" youcompleteme
+" make youcompleteme compatible with snipmate
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
