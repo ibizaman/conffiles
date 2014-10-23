@@ -207,6 +207,10 @@ vmap <Enter> <Plug>(EasyAlign)
 let g:syntastic_check_on_open = 1
 " }}}
 
+" snipmate --------------------------------------------------------- {{{
+let g:snips_author = 'Pierre Penninckx'
+" }}}
+
 " youcompleteme ---------------------------------------------------- {{{
 " make youcompleteme compatible with snipmate
 let g:ycm_key_list_select_completion=[]
