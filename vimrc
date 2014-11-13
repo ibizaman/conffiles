@@ -92,6 +92,13 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
+
+" }}}
+
+" Abbreviations ---------------------------------------------------- {{{
+
+iabbrev @@ ibizapeanut@gmail.com
+
 " }}}
 
 " Autocommands ----------------------------------------------------- {{{
