@@ -115,6 +115,11 @@ augroup save
     au BufLeave,FocusLost * silent! write
 augroup END
 
+augroup text
+    au!
+    au FileType mkd,txt,rst setlocal spell spelllang=en_us
+augroup END
+
 augroup cpp
     au!
     au BufNewFile,BufRead *.cpp setlocal syntax=cpp11
