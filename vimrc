@@ -125,6 +125,13 @@ vnoremap <leader>q gq
 nnoremap <tab> %
 vnoremap <tab> %
 
+" fast saving
+nnoremap <leader>w :w!<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+
 " split windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
