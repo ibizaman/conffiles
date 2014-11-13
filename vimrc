@@ -12,7 +12,6 @@ set autoindent
 " syntax
 syntax enable
 colorscheme mustang
-au BufNewFile,BufRead *.cpp set syntax=cpp11
 
 " filetypes
 set nocompatible
@@ -95,6 +94,15 @@ inoremap <right> <nop>
 inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
+
+" }}}
+
+" Autocommands ----------------------------------------------------- {{{
+
+augroup cpp
+    au!
+    au BufNewFile,BufRead *.cpp setlocal syntax=cpp11
+augroup END
 
 " }}}
 
