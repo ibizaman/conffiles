@@ -13,8 +13,10 @@ set autoindent
 syntax enable
 colorscheme mustang
 
-" filetypes
+" vi is in the past
 set nocompatible
+
+" enable filetype plugins
 filetype plugin indent on
 
 set showmode
@@ -22,13 +24,35 @@ set showcmd
 set wildmenu
 set wildmode=list:longest
 set ttyfast
+" always show current position
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set history=200
+set history=1000
 set fileformats=unix
 
-set nocompatible
+" turn magic on for regexp
+set magic
+
+" no annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+
+" small timeout for key codes but let me think at the mapping
+set timeout
+set timeoutlen=3000
+set ttimeoutlen=100
+
+" set utf8 as standard encoding
+set encoding=utf8
+
+" use Unix as the standard file type
+set fileformats=unix,dos,mac
+
+" persistent undo
+set undodir=~/.vim_undo
+set undofile
 
 " disable Background Color Erase
 " http://stackoverflow.com/a/15095377/1013628
@@ -52,6 +76,9 @@ if executable("par")
     set formatprg=par\ -w72e\ \|sed\ 's/[\ ]*$//'
 endif
 set formatoptions=croqn1
+
+" set 7 lines to the cursor when moving vertically with j and k
+set scrolloff=7
 
 " tab/menu display
 set showtabline=0
