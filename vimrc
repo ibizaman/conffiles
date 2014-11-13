@@ -92,6 +92,23 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
+" shortcuts
+" swap current line with the following
+nnoremap <leader>- ddp
+" swap current line with the previous one
+nnoremap <leader>_ ddkP
+" delete line in insert mode
+inoremap <c-d> <esc>ddi
+" select word
+nnoremap <space> viw
+" upper case word
+nnoremap <leader>u viwUe
+inoremap <leader>u <esc>viwUea
+" edit .vimrc
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>
+" easy escape
+inoremap jk <esc>
 
 " }}}
 
