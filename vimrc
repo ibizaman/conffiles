@@ -125,6 +125,19 @@ augroup cpp
     au BufNewFile,BufRead *.cpp setlocal syntax=cpp11
 augroup END
 
+
+" }}}
+
+" Movements -------------------------------------------------------- {{{
+
+augroup movements_markdown
+    au!
+    " move to text in previous heading
+    au FileType mkd onoremap <buffer> ih :<c-u>execute "normal! ?^\\([-=]\\)\\1\\+$\r:noh\rkvg_"<cr>
+    " move to text in previous heading and take also the line under it
+    au FileType mkd onoremap <buffer> ah :<c-u>execute "normal! ?^\\([-=]\\)\\1\\+$\r:noh\rg_vk0"<cr>
+augroup END
+
 " }}}
 
 " Plugins ---------------------------------------------------------- {{{
