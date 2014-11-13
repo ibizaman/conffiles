@@ -103,6 +103,13 @@ iabbrev @@ ibizapeanut@gmail.com
 
 " Autocommands ----------------------------------------------------- {{{
 
+augroup layout
+    au!
+    au BufNewFile,BufRead,BufWritePre *.html,*.xml setlocal nowrap
+    " auto pretty format
+    au BufRead,BufWritePre *.html,*.xml :normal gg=G
+augroup END
+
 augroup save
     au!
     au BufLeave,FocusLost * silent! write
