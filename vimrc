@@ -3,6 +3,7 @@ call pathogen#infect()
 " Basic Settings --------------------------------------------------- {{{
 
 let mapleader = ","
+let maplocalleader = ";"
 
 " tabs
 set softtabstop=4 shiftwidth=4 expandtab
