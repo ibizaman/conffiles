@@ -213,6 +213,12 @@ augroup vimscript
     au FileType vim setlocal foldexpr=FoldingLevelVimscript(v:lnum)
 augroup END
 
+" delete trailing white space on save
+augroup whitespace
+    au!
+    au BufWrite *.py,*.cpp,*.h,*.hpp :call DeleteTrailingWS()
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
@@ -336,6 +342,12 @@ function! VisualSelection(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+function! DeleteTrailingWS()
+    execute "normal mz"
+    %s/\s\+$//ge
+    execute "normal `z"
+endfunc
 
 " }}}
 
