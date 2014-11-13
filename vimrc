@@ -167,6 +167,12 @@ augroup cpp
     au BufNewFile,BufRead *.cpp setlocal syntax=cpp11
 augroup END
 
+augroup vimscript
+    au!
+    au FileType vim nnoremap <leader>h :call HeadingVimscript()<cr>
+    au FileType vim setlocal foldmethod=expr
+    au FileType vim setlocal foldexpr=FoldingLevelVimscript(v:lnum)
+augroup END
 
 " }}}
 
@@ -210,6 +216,62 @@ let g:ycm_key_list_previous_completion=[]
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
+
+" }}}
+
+" Helper Functions ------------------------------------------------- {{{
+
+" Remove whitespace in front, add prefix to line if needed, add enough
+" of the given character to fill the line until textwidth then add
+" given suffix
+function! FillToTextwidthAndKeepText(prefix, repetition, suffix)
+    let has_whitespace=match(getline("."), "^ \\+")!=-1
+    if has_whitespace
+        " delete whitespace
+        execute "normal! 0d/[^ ]\<cr>"
+    endif
+
+    let no_prefix=match(getline("."), "^".a:prefix)==-1
+    if no_prefix
+        " add the prefix and a space
+        execute "normal! 0i".a:prefix." \<esc>"
+    endif
+    nohlsearch
+
+    " go to the end and get the missing number of characters before
+    " textwidth, minus 2 because we want a space before and after
+    normal $
+    let missing=&textwidth-col(".")-len(a:suffix)-2
+    execute "normal a " . repeat(a:repetition, missing) . " " . a:suffix
+endfunction
+
+
+" Transform the line in either a opening or closing vimscript folding
+" marker
+function! HeadingVimscript()
+    if len(getline("."))==0
+        " add closing heading
+        normal i" }}}
+    else
+        call FillToTextwidthAndKeepText('"', '-', '{{{')
+    endif
+endfunction
+
+
+" Intelligent vimscript folding level indicator, filtering out false
+" positives like {{{ anywhere in a comment or in a normal line
+function! FoldingLevelVimscript(lnum)
+    if match(getline(a:lnum), "^\".*{{{$")!=-1
+        " add one fold level
+        return "a1"
+    elseif match(getline(a:lnum), "^\".*}}}$")!=-1
+        " substract one fold level
+        return "s1"
+    else
+        " same fold level as previous line
+        return "="
+    endif
+endfunction
 
 " }}}
 
