@@ -174,6 +174,9 @@ inoremap jk <esc>
 vnoremap <silent> * :call VisualSelection('f')n<CR>
 vnoremap <silent> # :call VisualSelection('b')n<CR>
 
+" toggle spell checking
+nnoremap <leader>ss :setlocal spell!<cr>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
