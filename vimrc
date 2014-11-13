@@ -53,8 +53,6 @@ if executable("par")
 endif
 set formatoptions=croqn1
 
-au FocusLost * :wa
-
 " tab/menu display
 set showtabline=0
 set swb=usetab
@@ -98,6 +96,11 @@ vnoremap <F1> <nop>
 " }}}
 
 " Autocommands ----------------------------------------------------- {{{
+
+augroup save
+    au!
+    au BufLeave,FocusLost * silent! write
+augroup END
 
 augroup cpp
     au!
