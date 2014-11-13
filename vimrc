@@ -1,5 +1,7 @@
 call pathogen#infect()
 
+" Basic Settings --------------------------------------------------- {{{
+
 let mapleader = ","
 
 " tabs
@@ -41,7 +43,6 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
 
 " text display
 set wrap
@@ -51,15 +52,24 @@ if executable("par")
     set formatprg=par\ -w72e\ \|sed\ 's/[\ ]*$//'
 endif
 set formatoptions=croqn1
-nnoremap <leader>q gqip
-vnoremap <leader>q gq
-im <C-B> <C-O>:setl sr! fo<C-R>=strpart("-+",&sr,1)<CR>=tc<CR>
 
 au FocusLost * :wa
 
 " tab/menu display
 set showtabline=0
 set swb=usetab
+
+" }}}
+
+" Mappings --------------------------------------------------------- {{{
+
+" cancel search highlight
+nnoremap <leader><space> :noh<cr>
+
+" easy formatting
+nnoremap <leader>q gqip
+vnoremap <leader>q gq
+" inoremap <C-B> <C-O>:setl sr! fo<C-R>=strpart("-+",&sr,1)<CR>=tc<CR>
 
 " easy matching
 nnoremap <tab> %
@@ -85,25 +95,36 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
-" NERDTree
+" }}}
+
+" Plugins ---------------------------------------------------------- {{{
+
+" NERDTree --------------------------------------------------------- {{{
 nnoremap <leader>k :NERDTreeToggle<return>
 let NERDTreeWinPos = "right"
 let NERDTreeWinSize = 50
 let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam', '\.vim$', '__pycache__', '*\.pyc']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_console_startup = 1
+" }}}
 
-" easy-align
+" easy-align ------------------------------------------------------- {{{
 vmap <Enter> <Plug>(EasyAlign)
+" }}}
 
-" syntactic
+" syntactic -------------------------------------------------------- {{{
 let g:syntastic_check_on_open = 1
+" }}}
 
-" youcompleteme
+" youcompleteme ---------------------------------------------------- {{{
 " make youcompleteme compatible with snipmate
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+" }}}
 
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
+
+" }}}
+
