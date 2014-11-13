@@ -59,6 +59,31 @@ set swb=usetab
 
 " }}}
 
+" Statusline ------------------------------------------------------- {{{
+
+hi StatusLine   guifg=#808080 guibg=#202020 gui=none ctermfg=244 ctermbg=235 cterm=bold
+hi StatusLineNC guifg=#939395 guibg=#101010 gui=none ctermfg=238 ctermbg=235
+
+set statusline=
+" buffer number
+set statusline+=\ %04n
+" trimmed full path to file
+set statusline+=\ %.20F
+" file type
+set statusline+=%(\ %y%)
+" modified - readonly - help - preview group
+set statusline+=%(\ [%M%R%H%W]%)
+" quickfix or location list
+set statusline+=%(\ %q%)
+" switch to the right side
+set statusline+=%=
+" current line number / total line number, current column and percentage
+set statusline+=%25(\ %l/%-4L:%-3c\ -%p%%-\ %)
+" value of byte under cursor
+set statusline+=%10(\ %b\ 0x%02B\ %)
+
+" }}}
+
 " Mappings --------------------------------------------------------- {{{
 
 " cancel search highlight
