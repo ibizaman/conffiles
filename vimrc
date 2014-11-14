@@ -84,6 +84,10 @@ set scrolloff=7
 set showtabline=0
 set swb=usetab
 
+" c++ indent
+" do not indent private, protected and public
+set cinoptions=g-1
+
 " }}}
 
 " Statusline ------------------------------------------------------- {{{
