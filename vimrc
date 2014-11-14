@@ -92,7 +92,7 @@ set cinoptions=g-1
 
 " Statusline ------------------------------------------------------- {{{
 
-hi StatusLine   guifg=#808080 guibg=#202020 gui=none ctermfg=244 ctermbg=235 cterm=bold
+hi StatusLine   guifg=#808080 guibg=#202020 gui=none ctermfg=244 ctermbg=237 cterm=bold
 hi StatusLineNC guifg=#939395 guibg=#101010 gui=none ctermfg=238 ctermbg=235
 
 set statusline=
