@@ -222,6 +222,11 @@ augroup whitespace
     au BufWrite *.py,*.cpp,*.h,*.hpp :call DeleteTrailingWS()
 augroup END
 
+augroup diff
+    au!
+    au BufEnter * :call MapDiffputIfBufferIsADiff()
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
@@ -362,6 +367,17 @@ function! DeleteTrailingWS()
     %s/\s\+$//ge
     execute "normal `z"
 endfunc
+
+
+function! MapDiffputIfBufferIsADiff()
+    if &diff
+        nnoremap <buffer> <leader>n :diffput<cr>:diffup<cr>
+        vnoremap <buffer> <leader>n :diffput<cr>:diffup<cr>
+        nnoremap <buffer> <leader>l :diffget<cr>:diffup<cr>
+        vnoremap <buffer> <leader>l :diffget<cr>:diffup<cr>
+        nnoremap <buffer> <leader>u u:diffup<cr>
+    endif
+endfunction
 
 " }}}
 
