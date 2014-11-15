@@ -215,7 +215,7 @@ augroup END
 
 augroup vimscript
     au!
-    au FileType vim nnoremap <leader>h :call HeadingVimscript()<cr>
+    au FileType vim nnoremap <leader>h :call HeadingVimscript()
     au FileType vim setlocal foldmethod=expr
     au FileType vim setlocal foldexpr=FoldingLevelVimscript(v:lnum)
 augroup END
