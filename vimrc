@@ -251,7 +251,7 @@ augroup END
 nnoremap <leader>k :NERDTreeToggle<return>
 let NERDTreeWinPos = "right"
 let NERDTreeWinSize = 50
-let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam', '\.vim$', '__pycache__', '*\.pyc']
+let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam', '__pycache__', '*\.pyc']
 let NERDTreeQuitOnOpen = 1
 " }}}
 
