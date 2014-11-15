@@ -285,11 +285,6 @@ let g:ctrlp_user_command = {
 let g:ctrlp_follow_symlinks = 1
 " }}}
 
-" speeddating ------------------------------------------------------ {{{
-SpeedDatingFormat %d/%m/%y
-SpeedDatingFormat %d/%m/%Y
-" }}}
-
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
