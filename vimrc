@@ -231,6 +231,11 @@ augroup diff
     au BufEnter * :call MapDiffputIfBufferIsADiff()
 augroup END
 
+augroup rebase
+    au!
+    au FileType gitrebase nnoremap <cr> :call RebaseActionToggle()
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
@@ -381,6 +386,14 @@ function! MapDiffputIfBufferIsADiff()
         vnoremap <buffer> <leader>l :diffget<cr>:diffup<cr>
         nnoremap <buffer> <leader>u u:diffup<cr>
     endif
+endfunction
+
+function! RebaseActionToggle()
+    let line = getline(".")
+    let result = matchstr(line, "^\\a")
+    let transitions = {'p': 'squash', 's': 'edit', 'e': 'fixup', 'f': 'pick'}
+    execute "normal! ^cw" . transitions[result]
+    execute "normal! 0"
 endfunction
 
 " }}}
