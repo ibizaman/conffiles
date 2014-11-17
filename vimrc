@@ -50,6 +50,11 @@ set encoding=utf8
 " use Unix as the standard file type
 set fileformats=unix,dos,mac
 
+" turn backup off, since most stuff is in git anyway...
+set nobackup
+set nowritebackup
+set noswapfile
+
 " persistent undo
 set undodir=~/.vim_undo
 set undofile
@@ -66,7 +71,9 @@ set ignorecase
 set smartcase
 set incsearch
 set showmatch
+" set the option, but deactivate on .vimrc loading
 set hlsearch
+nohlsearch
 
 " text display
 set wrap
