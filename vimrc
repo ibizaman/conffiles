@@ -398,7 +398,7 @@ endfunction
 function! RebaseActionToggle()
     let line = getline(".")
     let result = matchstr(line, "^\\a")
-    let transitions = {'p': 'squash', 's': 'edit', 'e': 'fixup', 'f': 'pick'}
+    let transitions = {'p': 'fixup', 'f': 'squash', 's': 'edit', 'e': 'pick'}
     execute "normal! ^cw" . transitions[result]
     execute "normal! 0"
 endfunction
