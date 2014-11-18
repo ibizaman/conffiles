@@ -240,7 +240,7 @@ augroup END
 
 augroup rebase
     au!
-    au FileType gitrebase nnoremap <cr> :call RebaseActionToggle()
+    au FileType gitrebase nnoremap <cr> :call RebaseActionToggle()<cr>
 augroup END
 
 " }}}
