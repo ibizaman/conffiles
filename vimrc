@@ -175,7 +175,7 @@ nnoremap <space> viw
 nnoremap <leader>u viwUe
 inoremap <leader>u <esc>viwUea
 " edit .vimrc
-nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>ve :call EditMyVimrc()<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
 " easy escape
 inoremap jk <esc>
@@ -401,6 +401,13 @@ function! RebaseActionToggle()
     let transitions = {'p': 'squash', 's': 'edit', 'e': 'fixup', 'f': 'pick'}
     execute "normal! ^cw" . transitions[result]
     execute "normal! 0"
+endfunction
+
+function! EditMyVimrc()
+    let full_path = resolve($MYVIMRC)
+    let full_dir = fnamemodify(full_path, ':p:h')
+    execute "vsplit" . full_path
+    execute "lcd" . full_dir
 endfunction
 
 " }}}
