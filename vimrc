@@ -243,6 +243,11 @@ augroup rebase
     au FileType gitrebase nnoremap <cr> :call RebaseActionToggle()<cr>
 augroup END
 
+augroup erlang
+    au!
+    au FileType erlang setlocal keywordprg="erl -man"
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
