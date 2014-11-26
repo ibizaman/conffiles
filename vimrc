@@ -95,6 +95,10 @@ set swb=usetab
 " do not indent private, protected and public
 set cinoptions=g-1
 
+" erlang syntax
+let g:erlang_highlight_bif = 0
+hi def link erlangAtom Normal
+
 " }}}
 
 " Statusline ------------------------------------------------------- {{{
