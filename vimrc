@@ -391,9 +391,8 @@ function! VisualSelection(direction) range
 endfunction
 
 function! DeleteTrailingWS()
-    execute "normal mz"
-    %s/\s\+$//ge
-    execute "normal `z"
+    " Do not delete trailing whitespaces following with a backslash
+    call Preserve('%s/\([^\\]\)\s\+$/\1/ge')
 endfunc
 
 
