@@ -230,6 +230,7 @@ augroup vimscript
     au FileType vim setlocal keywordprg=:help
     au FileType vim setlocal foldmethod=expr
     au FileType vim setlocal foldexpr=FoldingLevelVimscript(v:lnum)
+    au BufRead,BufWritePre .vimrc :call Preserve('normal gg=G')
 augroup END
 
 " delete trailing white space on save
@@ -299,12 +300,12 @@ let g:ycm_key_list_previous_completion=[]
 " ctrlp ------------------------------------------------------------ {{{
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        \ },
-    \ 'fallback': 'find %s -type f'
-    \ }
+            \ 'types': {
+            \ 1: ['.git', 'cd %s && git ls-files'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+            \ },
+            \ 'fallback': 'find %s -type f'
+            \ }
 let g:ctrlp_follow_symlinks = 1
 " }}}
 
