@@ -283,6 +283,7 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " syntactic -------------------------------------------------------- {{{
 let g:syntastic_check_on_open = 1
+let g:syntastic_html_checkers = ["validator", "w3"]
 " }}}
 
 " snipmate --------------------------------------------------------- {{{
