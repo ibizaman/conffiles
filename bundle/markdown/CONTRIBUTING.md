@@ -28,14 +28,12 @@ There are many flavors of markdown, each one with an unique feature set. This pl
 
     Next, if there are many more than one Jekyll feature options, create a `g:vim_markdown_jekyll` option that turns them all on at once.
 
+# Style
+
+When choosing between multiple valid Markdown syntaxes, the default behavior must be that specified at: <http://www.cirosantilli.com/markdown-styleguide>
+
+If you wish to have a behavior that differs from that style guide, add an option to turn it on or off, and leave it off by default.
+
 # Tests
 
-All new features must have tests. We don't require unit tests: tests that require users to open markdown code in Vim and check things manually are accepted, but you should point clearly to where the tests are.
-
-Wherever possible, use test cases from the [karlcow's Markdown Test Suite](https://github.com/karlcow/markdown-testsuite), and link to the relevant test files on your merge request.
-
-If a test does not exist there yet, make a pull request to them, and link to that pull request on the pull request you make here.
-
-If the test you want to do is not appropriate for the Markdown Test Suite, create it only under the `test/` directory here.
-
-If we start disagreeing too often on what is appropriate or not, we will fork off that repository.
+All new features must have unit tests.
