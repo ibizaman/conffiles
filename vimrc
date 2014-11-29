@@ -192,6 +192,9 @@ vnoremap <silent> # :call VisualSelection('b')n<CR>
 " toggle spell checking
 nnoremap <leader>ss :setlocal spell!<cr>
 
+" pretty formatting
+command! Format :call Preserve('normal gg=G')
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
@@ -205,8 +208,6 @@ iabbrev @@ ibizapeanut@gmail.com
 augroup layout
     au!
     au BufNewFile,BufRead,BufWritePre *.html,*.xml setlocal nowrap
-    " auto pretty format
-    au BufRead,BufWritePre *.html,*.xml :call Preserve('normal gg=G')
 augroup END
 
 augroup save
@@ -230,7 +231,6 @@ augroup vimscript
     au FileType vim setlocal keywordprg=:help
     au FileType vim setlocal foldmethod=expr
     au FileType vim setlocal foldexpr=FoldingLevelVimscript(v:lnum)
-    au BufRead,BufWritePre .vimrc :call Preserve('normal gg=G')
 augroup END
 
 " delete trailing white space on save
