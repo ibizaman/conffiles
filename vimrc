@@ -99,6 +99,9 @@ set cinoptions=g-1
 let g:erlang_highlight_bif = 0
 hi def link erlangAtom Normal
 
+" always show vertical split for diff (and Gdiff)
+set diffopt=filler,vertical
+
 " }}}
 
 " Statusline ------------------------------------------------------- {{{
