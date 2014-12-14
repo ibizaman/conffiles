@@ -89,7 +89,7 @@ syn keyword elmBuiltinFunction (::) (++) head tail last isEmpty map foldl foldr 
 " Maybe
 syn keyword elmBuiltinFunction maybe isJust isNothing justs
 " Mouse
-syn keyword elmBuiltinFunction position x y isDown isClicked clicks
+syn keyword elmBuiltinFunction position isDown isClicked clicks
 " Prelude
 syn keyword elmBuiltinFunction show readInt readFloat
 " Random
@@ -114,9 +114,9 @@ syn keyword elmBuiltinFunction connect
 syn keyword elmBuiltinFunction dimensions width height
 
 " Comments
-syn match elmTodo "[tT][oO][dD][oO]" contained
-syn match elmLineComment "--.*"
-syn region elmComment start="{-" end="-}" contains=elmTodo,elmComment
+syn match elmTodo "[tT][oO][dD][oO]\|FIXME\|XXX" contained
+syn match elmLineComment "--.*" contains=elmTodo,@spell
+syn region elmComment matchgroup=elmComment start="{-|\=" end="-}" contains=elmTodo,elmComment,@spell
 
 " String literals
 syn region elmString start="\"" skip="\\\"" end="\"" contains=elmStringEscape
