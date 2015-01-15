@@ -184,8 +184,6 @@ inoremap <leader>u <esc>viwUea
 " edit .vimrc
 nnoremap <leader>ve :call EditMyVimrc()<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
-" easy escape
-inoremap jk <esc>
 
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
