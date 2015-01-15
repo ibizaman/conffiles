@@ -237,7 +237,7 @@ augroup END
 " delete trailing white space on save
 augroup whitespace
     au!
-    au BufRead,BufWrite *.py,*.cpp,*.h,*.hpp,.vimrc,*.css :call DeleteTrailingWS()
+    au BufWrite *.py,*.cpp,*.h,*.hpp,.vimrc,*.css :call DeleteTrailingWS()
 augroup END
 
 augroup diff
