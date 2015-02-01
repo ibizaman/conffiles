@@ -3,6 +3,37 @@ YouCompleteMe: a code-completion engine for Vim
 
 [![Build Status](https://travis-ci.org/Valloric/YouCompleteMe.png?branch=master)](https://travis-ci.org/Valloric/YouCompleteMe)
 
+- [Intro](#intro)
+- [Installation](#installation)
+    - [Mac OS X](#mac-os-x-super-quick-installation)
+    - [Ubuntu](#ubuntu-linux-x64-super-quick-installation)
+    - [Windows](#windows-installation)
+    - [FreeBSD/OpenBSD](#freebsdopenbsd-installation)
+    - [Full Installation Guide](#full-installation-guide)
+- [User Guide](#user-guide)
+    - [General Usage](#general-usage)
+    - [Client-server architecture](#client-server-architecture)
+    - [Completion string ranking](#completion-string-ranking)
+    - [General semantic completion](#general-semantic-completion-engine-usage)
+    - [C-family semantic completion](#c-family-semantic-completion-engine-usage)
+    - [Python semantic completion](#python-semantic-completion)
+    - [C# semantic completion](#c-semantic-completion)
+    - [Semantic completion for other languages](#semantic-completion-for-other-languages)
+    - [Writing new semantic completers](#writing-new-semantic-completers)
+    - [Diagnostic display](#diagnostic-display)
+    - [C# diagnostic support](#c-diagnostic-support)
+    - [Diagnostic highlighting groups](#diagnostic-highlighting-groups)
+- [Commands](#commands)
+    - [YcmCompleter subcommands](#ycmcompleter-subcommands)
+- [Options](#options)
+- [FAQ](#faq)
+- [Contact](#contact)
+- [Project Management](#project-management)
+- [License](#license)
+
+Intro
+-----
+
 YouCompleteMe is a fast, as-you-type, fuzzy-search code completion engine for
 [Vim][]. It has several completion engines: an identifier-based engine that
 works with every programming language, a semantic, [Clang][]-based engine that
@@ -71,8 +102,10 @@ You'll also find that YCM has filepath completers (try typing `./` in a file)
 and a completer that integrates with [UltiSnips][].
 
 
-Mac OS X super-quick installation
----------------------------------
+Installation
+------------
+
+### Mac OS X super-quick installation
 
 Please refer to the full Installation Guide below; the following commands are
 provided on a best-effort basis and may not work for you.
@@ -124,8 +157,7 @@ YCM comes with sane defaults for its options, but you still may want to take a
 look at what's available for configuration. There are a few interesting options
 that are conservatively turned off by default that you may want to turn on.
 
-Ubuntu Linux x64 super-quick installation
------------------------------------------
+### Ubuntu Linux x64 super-quick installation
 
 Please refer to the full Installation Guide below; the following commands are
 provided on a best-effort basis and may not work for you.
@@ -168,15 +200,13 @@ YCM comes with sane defaults for its options, but you still may want to take a
 look at what's available for configuration. There are a few interesting options
 that are conservatively turned off by default that you may want to turn on.
 
-Windows Installation
---------------------
+### Windows Installation
 
 YCM has **no official support for Windows**, but that doesn't mean you can't get
 it to work there. See the [Windows Installation Guide][win-wiki] wiki page. Feel
 free to add to it.
 
-FreeBSD/OpenBSD Installation
-----------------------------
+### FreeBSD/OpenBSD Installation
 
 Please refer to the full Installation Guide below; the following commands are
 provided on a best-effort basis and may not work for you. OpenBSD / FreeBSD are
@@ -223,8 +253,7 @@ YCM comes with sane defaults for its options, but you still may want to take a
 look at what's available for configuration. There are a few interesting options
 that are conservatively turned off by default that you may want to turn on.
 
-Full Installation Guide
------------------------
+### Full Installation Guide
 
 These are the steps necessary to get YCM working on a Unix OS like Linux or
 Mac OS X. My apologies to Windows users, but I don't have a guide for them. The
@@ -264,7 +293,7 @@ process.
     repository (Vundle will do this for you) to fetch YCM's dependencies.
 
 3.  [Complete this step ONLY if you care about semantic completion support for
-    C-family languages. Otherwise it's not neccessary.]
+    C-family languages. Otherwise it's not necessary.]
 
     **Download the latest version of `libclang`**. Clang is an open-source
     compiler that can compile C/C++/Objective-C/Objective-C++. The `libclang`
@@ -311,7 +340,7 @@ process.
         cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 
     For those who want to use the system version of boost, you would pass
-    `-DUSE_SYSTEM_BOOST=ON` to cmake. This may be neccassery on some systems
+    `-DUSE_SYSTEM_BOOST=ON` to cmake. This may be necessary on some systems
     where the bundled version of boost doesn't compile out of the box.
 
     NOTE: We **STRONGLY recommended AGAINST use** of the system boost instead
@@ -446,7 +475,8 @@ of projects.
 Yes, [Clang's `CompilationDatabase` system][compdb] is also supported. Again,
 see the above linked example file. You can get CMake to generate this file for
 you by adding `set( CMAKE_EXPORT_COMPILE_COMMANDS 1 )` to your project's
-`CMakeLists.txt` file (if using CMake).
+`CMakeLists.txt` file (if using CMake). If you're not using CMake, you could use
+something like [Bear][] to generate the `compile_commands.json` file.
 
 If Clang encounters errors when compiling the header files that your file
 includes, then it's probably going to take a long time to get completions.  When
@@ -1721,7 +1751,7 @@ YCM needs to perform subsequence-based filtering on _all_ of those identifiers
 I'm sorry, but that level of performance is just plain impossible to achieve
 with VimScript. I've tried, and the language is just too slow. No, you can't get
 acceptable performance even if you limit yourself to just the identifiers in the
-current file and simple prefix-based fitering.
+current file and simple prefix-based filtering.
 
 ### Why does YCM demand such a recent version of Vim?
 
@@ -1893,3 +1923,4 @@ This software is licensed under the [GPL v3 license][gpl].
 [issue-669]: https://github.com/Valloric/YouCompleteMe/issues/669
 [status-mes]: https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
 [python-re]: https://docs.python.org/2/library/re.html#regular-expression-syntax
+[bear]: https://github.com/rizsotto/Bear
