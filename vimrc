@@ -211,11 +211,6 @@ augroup layout
     au BufNewFile,BufRead,BufWritePre *.html,*.xml setlocal nowrap
 augroup END
 
-augroup save
-    au!
-    au BufLeave,FocusLost * silent! write
-augroup END
-
 augroup text
     au!
     au FileType mkd,txt,rst setlocal spell spelllang=en_us
