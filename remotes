@@ -17,3 +17,4 @@ surround https://github.com/tpope/vim-surround.git master
 syntastic https://github.com/scrooloose/syntastic.git master
 vimerl https://github.com/jimenezrick/vimerl.git master
 youcompleteme https://github.com/Valloric/YouCompleteMe.git master
+python-pep8-indent https://github.com/hynek/vim-python-pep8-indent.git master
