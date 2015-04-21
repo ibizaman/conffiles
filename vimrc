@@ -132,7 +132,7 @@ set statusline+=%10(\ %b\ 0x%02B\ %)
 " Mappings --------------------------------------------------------- {{{
 
 " cancel search highlight
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space> :noh<cr>:syntax sync fromstart<cr>
 
 " easy formatting
 nnoremap <leader>q gqip
