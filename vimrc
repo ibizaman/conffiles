@@ -196,6 +196,9 @@ nnoremap <leader>ss :setlocal spell!<cr>
 " pretty formatting
 command! Format :call Preserve('normal gg=G')
 
+" open corresponding header/source files in splits
+nnoremap <leader>o :call OpenSourceHeader(expand('%'))<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
@@ -443,6 +446,25 @@ function! Preserve(command)
 
     " Restore the previous cursor position.
     call setpos('.', cursor_position)
+endfunction
+
+" Open the corresponding .cpp, .h and .hpp file in another a split
+function! OpenSourceHeader(name)
+    let l:target_extension = fnamemodify(a:name, ':e')
+    let l:target_filename = fnamemodify(a:name, ':r:t')
+
+    let l:extensions = ['cpp', 'h', 'hpp']
+    for extension in copy(l:extensions)
+        if (l:target_extension == extension)
+            let l:index = index(l:extensions, extension)
+            call remove(l:extensions, l:index)
+            break
+        endif
+    endfor
+
+    for to_open in l:extensions
+        execute 'silent!' 'vert' 'sfind' l:target_filename . '.' . to_open
+    endfor
 endfunction
 
 " }}}
