@@ -406,16 +406,16 @@ function! MapDiffputIfBufferIsADiff()
 endfunction
 
 function! RebaseActionToggle()
-    let line = getline(".")
-    let result = matchstr(line, "^\\a")
-    let transitions = {'p': 'fixup', 'f': 'squash', 's': 'edit', 'e': 'pick'}
+    let l:line = getline(".")
+    let l:result = matchstr(line, "^\\a")
+    let l:transitions = {'p': 'fixup', 'f': 'squash', 's': 'edit', 'e': 'pick'}
     execute "normal! ^cw" . transitions[result]
     execute "normal! 0"
 endfunction
 
 function! EditMyVimrc()
-    let full_path = resolve($MYVIMRC)
-    let full_dir = fnamemodify(full_path, ':p:h')
+    let l:full_path = resolve($MYVIMRC)
+    let l:full_dir = fnamemodify(full_path, ':p:h')
     execute "vsplit" . full_path
     execute "lcd" . full_dir
 endfunction
