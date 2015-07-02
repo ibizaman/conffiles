@@ -270,7 +270,8 @@ augroup END
 " Plugins ---------------------------------------------------------- {{{
 
 " NERDTree --------------------------------------------------------- {{{
-nnoremap <leader>k :NERDTreeToggle<return>
+nnoremap <leader>k :NERDTreeToggle<cr>
+nnoremap <leader><leader>k :NERDTreeFind<cr>
 let NERDTreeWinPos = "right"
 let NERDTreeWinSize = 50
 let NERDTreeIgnore=['.*\.app$', '^moc_.*', '.*\.exe$', '\.o$', '\~$', '\.xcodeproj', '\.graphml', '\.fig', '\.mdl', '\.aux', '\.toc', '\.beam', '__pycache__', '*\.pyc']
