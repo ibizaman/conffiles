@@ -10,6 +10,7 @@ included with a simple `git clone`, so install with:
     ln -s .vim/.gitignore .
     ln -s .vim/.gitconfig .
     ln -s .vim/.zshrc .
+    ln -s .vim/.tmux.conf .
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive
