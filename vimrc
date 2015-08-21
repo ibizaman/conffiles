@@ -11,7 +11,7 @@ set autoindent
 
 " syntax
 syntax enable
-colorscheme mustang
+colorscheme my-mustang
 
 " vi is in the past
 set nocompatible
