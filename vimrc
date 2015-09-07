@@ -178,6 +178,8 @@ nnoremap <leader>_ ddkP
 inoremap <c-d> <esc>ddi
 " select word
 nnoremap <space> viw
+" replace multi-line selection
+vnoremap <Leader>r "sy:%s/<C-R>=substitute(@s,"\n",'\\n','g')<CR>/
 " upper case word
 nnoremap <leader>u viwUe
 inoremap <leader>u <esc>viwUea
