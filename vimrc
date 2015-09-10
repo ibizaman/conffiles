@@ -311,6 +311,16 @@ let g:ctrlp_user_command = {
 let g:ctrlp_follow_symlinks = 1
 " }}}
 
+" buffergator ------------------------------------------------------ {{{
+let g:buffergator_suppress_keymaps = 1   " use my keymaps
+let g:buffergator_viewport_split_policy = "R"
+let g:buffergator_autoupdate = 1
+let g:buffergator_sort_regime = "mru"
+let g:buffergator_show_full_directory_path = 0
+
+nnoremap <Leader>l :BuffergatorToggle<CR>
+" }}}
+
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
@@ -402,8 +412,6 @@ function! MapDiffputIfBufferIsADiff()
     if &diff
         nnoremap <buffer> <leader>n :diffput<cr>:diffup<cr>
         vnoremap <buffer> <leader>n :diffput<cr>:diffup<cr>
-        nnoremap <buffer> <leader>l :diffget<cr>:diffup<cr>
-        vnoremap <buffer> <leader>l :diffget<cr>:diffup<cr>
         nnoremap <buffer> <leader>u u:diffup<cr>
     endif
 endfunction
