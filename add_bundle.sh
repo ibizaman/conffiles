@@ -27,6 +27,6 @@ fi
 git remote add "$plugin" "$repo_location" \
 && git fetch "$plugin" \
 && mkdir -p "$install_dir" \
-&& git read-tree --prefix="$install_dir" -u "$plugin/$repo_branch" \
+&& git read-tree --prefix="$install_dir" -u "$repo_branch" \
 && echo "$plugin $repo_location $repo_branch" >> "$remotes_file" \
 || exit 1
