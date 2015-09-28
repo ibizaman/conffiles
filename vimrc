@@ -102,6 +102,9 @@ hi def link erlangAtom Normal
 " always show vertical split for diff (and Gdiff)
 set diffopt=filler,vertical
 
+" allow to switch without writing a modified buffers
+set hidden
+
 " }}}
 
 " Statusline ------------------------------------------------------- {{{
