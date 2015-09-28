@@ -201,6 +201,10 @@ command! Format :call Preserve('normal gg=G')
 " open corresponding header/source files in splits
 nnoremap <leader>o :call OpenSourceHeader(expand('%'))<CR>
 
+" switch easily to other buffers
+nnoremap <Leader>l :bnext<CR>
+nnoremap <Leader>L :bprev<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
@@ -309,16 +313,6 @@ let g:ctrlp_user_command = {
             \ 'fallback': 'find %s -type f'
             \ }
 let g:ctrlp_follow_symlinks = 1
-" }}}
-
-" buffergator ------------------------------------------------------ {{{
-let g:buffergator_suppress_keymaps = 1   " use my keymaps
-let g:buffergator_viewport_split_policy = "R"
-let g:buffergator_autoupdate = 1
-let g:buffergator_sort_regime = "mru"
-let g:buffergator_show_full_directory_path = 0
-
-nnoremap <Leader>l :BuffergatorToggle<CR>
 " }}}
 
 " allow per-project .vimrc
