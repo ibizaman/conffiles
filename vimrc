@@ -401,7 +401,7 @@ endfunction
 
 function! DeleteTrailingWS()
     " Do not delete trailing whitespaces following with a backslash
-    call Preserve('%s/\([^\\]\)\s\+$/\1/ge')
+    call Preserve('%s/\(^\|[^\\]\)\s\+$/\1/ge')
 endfunc
 
 
