@@ -16,7 +16,7 @@ plugin="$1"
 install_dir=${4:-"bundle"}/"$plugin"
 
 repo_location="$2"
-repo_branch="$plugin"/${3:-"master"}
+repo_branch=${3:-"master"}
 remotes_file=remotes
 
 existing_plugin=$(awk -F " " '/^'$plugin'/ {print $2}' $remotes_file)
@@ -28,6 +28,6 @@ fi
 git remote add "$plugin" "$repo_location" \
 && git fetch "$plugin" \
 && mkdir -p "$install_dir" \
-&& git read-tree --prefix="$install_dir" -u "$repo_branch" \
+&& git read-tree --prefix="$install_dir" -u "$plugin"/"$repo_branch" \
 && echo "$plugin $repo_location $repo_branch" >> "$remotes_file" \
 || exit 1
