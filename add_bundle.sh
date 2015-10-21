@@ -1,18 +1,19 @@
 #!/bin/sh
 
 function usage() {
-    echo "$0 name url [repo_branch]
+    echo "$0 name url [repo_branch [install_dir]]
 
 Add a remote git repository as a pathogen plugin thanks to git subtree
 
 name : local name of the plugin
 url : repository location
-repo_branch : branch of the remote"
+repo_branch : branch of the remote (default: 'master')
+install_dir : installation directory (default: 'bundle')"
 }
 
 test -z "$1" || test -z "$2" && usage && exit 1
 plugin="$1"
-install_dir=bundle/"$1"
+install_dir=${4:-"bundle"}/"$plugin"
 
 repo_location="$2"
 repo_branch="$plugin"/${3:-"master"}
