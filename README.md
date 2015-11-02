@@ -13,7 +13,7 @@ included with a simple `git clone`, so install with:
     ln -s .vim/.tmux.conf .
     # install youcompleteme's submodules
     cd .vim
-    git submodule update --init --recursive
+    git submodule update --init --recursive -- bundle/youcompleteme
     cd bundle/youcompleteme
     [EXTRA_CMAKE_ARGS='...'] ./install.sh [--clang-completer [--system-libclang]] [--omnisharp-completer]
 
