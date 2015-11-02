@@ -1,5 +1,5 @@
-These files are my vim plugins, along with my vimrc file and my
-.gitconfig and .gitignore files.
+These files are my vim plugins, along with my vimrc file, my
+.gitconfig and .gitignore files and my .tmux.conf file.
 
 All bundles are included as subtree merges so every file needed is
 included with a simple `git clone`, so install with:
