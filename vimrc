@@ -292,7 +292,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " }}}
 
 " syntactic -------------------------------------------------------- {{{
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_html_checkers = ["validator", "w3"]
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ["elixir"]
