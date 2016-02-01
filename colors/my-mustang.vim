@@ -18,6 +18,6 @@ highlight clear Search
 
 highlight DiffAdd ctermbg=232
 highlight DiffChange ctermbg=232
-highlight DiffDelete ctermbg=52 ctermfg=88
+highlight DiffDelete ctermbg=232 ctermfg=88
 highlight DiffText ctermbg=88
 highlight Search ctermbg=4
