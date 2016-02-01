@@ -320,6 +320,25 @@ let g:ctrlp_user_command = {
 let g:ctrlp_follow_symlinks = 1
 " }}}
 
+" vim-test --------------------------------------------------------- {{{
+nmap <silent> <leader>pp :TestNearest<CR>
+nmap <silent> <leader>p; :TestFile<CR>
+nmap <silent> <leader>po :TestSuite<CR>
+nmap <silent> <leader>p[ :TestLast<CR>
+nmap <silent> <leader>pl :TestVisit<CR>
+
+function! ElixirUmbrellaTransform(cmd) abort
+    return a:cmd
+    "let apps_path = get(matchlist(s:cat('mix.exs'), 'apps_path:[^,]*"(.*)"\s*,'), 1)
+    execute "normal !cat mix.exs"
+    return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
+endfunction
+
+let g:test#custom_transformations = {'elixir': function('ElixirUmbrellaTransform')}
+let g:test#transformation = 'elixir'
+
+" }}}
+
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
