@@ -15,9 +15,12 @@ highlight clear DiffChange
 highlight clear DiffDelete 
 highlight clear DiffText 
 highlight clear Search 
+highlight clear Comment
 
 highlight DiffAdd ctermbg=232
 highlight DiffChange ctermbg=232
 highlight DiffDelete ctermbg=232 ctermfg=88
 highlight DiffText ctermbg=88
 highlight Search ctermbg=4
+highlight Comment ctermfg=252 ctermbg=17
+highlight gitcommitComment ctermfg=244 ctermbg=234
