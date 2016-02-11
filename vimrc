@@ -134,8 +134,8 @@ set statusline+=%10(\ %b\ 0x%02B\ %)
 
 " Mappings --------------------------------------------------------- {{{
 
-" cancel search highlight
-nnoremap <leader><space> :noh<cr>:syntax sync fromstart<cr>
+" cancel search highlight, clean empty buffers and restart syntax
+nnoremap <leader><space> :noh<cr>:call CleanBuffers(0)<cr>:syntax sync fromstart<cr>
 
 " easy formatting
 nnoremap <leader>q gqip
@@ -494,6 +494,20 @@ function! OpenSourceHeader(name)
     for to_open in l:extensions
         execute 'silent!' 'vert' 'sfind' l:target_filename . '.' . to_open
     endfor
+endfunction
+
+" Delete all empty buffers except the quickfix one and those displayed
+" in a window.
+function! CleanBuffers(all)
+    let l:filter_string = 'v:val!=0 && buflisted(v:val) && bufwinnr(v:val)<0'
+    if a:all == 0
+        let l:filter_string .= ' && getbufline(v:val, 1, 2)==[""]'
+    endif
+    echom l:filter_string
+    let l:buffers = filter(range(0, bufnr('$')), l:filter_string)
+    if !empty(l:buffers)
+        execute 'bwipeout ' . join(l:buffers, ' ')
+    endif
 endfunction
 
 " }}}
