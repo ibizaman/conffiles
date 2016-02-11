@@ -208,6 +208,9 @@ nnoremap <leader>o :call OpenSourceHeader(expand('%'))<CR>
 nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>L :bprev<CR>
 
+" delete buffer without closing window
+nnoremap <silent> <leader>d :bprevious \| :bdelete #<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
