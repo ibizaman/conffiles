@@ -116,7 +116,7 @@ set statusline=
 " buffer number
 set statusline+=\ %04n
 " trimmed full path to file
-set statusline+=\ %.20F
+set statusline+=\ %.F
 " file type
 set statusline+=%(\ %y%)
 " modified - readonly - help - preview group
