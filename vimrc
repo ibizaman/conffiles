@@ -265,6 +265,11 @@ augroup erlang
     au FileType erlang setlocal keywordprg="erl -man"
 augroup END
 
+augroup docker
+    au!
+    au BufNewFile,BufRead Dockerfile* setlocal syntax=dockerfile
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
