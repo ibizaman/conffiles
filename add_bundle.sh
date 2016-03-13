@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function usage() {
     echo "$0 name url [repo_branch [install_dir]]
