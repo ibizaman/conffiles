@@ -4,3 +4,4 @@
 *.pyc
 .netrwhist
 **/doc/tags
+promiscuous

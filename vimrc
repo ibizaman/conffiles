@@ -347,6 +347,11 @@ let g:test#transformation = 'elixir'
 
 " }}}
 
+" promiscuous ------------------------------------------------------ {{{
+nmap <leader>gb :Promiscuous<cr>
+nmap <leader>gg :Promiscuous -<cr>
+" }}}
+
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc
