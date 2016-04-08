@@ -352,6 +352,10 @@ nmap <leader>gb :Promiscuous<cr>
 nmap <leader>gg :Promiscuous -<cr>
 " }}}
 
+" fzf -------------------------------------------------------------- {{{
+set rtp+=~/.fzf
+" }}}
+
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc

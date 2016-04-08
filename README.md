@@ -5,7 +5,11 @@ All bundles are included as subtree merges so every file needed is
 included with a simple `git clone`, so install with:
 
     cd
-    git clone git://github.com/ibizaman/vimfiles.git .vim
+    git clone https://github.com/junegunn/fzf.git .fzf
+    cd .fzf
+    ./install --all
+    cd -
+    git clone https://github.com/ibizaman/vimfiles.git .vim
     ln -s .vim/vimrc .vimrc
     ln -s .vim/.gitignore .
     ln -s .vim/.gitconfig .

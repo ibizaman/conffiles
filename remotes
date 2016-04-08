@@ -26,3 +26,4 @@ gist https://github.com/mattn/gist-vim.git master
 test https://github.com/janko-m/vim-test.git master
 jirs https://github.com/mnpk/vim-jira-complete.git master
 promiscuous https://github.com/shuber/vim-promiscuous.git master
+fzf https://github.com/junegunn/fzf.vim.git master
