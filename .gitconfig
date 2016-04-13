@@ -10,6 +10,8 @@
 	d = difftool
         st = status -sb
         pushu = !sh -c 'git push -u origin $(git rev-parse --abbrev-ref HEAD)' -
+        mergu = !sh -c 'git merge $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
+        rebasu = !sh -c 'git rebase $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
 [core]
 	excludesfile = ~/.gitignore
 	ignorecase = false
