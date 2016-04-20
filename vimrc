@@ -211,6 +211,9 @@ nnoremap <Leader>L :bprev<CR>
 " delete buffer without closing window
 nnoremap <silent> <leader>d :bprevious \| :bdelete #<CR>
 
+" get github link to current file:line
+nnoremap <leader>gc :echo 'https://github.com/openmail/OpenMail/tree/' . systemlist('git rev-parse --abbrev-ref HEAD')[0] . '/' . expand('%') . '#L' . line('.')<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
