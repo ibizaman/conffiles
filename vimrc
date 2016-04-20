@@ -239,6 +239,11 @@ augroup cpp
     au BufNewFile,BufRead *.cpp setlocal syntax=cpp11
 augroup END
 
+augroup py
+    au!
+    au BufNewFile,BufRead *.py setlocal syntax=pysql
+augroup END
+
 augroup vimscript
     au!
     au FileType vim nnoremap <leader>h :call HeadingVimscript()<cr>
