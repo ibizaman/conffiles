@@ -24,6 +24,7 @@ syn region SQLEmbedded contains=@SQL containedin=pythonString,pythonRawString co
     \ end=+;+ 
 
 syn match SQLVariable "%(\zs[a-zA-Z0-9_-]\+\ze)s\?" containedin=SQLEmbedded contained
+syn match SQLVariable ":\zs[a-zA-Z0-9_-]\+" containedin=SQLEmbedded contained
 
 hi link SQLVariable Identifier
 
