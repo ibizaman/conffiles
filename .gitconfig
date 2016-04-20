@@ -12,6 +12,8 @@
         pushu = !sh -c 'git push -u origin $(git rev-parse --abbrev-ref HEAD)' -
         mergu = !sh -c 'git merge $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
         rebasu = !sh -c 'git rebase $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
+        branchdprev = !sh -c 'git branch -d $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
+        branchDprev = !sh -c 'git branch -D $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
 [core]
 	excludesfile = ~/.gitignore
 	ignorecase = false
