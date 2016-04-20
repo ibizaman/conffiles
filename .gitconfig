@@ -17,6 +17,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	ignorecase = false
+	editor = vim
 [credential]
 	helper = osxkeychain
 [diff]
