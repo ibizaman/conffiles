@@ -23,4 +23,8 @@ syn region SQLEmbedded contains=@SQL containedin=pythonString,pythonRawString co
     \ start=+\<\v(ALTER|BEGIN|CALL|COMMENT|COMMIT|CONNECT|CREATE|DELETE|DROP|END|EXPLAIN|EXPORT|GRANT|IMPORT|INSERT|LOAD|LOCK|MERGE|REFRESH|RENAME|REPLACE|REVOKE|ROLLBACK|SELECT|SET|TRUNCATE|UNLOAD|UNSET|UPDATE|UPSERT)+
     \ end=+;+ 
 
+syn match SQLVariable "%(\zs[a-zA-Z0-9_-]\+\ze)s\?" containedin=SQLEmbedded contained
+
+hi link SQLVariable Identifier
+
 let b:current_syntax = "pysql"
