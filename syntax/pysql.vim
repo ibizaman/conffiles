@@ -9,7 +9,7 @@ runtime! syntax/python.vim
 unlet b:current_syntax
 
 " Load SQL syntax
-syntax include @SQL syntax/sql.vim
+syntax include @SQL syntax/pgsql.vim
 
 " Need to add the keepend here
 syn region pythonString matchgroup=pythonQuotes

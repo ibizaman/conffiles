@@ -278,6 +278,11 @@ augroup docker
     au BufNewFile,BufRead Dockerfile* setlocal syntax=dockerfile
 augroup END
 
+augroup sql
+    au!
+    au BufNewFile,BufRead *.sql setlocal syntax=pgsql
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
