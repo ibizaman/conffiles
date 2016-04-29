@@ -21,7 +21,7 @@
 	ignorecase = false
 	editor = vim
 [credential]
-	helper = osxkeychain
+	helper = cache --timeout=3600
 [diff]
 	tool = vimdiff
         algorithm = histogram
