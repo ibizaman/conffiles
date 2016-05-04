@@ -22,3 +22,6 @@ https
 api
 webhooks
 www
+postgres
+sql
+dict
