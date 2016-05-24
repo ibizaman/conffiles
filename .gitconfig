@@ -4,9 +4,9 @@
 [color]
 	ui = true
 [alias]
-        lol1 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-        lol = log --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lola = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        lolu = !sh -c 'git log --graph --pretty=format:%Cred%h%Creset\\ -%C\\(yellow\\)%d%Creset\\ %s\\ %Cgreen\\(%ad\\)\\ %C\\(bold\\ blue\\)\\<%an\\>%Creset --abbrev-commit --date=relative origin/master..$(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
 	d = difftool
         st = status -sb
         pushu = !sh -c 'git push -u origin $(git rev-parse --abbrev-ref HEAD)' -
