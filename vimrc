@@ -283,6 +283,14 @@ augroup sql
     au BufNewFile,BufRead *.sql setlocal syntax=pgsql
 augroup END
 
+augroup yaml
+    au!
+    au FileType yaml setlocal softtabstop=2 shiftwidth=2
+
+    au FileType yaml setlocal indentexpr=GetYamlIndent()
+    au FileType yaml setlocal indentkeys=o,O,*<Return>,!^F
+augroup end
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
@@ -538,6 +546,21 @@ function! CleanBuffers(all)
     if !empty(l:buffers)
         execute 'bwipeout ' . join(l:buffers, ' ')
     endif
+endfunction
+
+function! GetYamlIndent()
+  let lnum = v:lnum - 1
+  if lnum == 0
+    return 0
+  endif
+  let line = substitute(getline(lnum),'\s\+$','','')
+  let indent = indent(lnum)
+  let increase = indent + &sw
+  if line =~ ':$'
+    return increase
+  else
+    return indent
+  endif
 endfunction
 
 " }}}
