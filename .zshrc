@@ -16,12 +16,14 @@ unsetopt beep
 # Emacs key-bindings
 bindkey -e
 
+
 ##############
 # Completion #
 ##############
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true  # auto rehash
 setopt completealiases
+
 
 ###########
 # History #
@@ -63,6 +65,7 @@ setopt pushdignoredups
 ## This reverts the +/- operators.
 setopt pushdminus
 
+
 #######################
 # Syntax Highlighting #
 #######################
@@ -80,6 +83,7 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
 
 ##################
 # History Search #
@@ -99,8 +103,17 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+
 ########################
 # Process Notification #
 ########################
 setopt notify
 
+
+###########
+# ALIASES #
+###########
+
+function sshtmux() {
+    ssh -t $1 -- tmux attach || tmux new
+}
