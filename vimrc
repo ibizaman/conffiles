@@ -214,6 +214,10 @@ nnoremap <silent> <leader>d :bprevious \| :bdelete #<CR>
 " get github link to current file:line
 nnoremap <leader>gc :echo 'https://github.com/openmail/OpenMail/tree/' . systemlist('git rev-parse --abbrev-ref HEAD')[0] . '/' . expand('%') . '#L' . line('.')<CR>
 
+" motions for escaped file names
+nnoremap <silent><buffer> <leader>W m':call search('\([^\\] \|^\)', 'w')<CR>
+nnoremap <silent><buffer> <leader>B m':call search('\([^\\] \|^\)', 'bw')<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
