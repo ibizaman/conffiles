@@ -31,13 +31,14 @@ set cpo&vim
 
 let s:easy_align_delimiters_default = {
 \  ' ': { 'pattern': ' ',  'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0 },
-\  '=': { 'pattern': '===\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
+\  '=': { 'pattern': '===\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.?-]\?=[#?]\?',
 \                          'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
 \  ':': { 'pattern': ':',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 },
 \  ',': { 'pattern': ',',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 },
 \  '|': { 'pattern': '|',  'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
 \  '.': { 'pattern': '\.', 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0 },
 \  '#': { 'pattern': '#\+', 'delimiter_align': 'l', 'ignore_groups': ['!Comment']  },
+\  '"': { 'pattern': '"\+', 'delimiter_align': 'l', 'ignore_groups': ['!Comment']  },
 \  '&': { 'pattern': '\\\@<!&\|\\\\',
 \                          'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
 \  '{': { 'pattern': '(\@<!{',
@@ -264,11 +265,8 @@ function! s:split_line(line, nth, modes, cycle, fc, lc, pattern, stick_to_left, 
     \ strpart(getline(a:line), a:fc - 1, a:lc - a:fc + 1) :
     \ strpart(getline(a:line), a:fc - 1)
   let idx     = 0
-  " Do not allow \zs
-  " 1: whole match
-  " 2: token
-  " 3: delimiter
-  let pattern = '^\(\(.\{-}\s*\)\(' .a:pattern. '\)\s' . (a:stick_to_left ? '*' : '\{-}') . '\)'
+  let nomagic = match(a:pattern, '\\v') > match(a:pattern, '\C\\[mMV]')
+  let pattern = '^.\{-}\s*\zs\('.a:pattern.(nomagic ? ')' : '\)')
   let tokens  = []
   let delims  = []
 
@@ -277,18 +275,22 @@ function! s:split_line(line, nth, modes, cycle, fc, lc, pattern, stick_to_left, 
   let token = ''
   let phantom = 0
   while 1
-    let matches = matchlist(string, pattern, idx)
+    let matchidx = match(string, pattern, idx)
     " No match
-    if empty(matches) | break | endif
+    if matchidx < 0 | break | endif
+    let matchend = matchend(string, pattern, idx)
+    let spaces = matchstr(string, '\s'.(a:stick_to_left ? '*' : '\{-}'), matchend + (matchidx == matchend))
 
-    " Match, but empty delimiter
-    if empty(matches[1])
+    " Match, but empty
+    if len(spaces) + matchend - idx == 0
       let char = strpart(string, idx, 1)
       if empty(char) | break | endif
       let [match, part, delim] = [char, char, '']
     " Match
     else
-      let [match, part, delim] = matches[1 : 3]
+      let match = strpart(string, idx, matchend - idx + len(spaces))
+      let part  = strpart(string, idx, matchidx - idx)
+      let delim = strpart(string, matchidx, matchend - matchidx)
     endif
 
     let ignorable = s:highlighted_as(a:line, idx + len(part) + a:fc, a:ignore_groups)
@@ -358,9 +360,10 @@ function! s:do_align(todo, modes, all_tokens, all_delims, fl, ll, fc, lc, nth, r
 
   " Phase 1
   for line in range(a:fl, a:ll)
-    if f == 1 && getline(line) !~ fx
+    let snip = a:lc > 0 ? getline(line)[a:fc-1 : a:lc-1] : getline(line)
+    if f == 1 && snip !~ fx
       continue
-    elseif f == -1 && getline(line) =~ fx
+    elseif f == -1 && snip =~ fx
       continue
     endif
 
@@ -655,7 +658,11 @@ function! s:interactive(range, modes, n, d, opts, rules, vis, bvis)
     let check = 0
     let warn = ''
 
-    let c  = getchar()
+    try
+      let c = getchar()
+    catch /^Vim:Interrupt$/
+      let c = 27
+    endtry
     let ch = nr2char(c)
     if c == 3 || c == 27 " CTRL-C / ESC
       if undo
@@ -822,10 +829,11 @@ function! s:valid_regexp(regexp)
 endfunction
 
 function! s:test_regexp(regexp)
-  if !s:valid_regexp(a:regexp)
-    call s:exit('Invalid regular expression: '. a:regexp)
+  let regexp = empty(a:regexp) ? @/ : a:regexp
+  if !s:valid_regexp(regexp)
+    call s:exit('Invalid regular expression: '. regexp)
   endif
-  return a:regexp
+  return regexp
 endfunction
 
 let s:shorthand_regex =
@@ -1048,12 +1056,15 @@ function! s:process(range, mode, n, ch, opts, regexp, rules, bvis)
     \ get(dict, 'align', recur == 2 ? s:alternating_modes(a:mode) : a:mode),
     \ recur)
 
+  let ve = &virtualedit
+  set ve=all
   let args = [
     \ {}, split(mode_sequence, '\zs'),
     \ {}, {}, a:range[0], a:range[1],
-    \ a:bvis             ? min([col("'<"), col("'>")]) : 1,
-    \ (!recur && a:bvis) ? max([col("'<"), col("'>")]) : 0,
+    \ a:bvis             ? min([virtcol("'<"), virtcol("'>")]) : 1,
+    \ (!recur && a:bvis) ? max([virtcol("'<"), virtcol("'>")]) : 0,
     \ nth, recur, dict ]
+  let &ve = ve
   while len(args) > 1
     let args = call('s:do_align', args)
   endwhile
@@ -1120,7 +1131,13 @@ endfunction
 function! easy_align#align(bang, live, visualmode, expr) range
   try
     call s:align(a:bang, a:live, a:visualmode, a:firstline, a:lastline, a:expr)
-  catch 'exit'
+  catch /^\%(Vim:Interrupt\|exit\)$/
+    if empty(a:visualmode)
+      echon "\r"
+      echon "\r"
+    else
+      normal! gv
+    endif
   endtry
 endfunction
 
