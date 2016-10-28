@@ -26,6 +26,7 @@
 [diff]
 	tool = vimdiff
         algorithm = histogram
+        compactionHeuristic = true
 [difftool]
 	prompt = false
 [push]
