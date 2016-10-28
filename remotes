@@ -28,3 +28,4 @@ promiscuous https://github.com/shuber/vim-promiscuous.git master
 fzf https://github.com/junegunn/fzf.vim.git master
 pgsql https://github.com/exu/pgsql.vim master
 editorconfig https://github.com/editorconfig/editorconfig-vim.git master
+diff https://github.com/chrisbra/vim-diff-enhanced.git master

@@ -375,6 +375,10 @@ nmap <leader>gg :Promiscuous -<cr>
 set rtp+=~/.fzf
 " }}}
 
+" enhanced-diff ---------------------------------------------------- {{{
+let g:enhanced_diff_default_git = "--no-index --no-color --no-ext-diff --compaction-heuristic"
+" }}}
+
 " allow per-project .vimrc
 set exrc
 set secure " disable unsafe commands in local .vimrc

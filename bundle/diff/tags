@@ -1,0 +1,14 @@
+:EnhancedDiff	doc/EnhancedDiff.txt	/*:EnhancedDiff*
+:EnhancedDiffDisable	doc/EnhancedDiff.txt	/*:EnhancedDiffDisable*
+:EnhancedDiffIgnorePat	doc/EnhancedDiff.txt	/*:EnhancedDiffIgnorePat*
+:PatienceDiff	doc/EnhancedDiff.txt	/*:PatienceDiff*
+EnhancedDiff-algorithms	doc/EnhancedDiff.txt	/*EnhancedDiff-algorithms*
+EnhancedDiff-config	doc/EnhancedDiff.txt	/*EnhancedDiff-config*
+EnhancedDiff-convert-diffs	doc/EnhancedDiff.txt	/*EnhancedDiff-convert-diffs*
+EnhancedDiff-custom-cmd	doc/EnhancedDiff.txt	/*EnhancedDiff-custom-cmd*
+EnhancedDiff-feedback	doc/EnhancedDiff.txt	/*EnhancedDiff-feedback*
+EnhancedDiff-history	doc/EnhancedDiff.txt	/*EnhancedDiff-history*
+EnhancedDiff-manual	doc/EnhancedDiff.txt	/*EnhancedDiff-manual*
+EnhancedDiff-vimrc	doc/EnhancedDiff.txt	/*EnhancedDiff-vimrc*
+EnhancedDiff.vim	doc/EnhancedDiff.txt	/*EnhancedDiff.vim*
+EnhancedDiffPlugin	doc/EnhancedDiff.txt	/*EnhancedDiffPlugin*
