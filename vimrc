@@ -343,16 +343,8 @@ let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 " }}}
 
-" ctrlp ------------------------------------------------------------ {{{
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_user_command = {
-            \ 'types': {
-            \ 1: ['.git', 'cd %s && git ls-files'],
-            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-            \ },
-            \ 'fallback': 'find %s -type f'
-            \ }
-let g:ctrlp_follow_symlinks = 1
+" fzf -------------------------------------------------------------- {{{
+nnoremap <c-p> :GitFiles<CR>
 " }}}
 
 " vim-test --------------------------------------------------------- {{{

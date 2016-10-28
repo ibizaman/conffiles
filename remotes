@@ -1,5 +1,4 @@
 cpp11 https://github.com/vim-scripts/Cpp11-Syntax-Support.git master
-ctrlp https://github.com/kien/ctrlp.vim.git master
 dispatch https://github.com/tpope/vim-dispatch.git master
 easy-align https://github.com/junegunn/vim-easy-align.git master
 easymotion https://github.com/Lokaltog/vim-easymotion.git master
