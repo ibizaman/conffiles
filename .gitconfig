@@ -14,6 +14,7 @@
         rebasu = !sh -c 'git rebase $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
         branchdprev = !sh -c 'git branch -d $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
         branchDprev = !sh -c 'git branch -D $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
+        branchc = !sh -c 'git fetch && git branch $0 origin/master'
         pullb = !sh -c 'git fetch origin pull/$0/head:pull/$0 && echo pull/$0'
         pulld = !sh -c 'git branch -D pull/$0 && echo pull/$0'
 [core]
