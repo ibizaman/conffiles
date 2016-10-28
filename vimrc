@@ -218,6 +218,8 @@ nnoremap <leader>gc :echo 'https://github.com/openmail/OpenMail/tree/' . systeml
 nnoremap <silent><buffer> <leader>W m':call search('\([^\\] \|^\)', 'w')<CR>
 nnoremap <silent><buffer> <leader>B m':call search('\([^\\] \|^\)', 'bw')<CR>
 
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
 " }}}
 
 " Abbreviations ---------------------------------------------------- {{{
@@ -565,6 +567,16 @@ function! GetYamlIndent()
   else
     return indent
   endif
+endfunction
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set %s :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no', strlen(&syntax) > 0 ? 'syn='.&syntax : '')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
 endfunction
 
 " }}}
