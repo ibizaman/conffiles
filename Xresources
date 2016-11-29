@@ -1,0 +1,8 @@
+!When modifying this file, run:
+!xrdb -merge -I$HOME ~/.Xresources
+xterm*termName: xterm-256color
+xterm*locale: true
+xterm*saveLines: 8192
+*foreground: rgb:d2/d2/d2
+*background: rgb:22/22/22
+*faceName: FreeMono Regular:size=8
