@@ -17,6 +17,7 @@ included with a simple `git clone`, so install with:
     ln -s .vim/zsh .zsh
     ln -s .vim/tmux.conf .tmux.conf
     ln -s .vim/Xresources .Xresources
+    ln -s .vim/xinitrc .xinitrc
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive -- bundle/youcompleteme

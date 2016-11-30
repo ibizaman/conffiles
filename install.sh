@@ -20,6 +20,7 @@ ln -s .vim/zshrc .zshrc
 ln -s .vim/zsh .zsh
 ln -s .vim/tmux.conf .tmux.conf
 ln -s .vim/Xresources .Xresources
+ln -s .vim/xinitrc .xinitrc
 cd .vim
 git submodule update --init --recursive -- bundle/youcompleteme
 cd bundle/youcompleteme
