@@ -5,4 +5,4 @@ xterm*locale: true
 xterm*saveLines: 8192
 *foreground: rgb:d2/d2/d2
 *background: rgb:22/22/22
-*faceName: FreeMono Regular:size=8
+*faceName: FreeMono Regular:size=10
