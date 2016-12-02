@@ -18,6 +18,7 @@ order += "run_watch VPN"
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "volume master"
 order += "battery 0"
 order += "load"
 order += "tztime local"
@@ -78,4 +79,10 @@ disk "/home/" {
         format = "/home %avail (%percentage_free)"
         threshold_type = percentage_free
         low_threshold = 3
+}
+
+volume master {
+        device = "pulse:1"
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
 }
