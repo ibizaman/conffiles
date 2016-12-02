@@ -20,6 +20,7 @@ included with a simple `git clone`, so install with:
     ln -s .vim/xinitrc .xinitrc
     ln -s ~/.vim/i3 .config/i3
     ln -s ~/.vim/i3status .config/i3status
+    ln -s ~/.vim/dunst .config/dunst
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive -- bundle/youcompleteme
