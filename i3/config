@@ -21,6 +21,9 @@ bindsym $mod+Shift+q kill
 # start rofi
 bindsym $mod+d exec rofi -show run
 
+# take a screenshot
+bindsym $mod+Print exec teiler
+
 # list open windows to switch to
 bindsym $alt+Tab exec rofi -show window
 
