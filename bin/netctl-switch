@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# %wheel ALL=NOPASSWD: /usr/bin/netctl
+# usermod -aG wheel $USER
+
+set -e
+
+title="Network Profile:"
+
+
+chosen=$(netctl list | grep -v '*' | grep --only-match -e '[^ ]\+' | sort --ignore-case | rofi -no-custom -dmenu -p "$title")
+
+start_time=$(date +'%Y-%m-%d %H:%M:%S')
+
+if sudo netctl switch-to $chosen 2>/dev/null; then
+    notify-send --app-name=netctl-switch --urgency=low "Switched to profile $chosen"
+else
+    systemctl_chosen=netctl@${chosen//-/"\x2d"}
+
+    log=$(journalctl --unit="$systemctl_chosen" --output=cat --since="$start_time" --quiet --no-pager | grep -v "^netctl@")
+
+    notify-send --app-name=netctl-switch --urgency=critical "Failed to switch to profile $chosen" "$log"
+fi

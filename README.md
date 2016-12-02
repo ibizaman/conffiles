@@ -21,6 +21,7 @@ included with a simple `git clone`, so install with:
     ln -s ~/.vim/i3 .config/i3
     ln -s ~/.vim/i3status .config/i3status
     ln -s ~/.vim/dunst .config/dunst
+    ln -s ~/.vim/bin bin
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive -- bundle/youcompleteme

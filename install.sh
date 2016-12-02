@@ -24,6 +24,7 @@ ln -s .vim/xinitrc .xinitrc
 ln -s ~/.vim/i3 .config/i3
 ln -s ~/.vim/i3status .config/i3status
 ln -s ~/.vim/dunst .config/dunst
+ln -s ~/.vim/bin bin
 cd .vim
 git submodule update --init --recursive -- bundle/youcompleteme
 cd bundle/youcompleteme
