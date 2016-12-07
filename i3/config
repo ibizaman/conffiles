@@ -90,10 +90,10 @@ bindsym $mod+0 workspace 10
 #bindsym $mod+Shift+0 move container to workspace 10
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 1
-bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 1
+bindsym XF86MonBrightnessUp exec xbacklight -inc 1
+bindsym XF86MonBrightnessDown exec xbacklight -dec 1
+bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +1%
