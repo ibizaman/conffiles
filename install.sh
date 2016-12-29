@@ -21,6 +21,7 @@ ln -s .vim/zsh .zsh
 ln -s .vim/tmux.conf .tmux.conf
 ln -s .vim/Xresources .Xresources
 ln -s .vim/xinitrc .xinitrc
+mkdir -p .config
 ln -s ~/.vim/i3 .config/i3
 ln -s ~/.vim/i3status .config/i3status
 ln -s ~/.vim/dunst .config/dunst
