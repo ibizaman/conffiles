@@ -1,8 +1,10 @@
 !When modifying this file, run:
 !xrdb -merge -I$HOME ~/.Xresources
+!To get the list of available fonts, run:
+!fc-list | cut -f2 -d: | sort -u
 xterm*termName: xterm-256color
 xterm*locale: true
 xterm*saveLines: 8192
 *foreground: rgb:d2/d2/d2
 *background: rgb:22/22/22
-*faceName: FreeMono Regular:size=10
+*faceName: Inconsolata\\-g:size=8
