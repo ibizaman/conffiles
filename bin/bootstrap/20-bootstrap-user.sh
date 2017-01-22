@@ -14,6 +14,7 @@ pacaur -S --noconfirm \
     android-studio \
     android-file-transfer \
     base-devel \
+    blender \
     chromium \
     cmake \
     colorgrab \
@@ -44,6 +45,7 @@ pacaur -S --noconfirm \
     unison \
     viber \
     vim \
+    vlc \
     wit \
     xclip \
     xf86-input-libinput \
