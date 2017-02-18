@@ -30,6 +30,7 @@ pacaur -S --noconfirm \
     nvidia \
     nvidia-settings \
     nvidia-utils openssh \
+    pass \
     pavucontrol \
     pepper-flash \
     pulseaudio \
