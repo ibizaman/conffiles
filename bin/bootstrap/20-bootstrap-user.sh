@@ -19,6 +19,7 @@ pacaur -S --noconfirm \
     cmake \
     colorgrab \
     dunst \
+    exfat \
     feh \
     git \
     gnumeric \
@@ -30,12 +31,14 @@ pacaur -S --noconfirm \
     nvidia \
     nvidia-settings \
     nvidia-utils openssh \
+    paperkey \
     pass \
     pavucontrol \
     pepper-flash \
     pulseaudio \
     python \
     python2 \
+    qrencode \
     rofi \
     rsync \
     teamviewer \
@@ -57,6 +60,7 @@ pacaur -S --noconfirm \
     xterm \
     zathura \
     zathura-pdf-poppler \
+    zbar \
     zsh \
 
 sudo usermod --shell zsh timi
