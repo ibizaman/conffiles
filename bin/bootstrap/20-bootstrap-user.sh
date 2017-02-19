@@ -15,6 +15,7 @@ pacaur -S --noconfirm \
     android-file-transfer \
     base-devel \
     blender \
+    browserpass \
     chromium \
     cmake \
     colorgrab \
