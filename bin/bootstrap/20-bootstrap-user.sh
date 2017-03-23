@@ -31,7 +31,8 @@ pacaur -S --noconfirm \
     nmap \
     nvidia \
     nvidia-settings \
-    nvidia-utils openssh \
+    nvidia-utils \
+    openssh \
     paperkey \
     pass \
     pavucontrol \
