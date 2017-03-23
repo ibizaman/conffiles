@@ -42,22 +42,29 @@ pacaur -S --noconfirm \
     qrencode \
     rofi \
     rsync \
+    sickrage \
+    solaar \
+    spotify \
     teamviewer \
     teiler-git \
     tmux \
+    ttf-croscore \
     ttf-dejavu \
     ttf-inconsolata-g \
     unison \
     viber \
     vim \
     vlc \
+    whatsapp-desktop \
     wit \
     xclip \
     xf86-input-libinput \
     xorg-apps\
     xorg-server \
     xorg-server-utils \
+    xorg-utils \
     xorg-xinit \
+    xscreensaver \
     xterm \
     zathura \
     zathura-pdf-poppler \
