@@ -105,6 +105,14 @@ set diffopt=filler,vertical
 " allow to switch without writing a modified buffers
 set hidden
 
+" Generate .spl when needed.
+" http://vi.stackexchange.com/a/5052
+for d in glob('~/.vim/spell/*.add', 1, 1)
+    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
+        silent exec 'mkspell! ' . fnameescape(d)
+    endif
+endfor
+
 " }}}
 
 " Statusline ------------------------------------------------------- {{{
