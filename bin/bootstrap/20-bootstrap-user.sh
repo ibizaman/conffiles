@@ -46,6 +46,7 @@ pacaur -S --noconfirm \
     sickrage \
     solaar \
     spotify \
+    sshfs \
     teamviewer \
     teiler-git \
     tmux \
