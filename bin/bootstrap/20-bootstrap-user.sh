@@ -54,6 +54,7 @@ pacaur -S --noconfirm \
     ttf-inconsolata-g \
     unison \
     viber \
+    vifm \
     vim \
     vlc \
     whatsapp-desktop \
