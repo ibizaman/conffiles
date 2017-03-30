@@ -26,7 +26,9 @@ pacaur -S --noconfirm \
     gnumeric \
     google-cloud-sdk \
     hfsprogs \
+    htop \
     i3 \
+    iotop \
     libinotify \
     nmap \
     nvidia \
