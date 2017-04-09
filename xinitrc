@@ -34,6 +34,7 @@ fi
 
 setxkbmap -variant altgr-intl
 xscreensaver
+redshiftgui --min&
 
 exec i3
 
