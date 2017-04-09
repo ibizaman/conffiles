@@ -22,6 +22,7 @@ pacaur -S --noconfirm \
     dunst \
     exfat \
     feh \
+    fcron \
     git \
     gnumeric \
     google-cloud-sdk \
@@ -84,6 +85,9 @@ sh ./.vim/install.sh
 
 sudo systemctl start teamviewerd
 sudo systemctl enable teamviewerd
+
+sudo systemctl start fcron
+sudo systemctl enable fcron
 
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
