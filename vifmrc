@@ -227,15 +227,20 @@ filetype *.[1-8] man ./%c
 fileviewer *.[1-8] man ./%c | col -b
 
 " Images
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ {View in sxiv}
-        \ sxiv,
-        \ {View in gpicview}
-        \ gpicview %c,
-        \ {View in shotwell}
-        \ shotwell,
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-         \ convert -identify %f -verbose /dev/null
+" filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"         \ {View in sxiv}
+"         \ sxiv,
+"         \ {View in gpicview}
+"         \ gpicview %c,
+"         \ {View in shotwell}
+"         \ shotwell,
+" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"          \ convert -identify %f -verbose /dev/null
+filextype *.jpg,*.jpeg,*.png,*.gif
+       \ {View in feh}
+       \ feh --fullscreen --auto-zoom --draw-filename --draw-exif --draw-tinted %d --start-at %d/%c 2>/dev/null,
+       \ {View in feh recursively}
+       \ feh --fullscreen --auto-zoom --draw-filename --draw-exif --draw-tinted --recursive %d --start-at %d/%c 2>/dev/null
 
 " OpenRaster
 filextype *.ora
