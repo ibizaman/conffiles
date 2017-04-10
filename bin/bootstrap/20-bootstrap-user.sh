@@ -43,6 +43,7 @@ pacaur -S --noconfirm \
     pulseaudio \
     python \
     python2 \
+    python2-gobject \
     qrencode \
     rofi \
     rsync \
@@ -50,6 +51,7 @@ pacaur -S --noconfirm \
     solaar \
     spotify \
     sshfs \
+    task \
     teamviewer \
     teiler-git \
     tmux \
@@ -92,4 +94,5 @@ sudo systemctl enable fcron
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
 
+sudo pip2 install bugwarrior[jira] 
 echo "Now log back and launch startx"
