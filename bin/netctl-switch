@@ -12,7 +12,7 @@ chosen=$(netctl list | grep --only-match -e '[^* ]\+' | sort --ignore-case | rof
 
 start_time=$(date +'%Y-%m-%d %H:%M:%S')
 
-if sudo netctl switch-to $chosen 2>/dev/null; then
+if sudo netctl stop-all && sudo netctl start $chosen 2>/dev/null; then
     notify-send --app-name=netctl-switch --urgency=low "Switched to profile $chosen"
 else
     systemctl_chosen=netctl@${chosen//-/"\x2d"}
