@@ -1,0 +1,4 @@
+xrandr --dpi 100/DP-0
+android-studio&
+sleep 5
+xrandr --dpi 130/DP-0
