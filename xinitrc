@@ -35,6 +35,9 @@ fi
 setxkbmap -variant altgr-intl
 xscreensaver&
 redshiftgui --min&
+chromium&
+viber&
+Whatsapp&
 
 exec i3
 
