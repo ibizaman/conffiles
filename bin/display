@@ -7,7 +7,7 @@ if [ $display = work ]; then
 elif [ $display = home ]; then
     xrandr --output 'DP-0' --pos '0x0' --output 'HDMI-0' --auto --pos '1920x180'
 elif [ $display = one ]; then
-    xrandr --output 'DP-0' --pos '0x0' --output 'HDMI-0' --off --output 'DP-3' --off
+    xrandr --output 'DP-0' --pos '0x0' --panning '1920x1080' --output 'HDMI-0' --off --output 'DP-3' --off
 elif [ $display = brightness ]; then
     value=$(echo -e '0.1\n0.2\n0.3\n0.4\n0.5\n0.6\n0.7\n0.8\n0.9\n1' | rofi -dmenu)
     xrandr --output 'DP-0' --brightness $value
