@@ -50,6 +50,7 @@ pacaur -S --noconfirm \
     rofi \
     rsync \
     sickrage \
+    smartmontools \
     solaar \
     spotify \
     sshfs \
