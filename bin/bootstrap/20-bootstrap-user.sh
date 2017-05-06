@@ -20,6 +20,7 @@ pacaur -S --noconfirm \
     cmake \
     colorgrab \
     dunst \
+    dosfstools \
     exfat \
     feh \
     fcron \
