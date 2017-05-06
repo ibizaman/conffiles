@@ -51,6 +51,7 @@ pacaur -S --noconfirm \
     rsync \
     sickrage \
     smartmontools \
+    ssmtp \
     solaar \
     spotify \
     sshfs \

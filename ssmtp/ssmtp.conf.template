@@ -1,0 +1,27 @@
+#
+# /etc/ssmtp.conf -- a config file for sSMTP sendmail.
+#
+# Go to https://mailgun.com/app/domains/MY.DOMAIN.com to get the info to
+# fill this out and place the file into /etc/ssmtp/
+#
+# Then test everything went well by running:
+#   echo test | mail -v -s "testing ssmtp setup" ME@gmail.com
+
+# The person who gets all mail for userids < 1000
+# Make this empty to disable rewriting.
+root=ME@gmail.com
+
+# Mailgun's SMTP Hostname
+mailhub=smtp.mailgun.org:587
+# Where will the mail seem to come from?
+rewriteDomain=DOMAIN.com
+# The full hostname
+hostname=COMPUTER.DOMAIN.com
+
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# Mailgun's Default SMTP Login
+AuthUser=POSTMASTER@mg.DOMAIN.com
+# Mailgun's Default Password
+AuthPass=XXXX
