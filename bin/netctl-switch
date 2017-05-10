@@ -6,9 +6,10 @@
 set -e
 
 title="Network Profile:"
-
-
-chosen=$(netctl list | grep --only-match -e '[^* ]\+' | sort --ignore-case | rofi -no-custom -dmenu -p "$title")
+chosen=$1
+if [ -z "$1" ]; then
+    chosen=$(netctl list | grep --only-match -e '[^* ]\+' | sort --ignore-case | rofi -no-custom -dmenu -p "$title")
+fi
 
 start_time=$(date +'%Y-%m-%d %H:%M:%S')
 

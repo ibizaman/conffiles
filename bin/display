@@ -5,7 +5,14 @@ display=$(echo -e 'work\nhome\none\nmirror\nbrightness' | rofi -dmenu)
 #TODO: maybe switch to mons? https://aur.archlinux.org/packages/mons/
 
 if [ $display = work ]; then
-    xrandr --output 'DP-0' --pos '0x360' --output 'DP-3' --auto --pos '1920x0'
+    CURRENT_FOCUSED_ID=$(i3-msg -t get_tree | jq '.. | select(.focused? == true) | .id')
+    netctl-switch work-eth
+    xrandr --output 'DP-0' --pos '0x360' --output 'DP-3' --auto --scale '1x1' --pos '1920x0'
+    pactl set-sink-mute 1 1
+    xbacklight -set 100
+    i3-msg workspace number 4
+    i3-msg move workspace to output right
+    i3-msg "[con_id=\"$CURRENT_FOCUSED_ID\"] focus"
 elif [ $display = home ]; then
     xrandr --output 'DP-0' --pos '0x0' --output 'HDMI-0' --auto --pos '1920x180'
 elif [ $display = one ]; then

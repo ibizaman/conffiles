@@ -32,6 +32,7 @@ pacaur -S --noconfirm \
     htop \
     i3 \
     iotop \
+    jq \
     libinotify \
     nmap \
     nvidia \
