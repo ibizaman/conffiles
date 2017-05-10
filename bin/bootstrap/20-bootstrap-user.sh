@@ -14,6 +14,7 @@ pacaur -S --noconfirm \
     android-studio \
     android-file-transfer \
     base-devel \
+    bc \
     blender \
     browserpass \
     chromium \
