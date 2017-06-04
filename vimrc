@@ -305,6 +305,10 @@ augroup yaml
     au FileType yaml setlocal indentkeys=o,O,*<Return>,!^F
 augroup end
 
+augroup mutt
+    au BufRead,BufNewFile *mutt-* setfiletype mail
+augroup END
+
 " }}}
 
 " Movements -------------------------------------------------------- {{{
