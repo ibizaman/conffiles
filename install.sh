@@ -27,6 +27,7 @@ ln -s ~/.vim/i3status .config
 ln -s ~/.vim/dunst .config
 ln -s ~/.vim/bin .
 ln -s ~/.vim/vifmrc .config/vifm/vifmrc
+ln -s .vim/muttrc .muttrc
 cd .vim
 git submodule update --init --recursive -- bundle/youcompleteme
 cd bundle/youcompleteme

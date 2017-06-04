@@ -1,0 +1,13 @@
+set mbox_type=Maildir
+
+set crypt_use_gpgme=yes
+set crypt_autosign=yes
+set crypt_verify_sig=yes
+set crypt_replysign=yes
+set crypt_replyencrypt=yes
+set crypt_replysignencrypted=yes
+
+# Sanely handle multi-part messages (prefer text part, but yield to
+# mailcap-configured rendering for html-only)
+alternative_order text/plain text/html
+auto_view text/html
