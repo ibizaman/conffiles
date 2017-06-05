@@ -7,6 +7,38 @@ set crypt_replysign=yes
 set crypt_replyencrypt=yes
 set crypt_replysignencrypted=yes
 
+set sort = reverse-threads
+set sort_aux = last-date-received
+
+# Do not ask for to and subject first
+set autoedit
+set edit_headers
+
+set folder=$HOME/Mail
+mailboxes `echo $HOME/Mail/*`
+
+# Handle quoted text correctly
+set text_flowed=yes
+
+# Use threaded view
+set sort=threads
+
+# Scroll inside the message rather than the index
+bind pager <up> previous-line
+bind pager <down> next-line
+
+# Be fast
+set sleep_time=0
+
+set smart_wrap
+
+unset help
+
+set wait_key=no
+
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
 # Sanely handle multi-part messages (prefer text part, but yield to
 # mailcap-configured rendering for html-only)
 alternative_order text/plain text/html

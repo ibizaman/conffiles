@@ -84,7 +84,7 @@ pacaur -S --noconfirm \
     zathura-pdf-poppler \
     zbar \
     zsh \
-    getmail neomutt \ #mail
+    getmail neomutt urlscan \ #mail
 
 sudo usermod --shell zsh timi
 
