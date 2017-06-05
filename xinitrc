@@ -35,7 +35,7 @@ fi
 setxkbmap -variant altgr-intl
 xscreensaver&
 redshiftgui --min&
-chromium&
+(netctl-switch && chromium)&
 viber&
 Whatsapp&
 
