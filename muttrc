@@ -52,3 +52,9 @@ color header		color120    	color233    '^from:'
 color header		color178    	color233    '^subject:'
 color header    	color31     	color233    '^user-agent:'
 color header		color29     	color233    '^reply-to:'
+
+# == Sidebar ==
+
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
