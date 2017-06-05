@@ -23,10 +23,6 @@ set text_flowed=yes
 # Use threaded view
 set sort=threads
 
-# Scroll inside the message rather than the index
-bind pager <up> previous-line
-bind pager <down> next-line
-
 # Be fast
 set sleep_time=0
 
@@ -35,6 +31,18 @@ set smart_wrap
 unset help
 
 set wait_key=no
+
+# Vim-like key bindings
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind attach,index,pager \CN next-entry
+bind attach,index,pager \CB previous-entry
+bind pager j next-line
+bind pager k previous-line
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
 
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
