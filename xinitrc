@@ -39,6 +39,8 @@ redshiftgui --min&
 viber&
 Whatsapp&
 
+feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
+
 exec i3
 
 # vim: set ft=sh
