@@ -23,6 +23,7 @@ included with a simple `git clone`, so install with:
     ln -s ~/.vim/dunst .config/dunst
     ln -s ~/.vim/bin bin
     ln -s .vim/muttrc .muttrc
+    ln -s .vim/mailcap .mailcap
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive -- bundle/youcompleteme
