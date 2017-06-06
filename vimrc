@@ -238,6 +238,11 @@ iabbrev @@ ibizapeanut@gmail.com
 
 " Autocommands ----------------------------------------------------- {{{
 
+augroup create_dir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
 augroup layout
     au!
     au BufNewFile,BufRead,BufWritePre *.html,*.xml setlocal nowrap
@@ -587,5 +592,14 @@ function! AppendModeline()
   call append(line("$"), l:modeline)
 endfunction
 
-" }}}
+" Helper to call mkdir -p
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
 
+" }}}
