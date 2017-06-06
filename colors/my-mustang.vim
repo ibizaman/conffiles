@@ -7,7 +7,7 @@ runtime colors/mustang.vim
 
 let g:colors_name = "my-mustang"
 
-highlight Folded ctermfg=235 ctermbg=233
+highlight Folded ctermfg=244 ctermbg=233
 highlight FoldColumn ctermfg=235 ctermbg=233
 
 highlight clear DiffAdd 
