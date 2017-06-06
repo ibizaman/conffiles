@@ -261,6 +261,9 @@ augroup END
 augroup py
     au!
     au BufNewFile,BufRead *.py setlocal syntax=pysql
+    au FileType python nnoremap <buffer> <leader>pp :g/print/s/^\(\s*\)#/\1<cr>:noh<cr>
+    au FileType python nnoremap <buffer> <leader>po :g/print/s/^\(\s*\)/\1#<cr>:noh<cr>
+    au FileType python nnoremap <buffer> <leader>pd :g/print/d<cr>:noh<cr>
 augroup END
 
 augroup vimscript
