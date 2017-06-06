@@ -45,4 +45,4 @@ HERE
 
 echo "Created $conffile"
 
-echo -e "Add to crontab the following line:\n@5  getmail --rcfile=$conffile"
+echo -e "Add to fcrontab the following line:\n@ 5  getmail --rcfile=$conffile"
