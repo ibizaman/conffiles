@@ -24,6 +24,8 @@ included with a simple `git clone`, so install with:
     ln -s ~/.vim/bin bin
     ln -s .vim/muttrc .muttrc
     ln -s .vim/mailcap .mailcap
+    ln -s ~/.vim/password-store-extensions .password-store/.extensions
+    mkdir -p .password-store/.extensions
     # install youcompleteme's submodules
     cd .vim
     git submodule update --init --recursive -- bundle/youcompleteme
