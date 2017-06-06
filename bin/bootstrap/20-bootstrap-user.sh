@@ -10,11 +10,13 @@ sh ./docsnippet/install-pacaur.sh
 
 pacaur -Syu --noconfirm
 pacaur -S --noconfirm \
+    arch-install-script \
     attic \
     android-studio \
     android-file-transfer \
     base-devel \
     bc \
+    binfmt-support \
     blender \
     browserpass \
     chromium \
@@ -25,6 +27,7 @@ pacaur -S --noconfirm \
     exfat \
     feh \
     fcron \
+    fzf \
     git \
     gnumeric \
     google-cloud-sdk \
@@ -48,6 +51,7 @@ pacaur -S --noconfirm \
     python \
     python2 \
     python2-gobject \
+    qemu-user-static \
     qrencode \
     rofi \
     rsync \
@@ -97,6 +101,9 @@ sudo systemctl enable teamviewerd
 
 sudo systemctl start fcron
 sudo systemctl enable fcron
+
+sudo systemctl enable binfmt-support
+sudo systemctl start binfmt-support
 
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'

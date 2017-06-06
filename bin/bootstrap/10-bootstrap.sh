@@ -1,3 +1,5 @@
+# Run this at root
+
 set -ex
 
 wifi-menu
@@ -27,3 +29,9 @@ Include = /etc/pacman.d/mirrorlist
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 HERE
+
+
+# Avoid problems with SD Card reader https://askubuntu.com/a/704028/697223
+sudo sh -c 'echo options sdhci debug_quirks=0x40 >> /etc/modprobe.d/sdhci-pci.conf'
+sudo modprobe -r sdhci-pci sdhci
+sudo modprobe sdhci-pci
