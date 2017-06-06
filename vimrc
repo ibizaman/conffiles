@@ -300,6 +300,9 @@ augroup END
 augroup sql
     au!
     au BufNewFile,BufRead *.sql setlocal syntax=pgsql
+    au BufNewFile,BufRead *.sql setlocal foldmethod=expr
+    " Lines starting with \d starts a fold
+    au BufNewFile,BufRead *.sql setlocal foldexpr=getline(v:lnum)[0:1]==\"\\\\d\"?'>1':1
 augroup END
 
 augroup yaml
