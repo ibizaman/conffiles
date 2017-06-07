@@ -3,11 +3,15 @@
 CURRENT_FOCUSED_ID=$(i3-msg -t get_tree | jq '.. | select(.focused? == true) | .id')
 display=$(echo -e 'work\nhome\none\nmirror\nbrightness' | rofi -dmenu)
 
+#EXTERNAL=DP-3
+EXTERNAL=HDMI-0
+
 #TODO: maybe switch to mons? https://aur.archlinux.org/packages/mons/
 
 if [ $display = work ]; then
     netctl-switch work-eth
-    xrandr --output 'DP-0' --pos '0x360' --output 'DP-3' --auto --scale '1x1' --pos '1920x0'
+    #xrandr --output 'DP-0' --pos '0x360' --output $EXTERNAL --auto --scale '1x1' --pos '1920x0'
+    xrandr --output 'DP-0' --pos '0x520' --output $EXTERNAL --auto --scale '1x1' --pos '1920x0'
     pactl set-sink-mute 1 1
     xbacklight -set 100
     i3-msg workspace number 4
@@ -21,9 +25,9 @@ elif [ $display = home ]; then
     i3-msg move workspace to output right
     i3-msg "[con_id=\"$CURRENT_FOCUSED_ID\"] focus"
 elif [ $display = one ]; then
-    xrandr --output 'DP-0' --pos '0x0' --panning '1920x1080' --output 'HDMI-0' --off --output 'DP-3' --off
+    xrandr --output 'DP-0' --pos '0x0' --panning '1920x1080' --output 'HDMI-0' --off --output $EXTERNAL --off
 elif [ $display = mirror ]; then
-    xrandr --output 'DP-0' --mode '1920x1080' --output 'DP-3' --same-as 'DP-0' --scale $(echo "1920/3440" | bc -l)x$(echo "1080/1440" | bc -l)
+    xrandr --output 'DP-0' --mode '1920x1080' --output $EXTERNAL --same-as 'DP-0' --scale $(echo "1920/3440" | bc -l)x$(echo "1080/1440" | bc -l)
 elif [ $display = brightness ]; then
     value=$(echo -e '0.1\n0.2\n0.3\n0.4\n0.5\n0.6\n0.7\n0.8\n0.9\n1' | rofi -dmenu)
     xrandr --output 'DP-0' --brightness $value
