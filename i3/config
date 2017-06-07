@@ -21,6 +21,9 @@ bindsym $mod+Shift+q kill
 # start rofi
 bindsym $mod+d exec rofi -show run
 
+# start pass clip
+bindsym $mod+c exec pass clip
+
 # take a screenshot
 bindsym $mod+Print exec teiler
 

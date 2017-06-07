@@ -45,6 +45,7 @@ pacaur -S --noconfirm \
     pandoc \
     paperkey \
     pass \
+    pass-clip \
     pavucontrol \
     pepper-flash \
     pulseaudio \
