@@ -5,8 +5,8 @@
 	ui = true
 [alias]
         lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-        lola = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-        lolu = !bash -c 'git log --graph --pretty=format:%Cred%h%Creset\\ -%C\\(yellow\\)%d%Creset\\ %s\\ %Cgreen\\(%ad\\)\\ %C\\(bold\\ blue\\)\\<%an\\>%Creset --abbrev-commit --date=relative ${1:-origin/master}^..$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) ${1:-origin/master}^..$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)' -
+        lola = !bash -c 'git log --graph --pretty=format:%Cred%h%Creset\\ -%C\\(yellow\\)%d%Creset\\ %s\\ %Cgreen\\(%ad\\)\\ %C\\(bold\\ blue\\)\\<%an\\>%Creset --abbrev-commit --date=relative ${@:---all}' -
+        lolu = !bash -c 'git log --graph --pretty=format:%Cred%h%Creset\\ -%C\\(yellow\\)%d%Creset\\ %s\\ %Cgreen\\(%ad\\)\\ %C\\(bold\\ blue\\)\\<%an\\>%Creset --abbrev-commit --date=relative ${1:-origin/master}..$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) ${1:-origin/master}..$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)' -
         lolm = !sh -c 'git log --graph --pretty=format:%Cred%h%Creset\\ -%C\\(yellow\\)%d%Creset\\ %s\\ %Cgreen\\(%ad\\)\\ %C\\(bold\\ blue\\)\\<%an\\>%Creset --abbrev-commit --date=relative $(git rev-parse --abbrev-ref --symbolic-full-name @{u})..HEAD' -
 	d = difftool
         st = status -sb
@@ -15,7 +15,7 @@
         rebasu = !sh -c 'git rebase $(git rev-parse --abbrev-ref --symbolic-full-name @{u})' -
         branchdprev = !sh -c 'git branch -d $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
         branchDprev = !sh -c 'git branch -D $(git rev-parse --abbrev-ref --symbolic-full-name @{-1})' -
-        branchc = !sh -c 'git fetch && git branch $0 origin/master'
+        branchc = !sh -c 'git fetch && git branch $0 ${1:-origin/master}'
         pullb = !sh -c 'git fetch origin pull/$0/head:pull/$0 && echo pull/$0'
         pulld = !sh -c 'git branch -D pull/$0 && echo pull/$0'
         touching = !sh -c 'git log --format=%H --follow $0 | head -n$1 | tail -n1'
