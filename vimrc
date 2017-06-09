@@ -391,6 +391,7 @@ let g:test#transformation = 'elixir'
 " promiscuous ------------------------------------------------------ {{{
 nmap <leader>gb :Promiscuous<cr>
 nmap <leader>gg :Promiscuous -<cr>
+let g:promiscuous_base_branch = 'promiscuous#git#basebranchlatestoriginmaster'
 " }}}
 
 " fzf -------------------------------------------------------------- {{{
