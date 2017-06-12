@@ -13,8 +13,9 @@ fi
 
 start_time=$(date +'%Y-%m-%d %H:%M:%S')
 
-if sudo netctl stop-all && sudo netctl start $chosen 2>/dev/null; then
+if sudo netctl stop-all && sudo netctl start "$chosen" 2>/dev/null; then
     notify-send --app-name=netctl-switch --urgency=low "Switched to profile $chosen"
+    killall -9 Viber && viber
 else
     systemctl_chosen=netctl@${chosen//-/"\x2d"}
 
