@@ -31,3 +31,4 @@ editorconfig https://github.com/editorconfig/editorconfig-vim.git master
 diff https://github.com/chrisbra/vim-diff-enhanced.git master
 coveragepy https://github.com/alfredodeza/coveragepy.vim.git master
 taskwarrior https://github.com/blindFS/vim-taskwarrior.git master
+jinja2 git@github.com:Glench/Vim-Jinja2-Syntax.git master
