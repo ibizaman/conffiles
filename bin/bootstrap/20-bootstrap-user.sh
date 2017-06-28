@@ -57,6 +57,7 @@ pacaur -S --noconfirm \
     qrencode \
     rofi \
     rsync \
+    shellcheck \
     sickrage \
     smartmontools \
     ssmtp \
