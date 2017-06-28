@@ -38,6 +38,7 @@ pacaur -S --noconfirm \
     jq \
     libinotify \
     nmap \
+    ntp \
     nvidia \
     nvidia-settings \
     nvidia-utils \
@@ -105,6 +106,9 @@ sudo systemctl enable fcron
 
 sudo systemctl enable binfmt-support
 sudo systemctl start binfmt-support
+
+sudo systemctl enable ntpd
+sudo systemctl start ntpd
 
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
