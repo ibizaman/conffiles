@@ -9,7 +9,7 @@ EXTERNAL=HDMI-0
 #TODO: maybe switch to mons? https://aur.archlinux.org/packages/mons/
 
 if [ $display = work ]; then
-    netctl-switch work-eth
+    netctl-switch work-eth&
     #xrandr --output 'DP-0' --pos '0x360' --output $EXTERNAL --auto --scale '1x1' --pos '1920x0'
     xrandr --output 'DP-0' --pos '0x520' --output $EXTERNAL --auto --scale '1x1' --pos '1920x0'
     pactl set-sink-mute 1 1
@@ -19,7 +19,7 @@ if [ $display = work ]; then
     i3-msg "[con_id=\"$CURRENT_FOCUSED_ID\"] focus"
     feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 elif [ $display = home ]; then
-    netctl-switch home-5G
+    netctl-switch home-5G&
     xrandr --output 'DP-0' --pos '0x0' --output 'HDMI-0' --auto --pos '1920x180'
     xbacklight -set 60
     i3-msg workspace number 1
@@ -27,6 +27,7 @@ elif [ $display = home ]; then
     i3-msg "[con_id=\"$CURRENT_FOCUSED_ID\"] focus"
     feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 elif [ $display = one ]; then
+    netctl-switch&
     xrandr --output 'DP-0' --pos '0x0' --panning '1920x1080' --output 'HDMI-0' --off --output $EXTERNAL --off
     feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 elif [ $display = mirror ]; then
