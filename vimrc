@@ -366,7 +366,9 @@ let g:ycm_key_list_previous_completion=[]
 " }}}
 
 " fzf -------------------------------------------------------------- {{{
-nnoremap <c-p> :GitFiles<CR>
+nnoremap <c-p>p :GitFiles<CR>
+nnoremap <c-p>b :Buffers<CR>
+set rtp+=~/.fzf
 " }}}
 
 " vim-test --------------------------------------------------------- {{{
@@ -392,10 +394,6 @@ let g:test#transformation = 'elixir'
 nmap <leader>gb :Promiscuous<cr>
 nmap <leader>gg :Promiscuous -<cr>
 let g:promiscuous_base_branch = 'promiscuous#git#basebranchlatestoriginmaster'
-" }}}
-
-" fzf -------------------------------------------------------------- {{{
-set rtp+=~/.fzf
 " }}}
 
 " enhanced-diff ---------------------------------------------------- {{{
