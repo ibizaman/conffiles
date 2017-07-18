@@ -20,6 +20,7 @@ pacaur -S --noconfirm \
     blender \
     browserpass \
     chromium \
+    ckb-next-git \
     cmake \
     colorgrab \
     dunst \
@@ -111,6 +112,9 @@ sudo systemctl start binfmt-support
 
 sudo systemctl enable ntpd
 sudo systemctl start ntpd
+
+sudo systemctl enable ckb-daemon
+sudo systemctl start ckb-daemon
 
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
