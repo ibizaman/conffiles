@@ -5,7 +5,7 @@
 xterm*termName: xterm-256color
 xterm*locale: true
 xterm*saveLines: 8192
-*faceName: Inconsolata\\-g:size=8
+*faceName: Inconsolata\\-g\ for\ Powerline:size=8
 
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme

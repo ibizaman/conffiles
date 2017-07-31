@@ -44,6 +44,7 @@ pacaur -S --noconfirm \
     nvidia-settings \
     nvidia-utils \
     openssh \
+    otf-inconsolata-g-powerline-git \
     pandoc \
     paperkey \
     pass \
