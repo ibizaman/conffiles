@@ -353,6 +353,10 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_html_checkers = ["validator", "w3"]
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ["elixir"]
+
+" advised for elm-vim plugin
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 " }}}
 
 " snipmate --------------------------------------------------------- {{{
@@ -363,6 +367,8 @@ let g:snips_author = 'Pierre Penninckx'
 " make youcompleteme compatible with snipmate
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+" advised for elm-vim plugin
+let g:elm_syntastic_show_warnings = 1
 " }}}
 
 " fzf -------------------------------------------------------------- {{{
