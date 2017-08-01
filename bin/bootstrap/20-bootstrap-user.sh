@@ -39,6 +39,7 @@ pacaur -S --noconfirm \
     jq \
     libinotify \
     nmap \
+    npm \
     ntp \
     nvidia \
     nvidia-settings \
@@ -122,3 +123,5 @@ sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\
 
 sudo pip2 install bugwarrior[jira] 
 echo "Now log back and launch startx"
+
+sudo npm install -g elm elm-test elm-oracle elm-format
