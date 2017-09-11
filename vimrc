@@ -348,6 +348,13 @@ let NERDTreeQuitOnOpen = 1
 vmap <Enter> <Plug>(EasyAlign)
 " }}}
 
+" elm-vim ---------------------------------------------------------- {{{
+let g:elm_setup_keybindings = 0
+let g:elm_syntastic_show_warnings = 1
+let g:elm_format_fail_silently = 0
+let g:elm_detailed_complete = 1
+" }}}
+
 " syntactic -------------------------------------------------------- {{{
 let g:syntastic_check_on_open = 0
 let g:syntastic_html_checkers = ["validator", "w3"]
@@ -356,7 +363,6 @@ let g:syntastic_elixir_checkers = ["elixir"]
 
 " advised for elm-vim plugin
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
 " }}}
 
 " snipmate --------------------------------------------------------- {{{
@@ -368,7 +374,9 @@ let g:snips_author = 'Pierre Penninckx'
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 " advised for elm-vim plugin
-let g:elm_syntastic_show_warnings = 1
+let g:ycm_semantic_triggers = {
+     \ 'elm' : ['.'],
+     \}
 " }}}
 
 " fzf -------------------------------------------------------------- {{{
