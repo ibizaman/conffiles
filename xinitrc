@@ -42,6 +42,6 @@ Whatsapp&
 
 feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 
-exec i3
+exec i3 >~/i3log-"$(date +'%F-%k-%M-%S')" 2>&1
 
 # vim: set ft=sh
