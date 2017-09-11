@@ -29,8 +29,6 @@ ln -s ~/.vim/bin .
 ln -s ~/.vim/vifmrc .config/vifm/vifmrc
 ln -s .vim/muttrc .muttrc
 ln -s .vim/mailcap .mailcap
-mkdir -p .password-store/.extensions
-ln -s ~/.vim/password-store-extensions .password-store/.extensions
 cd .vim
 git submodule update --init --recursive -- bundle/youcompleteme
 cd bundle/youcompleteme
