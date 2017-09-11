@@ -29,6 +29,7 @@ pacaur -S --noconfirm \
     feh \
     fcron \
     fzf \
+    gimp \
     git \
     gnumeric \
     google-cloud-sdk \
@@ -54,6 +55,7 @@ pacaur -S --noconfirm \
     pavucontrol \
     pepper-flash \
     pulseaudio \
+    pv \
     python \
     python2 \
     python2-gobject \
