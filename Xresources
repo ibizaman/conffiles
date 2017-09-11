@@ -7,9 +7,7 @@ xterm*locale: true
 xterm*saveLines: 8192
 *faceName: Inconsolata\\-g\ for\ Powerline:size=8
 
-! ------------------------------------------------------------------------------
 ! ROFI Color theme
-! ------------------------------------------------------------------------------
 rofi.color-enabled: true
 rofi.color-window: #393939, #393939, #268bd2
 rofi.color-normal: #393939, #ffffff, #393939, #268bd2, #ffffff
