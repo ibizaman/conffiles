@@ -7,3 +7,4 @@
 promiscuous
 *.venv*
 spell/*.spl
+*~
