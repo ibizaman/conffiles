@@ -38,3 +38,5 @@
 	user = ibizaman
 [remote "origin"]
 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+[merge]
+	conflictStyle = diff3
