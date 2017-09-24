@@ -29,6 +29,7 @@ ln -s ~/.vim/bin .
 ln -s ~/.vim/vifmrc .config/vifm/vifmrc
 ln -s .vim/muttrc .muttrc
 ln -s .vim/mailcap .mailcap
+ln -s ~/.vim/psqlrc .psqlrc
 cd .vim
 git submodule update --init --recursive -- bundle/youcompleteme
 cd bundle/youcompleteme
