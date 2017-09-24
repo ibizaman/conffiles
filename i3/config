@@ -23,6 +23,8 @@ bindsym $mod+d exec rofi -show run
 
 # start pass clip
 bindsym $mod+c exec pass clip
+bindsym $mod+Shift+c exec uxterm -class Float -e "sudo swapoff -a && pass open"
+bindsym $mod+Control+c exec uxterm -class Float -e "pass close && sudo swapon /dev/vg0/swap"
 
 # take a screenshot
 bindsym $mod+Print exec teiler
@@ -109,7 +111,7 @@ bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume al
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+t reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
