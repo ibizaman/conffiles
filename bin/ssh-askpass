@@ -1,0 +1,4 @@
+#!/bin/sh
+
+keyfile=$(echo $@ | sed -e 's,^.*\.ssh\/\(.*\):$,\1,')
+pass show "sshkey-passphrase/$keyfile" | head -n1 || exit 1

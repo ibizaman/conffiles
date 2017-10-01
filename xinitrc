@@ -40,6 +40,16 @@ redshiftgui --min&
 viber&
 Whatsapp&
 
+load_ssh_keys () {
+    uxterm -class Float -e "sudo swapoff -a && pass open"
+
+    for f in $(pass ls sshkey-passphrase | tail -n+2 | cut -d ' ' -f 2-); do
+        SSH_ASKPASS='/home/timi/bin/ssh-askpass' \
+                   ssh-add "$HOME"/.ssh/"$f" < /dev/null
+    done
+}
+(sleep 20 && load_ssh_keys &) &
+
 feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 
 exec i3 >~/i3log-"$(date +'%F-%k-%M-%S')" 2>&1
