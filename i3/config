@@ -28,7 +28,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 
 # start pass clip
-bindsym $mod+c exec pass clip
+bindsym $mod+c exec PASSWORD_STORE_X_SELECTION=primary pass clip
 bindsym $mod+Shift+c exec uxterm -class Float -e "sudo swapoff -a && pass open"
 bindsym $mod+Control+c exec uxterm -class Float -e "pass close && sudo swapon /dev/vg0/swap"
 
