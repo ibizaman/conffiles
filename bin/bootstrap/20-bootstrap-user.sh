@@ -19,7 +19,6 @@ pacaur -S --noconfirm \
     binfmt-support \
     blender \
     browserpass \
-    chromium \
     ckb-next-git \
     cmake \
     colorgrab \
@@ -28,6 +27,7 @@ pacaur -S --noconfirm \
     exfat \
     feh \
     fcron \
+    firefox \
     fzf \
     gimp \
     git \
