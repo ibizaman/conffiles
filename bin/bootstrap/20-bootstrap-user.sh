@@ -79,6 +79,7 @@ pacaur -S --noconfirm \
     ttf-dejavu \
     ttf-inconsolata-g \
     unison \
+    uqm-hd \
     viber \
     vifm \
     vim \
