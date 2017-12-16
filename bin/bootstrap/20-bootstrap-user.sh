@@ -25,6 +25,7 @@ pacaur -S --noconfirm \
     dunst \
     dosfstools \
     exfat \
+    endless-sky \
     feh \
     fcron \
     firefox \
