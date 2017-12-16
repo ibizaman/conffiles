@@ -34,7 +34,7 @@ fi
 
 setxkbmap -variant altgr-intl
 clipster --daemon&
-xscreensaver&
+xscreensaver -no-splash&
 redshiftgui --min&
 (display && chromium)&
 viber&
