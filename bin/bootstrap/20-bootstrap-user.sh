@@ -124,6 +124,7 @@ sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bi
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
 
 sudo pip2 install bugwarrior[jira] 
+sudo pip install virtualenvwrapper
 echo "Now log back and launch startx"
 
 sudo npm install -g elm elm-test elm-oracle elm-format
