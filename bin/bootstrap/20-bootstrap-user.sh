@@ -40,6 +40,8 @@ pacaur -S --noconfirm \
     iotop \
     jq \
     libinotify \
+    markdown \
+    mdl \
     nmap \
     npm \
     ntp \
@@ -130,3 +132,4 @@ sudo pip install virtualenvwrapper
 echo "Now log back and launch startx"
 
 sudo npm install -g elm elm-test elm-oracle elm-format
+sudo npm install -g vmd
