@@ -73,6 +73,7 @@ pacaur -S --noconfirm \
     solaar \
     spotify \
     sshfs \
+    syncthing \
     task \
     teamviewer \
     teiler-git \
@@ -80,7 +81,6 @@ pacaur -S --noconfirm \
     ttf-croscore \
     ttf-dejavu \
     ttf-inconsolata-g \
-    unison \
     uqm-hd \
     viber \
     vifm \
@@ -123,6 +123,9 @@ sudo systemctl start ntpd
 
 sudo systemctl enable ckb-daemon
 sudo systemctl start ckb-daemon
+
+sudo systemctl enable syncthing@"$USER"
+sudo systemctl start syncthing@"$USER"
 
 sudo sh -c 'echo "ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", RUN+="/usr/bin/ethtool -s %k wol d" > /etc/udev/rules.d/70-disable_wol.rules'
 sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"net\", KERNEL==\"wlan*\", RUN+=\"/usr/bin/iw dev %k set power_save on\"" > /etc/udev/rules.d/70-wifi-powersave.rules'
