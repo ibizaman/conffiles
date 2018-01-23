@@ -36,9 +36,12 @@ setxkbmap -variant altgr-intl
 clipster --daemon&
 xscreensaver -no-splash&
 redshiftgui --min&
-(display && chromium)&
-viber&
-Whatsapp&
+#display
+#chromium&
+#firefox&
+#emacs&
+#viber&
+#Whatsapp&
 
 load_ssh_keys () {
     uxterm -class Float -e "sudo swapoff -a && pass open"
@@ -48,7 +51,7 @@ load_ssh_keys () {
                    ssh-add "$HOME"/.ssh/"$f" < /dev/null
     done
 }
-(sleep 20 && load_ssh_keys &) &
+#(sleep 20 && load_ssh_keys &) &
 
 feh --bg-fill /srv/pictures/Wallpaper/chosen_wallpaper
 
