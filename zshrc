@@ -122,6 +122,11 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+if [ -d ~/.zsh_aliases ]; then
+    source ~/.zsh_aliases/*
+fi
+
+
 #######
 # SSH #
 #######
