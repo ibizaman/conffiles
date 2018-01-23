@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rom_dir="$1"
+if [ -z "$rom_dir" ] || ! [ -d "$rom_dir" ]; then
+    echo "$0 ROM_DIR"
+    echo "ROM_DIR must point to the directory where the wii roms are located."
+    exit 1
+fi
+shift
+
+sudo wwt LIST | \
+    head -n-3 | \
+    tail -n+4 | \
+    cut -d' ' -f1 | \
+    sudo xargs -n1 -I. wwt EXTRACT --auto --update .="$rom_dir"
+
+sudo wwt ADD --recurse "$rom_dir" --auto
