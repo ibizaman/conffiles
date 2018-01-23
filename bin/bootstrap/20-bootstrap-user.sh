@@ -11,13 +11,13 @@ sh ./docsnippet/install-pacaur.sh
 pacaur -Syu --noconfirm
 pacaur -S --noconfirm \
     arch-install-script \
-    attic \
     android-studio \
     android-file-transfer \
     base-devel \
     bc \
     binfmt-support \
     blender \
+    borg \
     browserpass \
     ckb-next-git \
     cmake \
