@@ -49,6 +49,8 @@ pacaur -S --noconfirm \
     nvidia-settings \
     nvidia-utils \
     openssh \
+    openvpn \
+    openvpn-update-resolv-conf \
     otf-inconsolata-g-powerline-git \
     pandoc \
     paperkey \
