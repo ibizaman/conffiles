@@ -36,6 +36,7 @@ setxkbmap -variant altgr-intl
 clipster --daemon&
 xscreensaver -no-splash&
 redshiftgui --min&
+ckb --background&
 #display
 #chromium&
 #firefox&
