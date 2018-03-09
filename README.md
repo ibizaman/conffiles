@@ -1,3 +1,5 @@
+Hey I'm using emacs now. What's underneath here is old.
+
 These files are my vim plugins, along with my vimrc file, my
 .gitconfig and .gitignore files and my .tmux.conf file.
 
