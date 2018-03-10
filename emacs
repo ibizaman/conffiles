@@ -125,6 +125,10 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package org
   :straight t
   :after ob-python ob-async ob-shell
+  :init
+  (defun my/org-mode-hook-evil ()
+      (setq evil-auto-indent nil))
+  (add-hook 'org-mode-hook 'my/org-mode-hook-evil)
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
