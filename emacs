@@ -191,6 +191,14 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package htmlize
   :straight t)
 
+(use-package git-link
+  :straight t
+  :config
+  (defun git-link-master-branch ()
+    (interactive)
+    (let ((git-link-default-branch "master"))
+      (call-interactively 'git-link))))
+
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
