@@ -188,6 +188,9 @@ Inserted by installing 'org-mode' or when a release is made."
   :bind (("C-c =" . er/expand-region)
 	 ("C-c -" . (lambda () (interactive) (call-with-prefix -1 'er/expand-region)))))
 
+(use-package htmlize
+  :straight t)
+
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
