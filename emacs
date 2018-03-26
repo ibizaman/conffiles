@@ -210,6 +210,13 @@ Inserted by installing 'org-mode' or when a release is made."
 	  (git-link-use-commit t))
       (call-interactively 'git-link))))
 
+(use-package git-gutter-fringe+
+  :straight t
+  :config
+  (global-git-gutter+-mode)
+  (git-gutter-fr+-minimal)
+  (setq git-gutter-fr+-side 'right-fringe))
+
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
