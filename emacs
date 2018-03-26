@@ -137,7 +137,7 @@ Inserted by installing 'org-mode' or when a release is made."
    '((emacs-lisp . t)
      (sql . t)
      (python . t)
-     (sh . t))))
+     (shell . t))))
 
 (use-package virtualenvwrapper
   :straight t
