@@ -66,13 +66,15 @@ Inserted by installing 'org-mode' or when a release is made."
 ; Git-grep command
 (defun completing-read-simple (prompt alist)
   "Equivalent to (completing-read PROMPT ALIST nil nil (car ALIST) (quote ALIST))."
-  (completing-read prompt alist nil nil (car alist) (quote alist)))
+  (completing-read prompt (symbol-value alist) nil nil nil alist))
 
-(defun git-grep (regexp &optional files)
-  "Search for REGEXP in current git tracked FILES."
-  (interactive (list (completing-read-simple (concat "Git grep regexp in dir " (vc-root-dir) ": ") grep-regexp-history)
-		     (completing-read-simple (concat "Run on files in dir " (vc-root-dir) " : ") grep-files-history)))
-  (lgrep (concat "git --no-pager grep -n -e '" regexp "'") nil (vc-root-dir)))
+(defun git-grep (dir regexp &optional files)
+  "Search in DIR (default current git folder) for REGEXP tracked FILES."
+  (interactive (let* ((dir (read-file-name (concat "Git grep in dir: ") (vc-root-dir) nil t)))
+		 (list dir
+		       (completing-read-simple (concat "Git grep regexp in dir " dir ": ") 'grep-regexp-history)
+		       (completing-read-simple (concat "Run on files in dir " dir " : ") 'grep-files-history))))
+  (lgrep (concat "git --no-pager grep -n -e '" regexp "'") nil dir))
 
 (global-set-key (kbd "C-x f") 'git-grep)
 
