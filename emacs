@@ -217,6 +217,12 @@ Inserted by installing 'org-mode' or when a release is made."
   (git-gutter-fr+-minimal)
   (setq git-gutter-fr+-side 'right-fringe))
 
+
+(use-package exec-path-from-shell
+  :straight t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
