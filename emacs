@@ -47,6 +47,8 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'org)
 ; ORG-MODE install hack END
 
+(setq-default indent-tabs-mode nil)
+
 (set-face-attribute 'default nil :family "Inconsolata"
                                :foundry "PfEd"
                                :slant 'normal
