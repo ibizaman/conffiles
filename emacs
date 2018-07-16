@@ -75,6 +75,9 @@ Inserted by installing 'org-mode' or when a release is made."
       savehist-file "~/.emacs.d/savehist")
 (savehist-mode t)
 
+; Use ibuffer for tab list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
