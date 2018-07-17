@@ -52,7 +52,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (set-face-attribute 'default nil :family "Inconsolata"
                                :foundry "PfEd"
                                :slant 'normal
-                               :height 90
+                               :height 130
                                :weight 'normal
                                :width 'normal)
 
