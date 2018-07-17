@@ -209,6 +209,9 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (pyenv-mode))
 
+(setq mac-function-key-is-meta t)
+(setq mac-function-modifier 'meta)
+
 (use-package flycheck
   :straight t
   :config
