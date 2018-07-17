@@ -231,6 +231,12 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (flycheck-popup-tip-mode))
 
+(use-package flyspell
+  :config
+  (progn
+    (add-hook 'text-mode-hook #'turn-on-flyspell)
+    (add-hook 'org-mode-hook #'turn-on-flyspell)
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 (use-package pytest
   :straight t
   :bind (("C-c t t" . pytest-one)
