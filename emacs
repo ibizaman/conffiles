@@ -286,12 +286,38 @@ Inserted by installing 'org-mode' or when a release is made."
   (git-gutter-fr+-minimal)
   (setq git-gutter-fr+-side 'right-fringe))
 
+(use-package groovy-mode
+  :straight t)
+
+(use-package markdown-mode
+  :straight t)
 
 (use-package exec-path-from-shell
   :straight t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
+
+(use-package ox-hugo
+  :straight t
+  :after ox)
+
+(use-package rainbow-delimiters
+  :straight t
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+(use-package highlight-parentheses
+  :straight t)
+
+(use-package org-jira
+  :straight t)
+
+(use-package elm-mode
+  :straight t)
+
+(use-package haskell-mode
+  :straight t)
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
