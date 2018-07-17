@@ -204,9 +204,10 @@ Inserted by installing 'org-mode' or when a release is made."
          :map org-mode-map
          ("C-c d d" . org-cut-subtree)))
 
-(use-package virtualenvwrapper
+(use-package pyenv-mode
   :straight t
-  :bind (("C-c v" . venv-workon)))
+  :config
+  (pyenv-mode))
 
 (use-package flycheck
   :straight t
