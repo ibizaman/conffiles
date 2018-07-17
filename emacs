@@ -302,6 +302,25 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :after ox)
 
+(defun use-region-or-expand-region ()
+  "Use region if active or expand region at point."
+  (when (not (use-region-p))
+    (let ((inhibit-message t))
+      (call-interactively 'er/expand-region))))
+
+(defun eval-point-region-and-deactivate ()
+  "Evaluate region or expanded region and deactivates region when done."
+  (interactive)
+  (use-region-or-expand-region)
+  (condition-case-unless-debug err
+      (call-interactively 'eval-region)
+    (error (deactivate-mark)
+           (signal (car err) (cdr err))))
+  (deactivate-mark))
+
+(use-package elisp-mode
+  :bind (("C-c C-c" . eval-point-region-and-deactivate)))
+
 (use-package rainbow-delimiters
   :straight t
   :init
