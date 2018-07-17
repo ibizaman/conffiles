@@ -168,7 +168,7 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :after magit-gh-pulls
   :init
-  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+  ;(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
   (setq magit-diff-refine-hunk t
 	magit-diff-paint-whitespace t
 	magit-diff-highlight-trailing t
