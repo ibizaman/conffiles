@@ -342,6 +342,14 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-c d s" . nameses-save)
          ("C-c d r" . nameses-reset)))
 
+(use-package ob-tmux
+  :straight (ob-tmux :type git :host nil :repo "https://github.com/ahendriksen/ob-tmux.git")
+  :config
+  (setq org-babel-default-header-args:tmux
+        '((:results . "silent")
+          (:terminal . "iterm")))
+  (setq org-babel-tmux-session-prefix "ob-"))
+
 (use-package org-jira
   :straight t)
 
