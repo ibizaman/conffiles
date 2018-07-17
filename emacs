@@ -335,6 +335,13 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package highlight-parentheses
   :straight t)
 
+(use-package nameses
+  :straight (nameses :type git :host nil :repo "https://gist.github.com/8960595.git")
+  :init (require 'desktop)
+  :bind (("C-c d d" . nameses-load)
+         ("C-c d s" . nameses-save)
+         ("C-c d r" . nameses-reset)))
+
 (use-package org-jira
   :straight t)
 
