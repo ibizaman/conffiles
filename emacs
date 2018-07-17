@@ -195,7 +195,14 @@ Inserted by installing 'org-mode' or when a release is made."
    '((emacs-lisp . t)
      (sql . t)
      (python . t)
-     (shell . t))))
+     (shell . t)))
+  (setq org-log-done 'time)
+  :bind (("C-c j" . outline-next-heading)
+         ("C-c k" . outline-previous-heading)
+         ("C-c h" . outline-up-heading)
+         ("C-c l" . outline-show-subtree)
+         :map org-mode-map
+         ("C-c d d" . org-cut-subtree)))
 
 (use-package virtualenvwrapper
   :straight t
