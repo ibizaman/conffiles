@@ -202,7 +202,7 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-c h" . outline-up-heading)
          ("C-c l" . outline-show-subtree)
          :map org-mode-map
-         ("C-c d d" . org-cut-subtree)))
+         ("C-c o d" . org-cut-subtree)))
 
 (use-package pyenv-mode
   :straight t
