@@ -367,6 +367,19 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :config
   (global-set-key (kbd "C-x C-b") 'ibuffer))
+
+(use-package ivy
+  :straight t
+  :after magit
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (global-set-key (kbd "C-s") 'swiper)
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-ignore-order)))
+  (setq magit-completing-read-function 'ivy-completing-read))
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
