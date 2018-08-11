@@ -395,3 +395,5 @@ Inserted by installing 'org-mode' or when a release is made."
 ; Prompt to save customization before quitting
 (add-hook 'kill-emacs-query-functions
 	  'custom-prompt-customize-unsaved-options)
+
+(setenv "PGCONNECT_TIMEOUT" "5")
