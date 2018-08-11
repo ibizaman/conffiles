@@ -356,6 +356,12 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package elm-mode
   :straight t)
 
+(use-package flycheck-elm
+  :straight t
+  :after flycheck
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
+
 (use-package haskell-mode
   :straight t)
 ; Move custom-set-variables and custom-set-faces in different file
