@@ -75,9 +75,6 @@ Inserted by installing 'org-mode' or when a release is made."
       savehist-file "~/.emacs.d/savehist")
 (savehist-mode t)
 
-; Use ibuffer for tab list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
@@ -364,6 +361,12 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package haskell-mode
   :straight t)
+
+
+(use-package ibuffer
+  :straight t
+  :config
+  (global-set-key (kbd "C-x C-b") 'ibuffer))
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
