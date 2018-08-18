@@ -129,16 +129,6 @@ Inserted by installing 'org-mode' or when a release is made."
   "Equivalent to (completing-read PROMPT ALIST nil nil (car ALIST) (quote ALIST))."
   (completing-read prompt (symbol-value alist) nil nil nil alist))
 
-(defun git-grep (dir regexp &optional files)
-  "Search in DIR (default current git folder) for REGEXP tracked FILES."
-  (interactive (let* ((dir (read-file-name (concat "Git grep in dir: ") (vc-root-dir) nil t)))
-		 (list dir
-		       (completing-read-simple (concat "Git grep regexp in dir " dir ": ") 'grep-regexp-history)
-		       (completing-read-simple (concat "Run on files in dir " dir " : ") 'grep-files-history))))
-  (lgrep (concat "git --no-pager grep -n -e '" regexp "'") nil dir))
-
-(global-set-key (kbd "C-x f") 'git-grep)
-
 (defun call-with-prefix (prefix function)
   "Call a function interactively like if \\<keymap> PREFIX FUNCTION was given."
   (interactive)
@@ -383,6 +373,8 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "C-x f f") 'counsel-git)
+  (global-set-key (kbd "C-x f g") 'counsel-git-grep)
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
