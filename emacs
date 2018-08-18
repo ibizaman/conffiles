@@ -70,6 +70,12 @@ Inserted by installing 'org-mode' or when a release is made."
         ;; %l print the current line number
         ;; %c print the current column
         (line-number-mode ("%l" (column-number-mode ":%c")))))
+
+
+; Start frames maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+
 ; Enable saving of minibuffer history and other variables
 (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring)
       savehist-file "~/.emacs.d/savehist")
