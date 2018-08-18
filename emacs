@@ -386,6 +386,10 @@ Inserted by installing 'org-mode' or when a release is made."
   (global-set-key (kbd "C-h f") #'helpful-callable)
   (global-set-key (kbd "C-h v") #'helpful-variable)
   (global-set-key (kbd "C-h k") #'helpful-key))
+
+
+(use-package graphviz-dot-mode
+  :straight t)
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
