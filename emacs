@@ -361,20 +361,20 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package ibuffer
   :straight t
-  :config
-  (global-set-key (kbd "C-x C-b") 'ibuffer))
+  :bind (("C-x C-b" . 'ibuffer)))
 
 (use-package ivy
   :straight t
   :after magit
+  :init (global-unset-key (kbd "C-x f"))
+  :bind (("C-s" . 'swiper)
+         ("C-x f f" . 'counsel-git)
+         ("C-x f g" . 'counsel-git-grep))
   :config
   (ivy-mode 1)
   (counsel-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
-  (global-set-key (kbd "C-s") 'swiper)
-  (global-set-key (kbd "C-x f f") 'counsel-git)
-  (global-set-key (kbd "C-x f g") 'counsel-git-grep)
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
@@ -382,10 +382,9 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package helpful
   :straight t
-  :config
-  (global-set-key (kbd "C-h f") #'helpful-callable)
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key))
+  :bind (("C-h f" . #'helpful-callable)
+         ("C-h v" . #'helpful-variable)
+         ("C-h k" . #'helpful-key)))
 
 
 (use-package graphviz-dot-mode
