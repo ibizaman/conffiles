@@ -150,6 +150,12 @@ Inserted by installing 'org-mode' or when a release is made."
   (global-unset-key (kbd "C-x +")) ; Set to "C-w =" with evil
   )
 
+(use-package evil-collection
+  :straight t
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package mustang-theme
   :straight t)
 
