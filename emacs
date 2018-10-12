@@ -71,6 +71,8 @@ Inserted by installing 'org-mode' or when a release is made."
         ;; %c print the current column
         (line-number-mode ("%l" (column-number-mode ":%c")))))
 
+; With truncate-lines, do not split word
+(setq visual-line-mode 1)
 
 ; Start frames maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
