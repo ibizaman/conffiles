@@ -326,6 +326,23 @@ Inserted by installing 'org-mode' or when a release is made."
            (signal (car err) (cdr err))))
   (deactivate-mark))
 
+
+(defun get-region-or-line-content ()
+  "Get region or line content."
+  (if (use-region-p)
+    (buffer-substring-no-properties (region-beginning) (region-end))
+    (thing-at-point 'line t)))
+
+
+(defun compile-region-or-line ()
+  "Compile region or line content."
+  (interactive)
+  (compile (get-region-or-line-content) t))
+
+
+(global-set-key (kbd "C-c s") 'compile-region-or-line)
+
+
 (use-package elisp-mode
   :bind (("C-c C-c" . eval-point-region-and-deactivate)))
 
