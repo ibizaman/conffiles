@@ -425,6 +425,11 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package systemd
   :straight t)
+
+(use-package intero
+  :straight t
+  :config
+  (intero-global-mode 1))
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
