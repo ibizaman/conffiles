@@ -352,7 +352,9 @@ Inserted by installing 'org-mode' or when a release is made."
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (use-package highlight-parentheses
-  :straight t)
+  :straight t
+  :config
+  (global-highlight-parentheses-mode))
 
 (use-package nameses
   :straight (nameses :type git :host nil :repo "https://gist.github.com/8960595.git")
