@@ -422,6 +422,9 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :config
   (eyebrowse-mode 1))
+
+(use-package systemd
+  :straight t)
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
