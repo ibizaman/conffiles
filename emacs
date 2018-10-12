@@ -430,6 +430,151 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :config
   (intero-global-mode 1))
+
+
+(defun ediff-buffer-mode-next-difference ()
+  "Advance to the next difference."
+  (interactive)
+  (with-selected-window
+      (get-buffer-window "*Ediff Control Panel*")
+    (ediff-next-difference)))
+
+
+(defun ediff-buffer-mode-previous-difference ()
+  "Advance to the previous difference."
+  (interactive)
+  (with-selected-window
+      (get-buffer-window "*Ediff Control Panel*")
+    (ediff-previous-difference)))
+
+
+(defun ediff-buffer-mode--get-current-buffer-char ()
+  "Get char corresponding to current Ediff buffer."
+  (let ((buff (current-buffer)))
+    (with-selected-window
+        (get-buffer-window "*Ediff Control Panel*")
+      (cond ((eq buff ediff-buffer-A) ?a)
+            ((eq buff ediff-buffer-B) ?b)
+            ((eq buff ediff-buffer-C) ?c)))))
+
+
+(defun ediff-buffer-mode--get-other-buffer-char (current-buffer-char)
+  "For CURRENT-BUFFER-CHAR return other buffer chars."
+  (remove current-buffer-char '(?a ?b ?c)))
+
+
+(defun ediff-buffer-mode--prompt-other-source (current-buffer-char get-or-put)
+  "For CURRENT-BUFFER-CHAR, prompt user for other buffer source with prompt adapting to GET-OR-PUT value."
+  (let* ((prompt (if (string= get-or-put "get") "Select buffer to get changes from: "
+                   "Select buffer to put changes to: "))
+         (buffer-help (if (string= get-or-put "get") "Get from "
+                        "Put to "))
+         (choice
+          (read-multiple-choice
+           prompt
+           (mapcar
+            (lambda (char) (list char (concat buffer-help (string char))))
+            (ediff-buffer-mode--get-other-buffer-char current-buffer-char)))))
+    (car choice)))
+
+
+(defun ediff-buffer-mode--validate-other-source (current-buffer-char other-buffer-char)
+  "For CURRENT-BUFFER-CHAR, check OTHER-BUFFER-CHAR is an accepted char.
+
+For example, for CURRENT-BUFFER-CHAR = ?a then the accepted chars are ?b and ?c."
+  (let ((accepted-other-buffers (ediff-buffer-mode--get-other-buffer-char current-buffer-char)))
+    (when (not (member other-buffer-char accepted-other-buffers))
+      (error "Chosen buffer must be %s" (mapconcat (lambda (x) (string x)) accepted-other-buffers " or ")))))
+
+
+(defun ediff-buffer-mode-get-changes (&optional get-src)
+  "Get changes from the other window into the current window.
+
+For 3-way jobs, the other window cannot be determined automatically.
+In that case a prompt will ask the user to enter what buffer the change must come
+from.  If GET-SRC is given, use that as the source and do not prompt the user."
+  (interactive)
+  (let ((buff-char (ediff-buffer-mode--get-current-buffer-char)))
+    (with-selected-window
+        (get-buffer-window "*Ediff Control Panel*")
+      (if ediff-3way-job
+          (progn
+            (let* ((other-buff-char (ediff-buffer-mode--get-other-buffer-char buff-char))
+                   (get-src (or get-src (ediff-buffer-mode--prompt-other-source buff-char "get"))))
+              (ediff-buffer-mode--validate-other-source buff-char get-src)
+              (cond ((and (char-equal buff-char ?a) (char-equal get-src ?b)) (ediff-copy-B-to-A nil))
+                    ((and (char-equal buff-char ?a) (char-equal get-src ?c)) (ediff-copy-C-to-A nil))
+                    ((and (char-equal buff-char ?b) (char-equal get-src ?a)) (ediff-copy-A-to-B nil))
+                    ((and (char-equal buff-char ?b) (char-equal get-src ?c)) (ediff-copy-C-to-B nil))
+                    ((and (char-equal buff-char ?c) (char-equal get-src ?a)) (ediff-copy-A-to-C nil))
+                    ((and (char-equal buff-char ?c) (char-equal get-src ?b)) (ediff-copy-B-to-C nil)))))
+        (progn
+          (cond (char-equal buff-char ?a) (ediff-copy-B-to-A nil)
+                (char-equal buff-char ?b) (ediff-copy-A-to-B nil)))))))
+
+
+(defun ediff-buffer-mode-put-changes (&optional put-src)
+  "Get changes from the other window into the current window.
+
+For 3-way jobs, the other window cannot be determined automatically.
+In that case a prompt will ask the user to enter what buffer the change must come
+from.  If PUT-SRC is given, use that as the source and do not prompt the user."
+  (interactive)
+  (let ((buff-char (ediff-buffer-mode--get-current-buffer-char)))
+    (with-selected-window
+        (get-buffer-window "*Ediff Control Panel*")
+      (if ediff-3way-job
+          (progn
+            (let* ((other-buff-char (ediff-buffer-mode--get-other-buffer-char buff-char))
+                   (put-src (or put-src (ediff-buffer-mode--prompt-other-source buff-char "put"))))
+              (ediff-buffer-mode--validate-other-source buff-char put-src)
+              (cond ((and (char-equal buff-char ?a) (char-equal put-src ?b)) (ediff-copy-A-to-B nil))
+                    ((and (char-equal buff-char ?a) (char-equal put-src ?c)) (ediff-copy-A-to-C nil))
+                    ((and (char-equal buff-char ?b) (char-equal put-src ?a)) (ediff-copy-B-to-A nil))
+                    ((and (char-equal buff-char ?b) (char-equal put-src ?c)) (ediff-copy-B-to-C nil))
+                    ((and (char-equal buff-char ?c) (char-equal put-src ?a)) (ediff-copy-C-to-A nil))
+                    ((and (char-equal buff-char ?c) (char-equal put-src ?b)) (ediff-copy-C-to-B nil)))))
+        (progn
+          (cond ((char-equal buff-char ?a) (ediff-copy-A-to-B nil))
+                ((char-equal buff-char ?b) (ediff-copy-B-to-A nil))))))))
+
+
+(defvar ediff-buffer-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-j") 'ediff-buffer-mode-next-difference)
+    (define-key map (kbd "C-k") 'ediff-buffer-mode-previous-difference)
+    (define-key map (kbd "C-c o") 'ediff-buffer-mode-get-changes)
+    (define-key map (kbd "C-c p") 'ediff-buffer-mode-put-changes)
+    map))
+
+
+(define-minor-mode ediff-buffer-mode
+  "Minor mode enabled on buffers used in Ediff."
+  :init-value nil)
+
+
+(defun enable-ediff-buffer-mode ()
+  "Enable ediff=buffer-mode."
+  (ediff-buffer-mode t))
+
+
+(defun disable-all-ediff-buffer-mode ()
+  "Enable ediff=buffer-mode."
+  (with-selected-window
+      (get-buffer-window "*Ediff Control Panel*")
+    (if ediff-buffer-A
+        (with-selected-window (get-buffer-window ediff-buffer-A)
+          (ediff-buffer-mode -1)))
+    (if ediff-buffer-B
+        (with-selected-window (get-buffer-window ediff-buffer-B)
+          (ediff-buffer-mode -1)))
+    (if ediff-buffer-C
+        (with-selected-window (get-buffer-window ediff-buffer-C)
+          (ediff-buffer-mode -1)))))
+
+
+(add-hook 'ediff-prepare-buffer-hook 'enable-ediff-buffer-mode)
+(add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
