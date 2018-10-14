@@ -431,6 +431,48 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (intero-global-mode 1))
 
+(add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")
+(use-package mu4e
+  :config
+  (setq mail-user-agent        'mu4e-user-agent
+        mu4e-maildir           "~/Maildir"
+        mu4e-use-fancy-chars   t
+        mu4e-attachment-dir    "~/Maildir/Attachments/Gmail"
+        mu4e-view-show-images  t
+        mu4e-completing-read-function 'ivy-completing-read
+        mu4e-contexts
+        `( ,(make-mu4e-context
+             :name "Private"
+             :enter-func (lambda () (mu4e-message "Entering Private context"))
+             :leave-func (lambda () (mu4e-message "Leaving Private context"))
+             ;; we match based on the contact-fields of the message
+             :match-func (lambda (msg)
+                           (when msg
+                             (string-match-p "^/Gmail" (mu4e-message-field msg :maildir))))
+             :vars '( ( user-mail-address      . "ibizapeanut@gmail.com"  )
+                      ( user-full-name         . "Pierre Penninckx" )
+                      ( mu4e-drafts-folder     . "/Gmail/[Google Mail].Drafts" )
+                      ( mu4e-sent-folder       . "/Gmail/[Google Mail].Sent Mail" )
+                      ( mu4e-trash-folder      . "/Gmail/[Google Mail].Trash" )
+                      ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+                      ( mu4e-sent-messages-behavior . delete )
+                      ( mu4e-maildir-shortcuts .
+                                               ( ("/Gmail/INBOX"                     . ?i)
+                                                 ("/Gmail/[Google Mail].Sent Mail"   . ?s)
+                                                 ("/Gmail/[Google Mail].Trash"       . ?t)
+                                                 ("/Gmail/[Google Mail].All Mail"    . ?a)) )
+                      ( mu4e-get-mail-command . "offlineimap" )
+                      ))))
+  (require 'smtpmail)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+        smtpmail-auth-credentials
+        '(("smtp.gmail.com" 587 "ibizapeanut@gmail.com" nil))
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 587))
+
 
 (defun ediff-buffer-mode-next-difference ()
   "Advance to the next difference."
