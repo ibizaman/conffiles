@@ -456,6 +456,7 @@ Inserted by installing 'org-mode' or when a release is made."
         mu4e-view-show-images  t
         mu4e-confirm-quit      nil
         mu4e-completing-read-function 'ivy-completing-read
+        mu4e-hide-index-messages t
         message-kill-buffer-on-exit   t
         mu4e-contexts
         `( ,(make-mu4e-context
