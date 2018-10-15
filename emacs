@@ -484,6 +484,27 @@ Inserted by installing 'org-mode' or when a release is made."
         smtpmail-smtp-service 587))
 
 
+(use-package slack
+  :straight t
+  :commands (slack-start)
+  :init
+  (setq slack-buffer-emojify t  ;; if you want to enable emoji, default nil
+        slack-prefer-current-team t
+        slack-completing-read-function #'ivy-completing-read
+        slack-buffer-function #'switch-to-buffer
+        slack-display-team-name nil
+        slack-request-timeout 100)
+  :config
+  (slack-register-team
+   :name "emacs-slack"
+   :default t
+   :client-id (auth-source-pass-get 'secret "slack.com/pierre@openmail.co/client-id")
+   :client-secret (auth-source-pass-get 'secret "slack.com/pierre@openmail.co/client-secret")
+   :token (auth-source-pass-get 'secret "slack.com/pierre@openmail.co/token")
+   :full-and-display-names t)
+  :bind (("C-j" . #'slack-buffer-goto-next-message)
+         ("C-k" . #'slack-buffer-goto-prev-message)))
+
 (defun ediff-buffer-mode-next-difference ()
   "Advance to the next difference."
   (interactive)
