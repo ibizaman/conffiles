@@ -435,6 +435,11 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package pass
   :straight t)
 
+(use-package auth-source
+  :config
+  (setq auth-source-debug t
+        auth-source-do-cache nil))
+
 (use-package auth-source-pass
   :straight t
   :config
@@ -477,13 +482,15 @@ Inserted by installing 'org-mode' or when a release is made."
                       ))))
   (require 'smtpmail)
   (setq message-send-mail-function 'smtpmail-send-it
+        user-mail-address "ibizapeanut@gmail.com"
         starttls-use-gnutls t
-        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-        smtpmail-auth-credentials
-        '(("smtp.gmail.com" 587 "ibizapeanut@gmail.com" nil))
+        starttls-gnutls-program "gnutls-cli"
+        starttls-extra-arguments nil
         smtpmail-default-smtp-server "smtp.gmail.com"
         smtpmail-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-service 587))
+        smtpmail-smtp-service 587
+        smtpmail-debug-info t
+        smtpmail-smtp-user "ibizapeanut@gmail.com"))
 
 
 (use-package slack
