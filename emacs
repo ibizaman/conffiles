@@ -431,6 +431,16 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (intero-global-mode 1))
 
+
+(use-package pass
+  :straight t)
+
+(use-package auth-source-pass
+  :straight t
+  :config
+  (auth-source-pass-enable))
+
+
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")
 (use-package mu4e
   :config
