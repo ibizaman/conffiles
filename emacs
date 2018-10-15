@@ -449,7 +449,9 @@ Inserted by installing 'org-mode' or when a release is made."
         mu4e-use-fancy-chars   t
         mu4e-attachment-dir    "~/Maildir/Attachments/Gmail"
         mu4e-view-show-images  t
+        mu4e-confirm-quit      nil
         mu4e-completing-read-function 'ivy-completing-read
+        message-kill-buffer-on-exit   t
         mu4e-contexts
         `( ,(make-mu4e-context
              :name "Private"
