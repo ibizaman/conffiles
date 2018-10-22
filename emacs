@@ -99,12 +99,6 @@ Inserted by installing 'org-mode' or when a release is made."
          (setq output (concat ".../" output)))
        output))
 
-(defvar mode-line-directory
-  '(:propertize
-    (:eval (if (buffer-file-name) (concat " " (shorten-directory default-directory 20)) " "))
-                face mode-line-directory)
-  "Formats the current directory.")
-(put 'mode-line-directory 'risky-local-variable t)
 
 (setq-default mode-line-buffer-identification
   (propertized-buffer-identification "%b "))
