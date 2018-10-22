@@ -146,6 +146,7 @@ fi
 ########
 
 export PATH="$HOME/bin:$PATH"
+export EDITOR="$HOME/.vim/emacsnw"
 
 
 #####################

@@ -59,7 +59,8 @@ Inserted by installing 'org-mode' or when a release is made."
 ; Disable GUI
 (menu-bar-mode 0)
 (tool-bar-mode 0)
-(scroll-bar-mode 0)
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode 0))
 (column-number-mode 1)
 (setq mode-line-position
       '(;; %p print percent of buffer above top of window, o Top, Bot or All
