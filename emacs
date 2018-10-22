@@ -78,6 +78,8 @@ Inserted by installing 'org-mode' or when a release is made."
 ; Start frames maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ; Enable saving of minibuffer history and other variables
 (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring)
