@@ -239,7 +239,15 @@ Inserted by installing 'org-mode' or when a release is made."
   (progn
     (add-hook 'text-mode-hook #'turn-on-flyspell)
     (add-hook 'org-mode-hook #'turn-on-flyspell)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  (setq flyspell-issue-message-flag nil)  ; speedup checking entire buffer
+  )
+
+(use-package ispell
+  :config
+  (setq ispell-program-name "hunspell"
+        ispell-local-dictionary "fr"))
+
 (use-package pytest
   :straight t
   :bind (("C-c t t" . pytest-one)
