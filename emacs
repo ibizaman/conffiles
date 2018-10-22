@@ -454,6 +454,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")
 (use-package mu4e
   :config
+  (require 'mu4e-contrib)
   (setq mail-user-agent        'mu4e-user-agent
         mu4e-maildir           "~/Maildir"
         mu4e-use-fancy-chars   t
@@ -463,6 +464,9 @@ Inserted by installing 'org-mode' or when a release is made."
         mu4e-completing-read-function 'ivy-completing-read
         mu4e-hide-index-messages t
         message-kill-buffer-on-exit   t
+        mu4e-html2text-command 'mu4e-shr2text
+        shr-color-visible-luminance-min 80  ; for dark themes
+        shr-color-visible-distance-min 5
         mu4e-contexts
         `( ,(make-mu4e-context
              :name "Private"
@@ -472,7 +476,7 @@ Inserted by installing 'org-mode' or when a release is made."
              :match-func (lambda (msg)
                            (when msg
                              (string-match-p "^/Gmail" (mu4e-message-field msg :maildir))))
-             :vars '( ( user-mail-address      . "ibizapeanut@gmail.com"  )
+             :vars `( ( user-mail-address      . "ibizapeanut@gmail.com"  )
                       ( user-full-name         . "Pierre Penninckx" )
                       ( mu4e-drafts-folder     . "/Gmail/[Google Mail].Drafts" )
                       ( mu4e-sent-folder       . "/Gmail/[Google Mail].Sent Mail" )
@@ -481,11 +485,37 @@ Inserted by installing 'org-mode' or when a release is made."
                       ( mu4e-sent-messages-behavior . delete )
                       ( mu4e-maildir-shortcuts .
                                                ( ("/Gmail/INBOX"                     . ?i)
+                                                 ("/Gmail/recruiting"                . ?r)
                                                  ("/Gmail/[Google Mail].Sent Mail"   . ?s)
                                                  ("/Gmail/[Google Mail].Trash"       . ?t)
                                                  ("/Gmail/[Google Mail].All Mail"    . ?a)) )
                       ( mu4e-get-mail-command . "offlineimap" )
-                      ))))
+                      ( mu4e-bookmarks .
+                                       (,(make-mu4e-bookmark
+                                          :name  "Unread messages not list"
+                                          :query "flag:unread AND NOT flag:trashed AND NOT flag:list AND NOT maildir:/Gmail/recruiting"
+                                          :key ?u)
+                                        ,(make-mu4e-bookmark
+                                          :name  "Recruiting"
+                                          :query "maildir:/Gmail/recruiting"
+                                          :key ?r)
+                                        ,(make-mu4e-bookmark
+                                          :name  "Unread messages all"
+                                          :query "flag:unread AND NOT flag:trashed"
+                                          :key ?i)
+                                        ,(make-mu4e-bookmark
+                                          :name "Today's messages"
+                                          :query "date:today..now"
+                                          :key ?t)
+                                        ,(make-mu4e-bookmark
+                                          :name "Last 7 days"
+                                          :query "date:7d..now"
+                                          :key ?w)
+                                        ,(make-mu4e-bookmark
+                                          :name "Messages with images"
+                                          :query "mime:image/*"
+                                          :key ?p))))))
+        mu4e-refile-folder "/Gmail/[Google Mail].All Mail")
   (require 'smtpmail)
   (setq message-send-mail-function 'smtpmail-send-it
         user-mail-address "ibizapeanut@gmail.com"
@@ -497,6 +527,8 @@ Inserted by installing 'org-mode' or when a release is made."
         smtpmail-smtp-service 587
         smtpmail-debug-info t
         smtpmail-smtp-user "ibizapeanut@gmail.com"))
+
+(use-package org-mu4e)
 
 
 (use-package slack
