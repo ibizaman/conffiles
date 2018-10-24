@@ -509,7 +509,7 @@ Inserted by installing 'org-mode' or when a release is made."
                                           :key ?t)
                                         ,(make-mu4e-bookmark
                                           :name "Last 7 days"
-                                          :query "date:7d..now"
+                                          :query "date:7d..now AND NOT flag:list AND NOT maildir:/Gmail/recruiting"
                                           :key ?w)
                                         ,(make-mu4e-bookmark
                                           :name "Messages with images"
