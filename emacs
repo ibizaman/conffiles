@@ -695,6 +695,15 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
 
 (add-hook 'ediff-prepare-buffer-hook 'enable-ediff-buffer-mode)
 (add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
+
+
+(use-package docker
+  :straight t)
+
+(use-package dockerfile-mode
+  :straight t)
+
+
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
