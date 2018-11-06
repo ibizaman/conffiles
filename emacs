@@ -72,6 +72,8 @@ Inserted by installing 'org-mode' or when a release is made."
         ;; %c print the current column
         (line-number-mode ("%l" (column-number-mode ":%c")))))
 
+(setq backup-directory-alist `(("." . "~/.saves")))
+
 ; With truncate-lines, do not split word
 (setq visual-line-mode 1)
 
