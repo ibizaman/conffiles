@@ -752,6 +752,9 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
 (add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
 
 
+(use-package system-packages
+  :straight t)
+
 (use-package docker
   :straight t)
 
