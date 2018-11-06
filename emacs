@@ -125,6 +125,13 @@ Inserted by installing 'org-mode' or when a release is made."
         mode-line-misc-info
         mode-line-end-spaces))
 
+(defun ibizaman/define-keymap (map-symbol keys)
+  (set map-symbol
+        (let ((map (make-sparse-keymap)))
+          (dolist (key keys)
+                  (define-key map (car key) (cdr key)))
+          map)))
+
 ; Git-grep command
 (defun completing-read-simple (prompt alist)
   "Equivalent to (completing-read PROMPT ALIST nil nil (car ALIST) (quote ALIST))."
