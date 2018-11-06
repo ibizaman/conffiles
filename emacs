@@ -762,6 +762,10 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
   :straight t)
 
 
+(use-package command-log-mode
+  :straight (command-log-mode :type git :host github :repo "ibizaman/command-log-mode" :branch "master"))
+
+
 ; Move custom-set-variables and custom-set-faces in different file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
