@@ -485,6 +485,25 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package mu4e
   :config
   (require 'mu4e-contrib)
+
+  (progn
+    (defvar ibizaman/mu4e-unread-excluded-lists nil)
+
+    (defun ibizaman/mu4e-add-message-list-to-excluded-lists (msg)
+      (let ((list (mu4e-message-field msg :mailing-list)))
+        (add-to-list 'ibizaman/mu4e-unread-excluded-lists list)
+        (message "Added %s to excluded list" list))
+      (ibizaman/mu4e-set-contexts)
+      (mu4e-context-switch t (mu4e-context-name (mu4e-context-current))))
+
+    (add-to-list 'mu4e-headers-actions
+                 '("Exclude list" . ibizaman/mu4e-add-message-list-to-excluded-lists) t)
+
+    (defun ibizaman/mu4e-generate-unread-filter ()
+      (concat "flag:unread AND NOT flag:trashed AND NOT maildir:/Gmail/recruiting"
+              (mapconcat (lambda (v) (concat " AND NOT list:" v))
+                         ibizaman/mu4e-unread-excluded-lists ""))))
+
   (setq mail-user-agent        'mu4e-user-agent
         mu4e-maildir           "~/Maildir"
         mu4e-use-fancy-chars   t
@@ -497,55 +516,61 @@ Inserted by installing 'org-mode' or when a release is made."
         mu4e-html2text-command 'mu4e-shr2text
         shr-color-visible-luminance-min 80  ; for dark themes
         shr-color-visible-distance-min 5
-        mu4e-contexts
-        `( ,(make-mu4e-context
-             :name "Private"
-             :enter-func (lambda () (mu4e-message "Entering Private context"))
-             :leave-func (lambda () (mu4e-message "Leaving Private context"))
-             ;; we match based on the contact-fields of the message
-             :match-func (lambda (msg)
-                           (when msg
-                             (string-match-p "^/Gmail" (mu4e-message-field msg :maildir))))
-             :vars `( ( user-mail-address      . "ibizapeanut@gmail.com"  )
-                      ( user-full-name         . "Pierre Penninckx" )
-                      ( mu4e-drafts-folder     . "/Gmail/[Google Mail].Drafts" )
-                      ( mu4e-sent-folder       . "/Gmail/[Google Mail].Sent Mail" )
-                      ( mu4e-trash-folder      . "/Gmail/[Google Mail].Trash" )
-                      ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-                      ( mu4e-sent-messages-behavior . delete )
-                      ( mu4e-maildir-shortcuts .
-                                               ( ("/Gmail/INBOX"                     . ?i)
-                                                 ("/Gmail/recruiting"                . ?r)
-                                                 ("/Gmail/[Google Mail].Sent Mail"   . ?s)
-                                                 ("/Gmail/[Google Mail].Trash"       . ?t)
-                                                 ("/Gmail/[Google Mail].All Mail"    . ?a)) )
-                      ( mu4e-get-mail-command . "offlineimap" )
-                      ( mu4e-bookmarks .
-                                       (,(make-mu4e-bookmark
-                                          :name  "Unread messages not list"
-                                          :query "flag:unread AND NOT flag:trashed AND NOT flag:list AND NOT maildir:/Gmail/recruiting"
-                                          :key ?u)
-                                        ,(make-mu4e-bookmark
-                                          :name  "Recruiting"
-                                          :query "maildir:/Gmail/recruiting"
-                                          :key ?r)
-                                        ,(make-mu4e-bookmark
-                                          :name  "Unread messages all"
-                                          :query "flag:unread AND NOT flag:trashed"
-                                          :key ?i)
-                                        ,(make-mu4e-bookmark
-                                          :name "Today's messages"
-                                          :query "date:today..now"
-                                          :key ?t)
-                                        ,(make-mu4e-bookmark
-                                          :name "Last 7 days"
-                                          :query "date:7d..now AND NOT flag:list AND NOT maildir:/Gmail/recruiting"
-                                          :key ?w)
-                                        ,(make-mu4e-bookmark
-                                          :name "Messages with images"
-                                          :query "mime:image/*"
-                                          :key ?p))))))
         mu4e-refile-folder "/Gmail/[Google Mail].All Mail")
+  (defun ibizaman/mu4e-set-contexts ()
+    (setq mu4e-contexts
+          `( ,(make-mu4e-context
+               :name "Private"
+               :enter-func (lambda () (mu4e-message "Entering Private context"))
+               :leave-func (lambda () (mu4e-message "Leaving Private context"))
+               ;; we match based on the contact-fields of the message
+               :match-func (lambda (msg)
+                             (when msg
+                               (string-match-p "^/Gmail" (mu4e-message-field msg :maildir))))
+               :vars `( ( user-mail-address      . "ibizapeanut@gmail.com"  )
+                        ( user-full-name         . "Pierre Penninckx" )
+                        ( mu4e-drafts-folder     . "/Gmail/[Google Mail].Drafts" )
+                        ( mu4e-sent-folder       . "/Gmail/[Google Mail].Sent Mail" )
+                        ( mu4e-trash-folder      . "/Gmail/[Google Mail].Trash" )
+                        ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+                        ( mu4e-sent-messages-behavior . delete )
+                        ( mu4e-maildir-shortcuts .
+                                                 ( ("/Gmail/INBOX"                     . ?i)
+                                                   ("/Gmail/recruiting"                . ?r)
+                                                   ("/Gmail/[Google Mail].Sent Mail"   . ?s)
+                                                   ("/Gmail/[Google Mail].Trash"       . ?t)
+                                                   ("/Gmail/[Google Mail].All Mail"    . ?a)) )
+                        ( mu4e-get-mail-command . "offlineimap" )
+                        ( mu4e-bookmarks .
+                                         (,(make-mu4e-bookmark
+                                            :name  "Unread messages not list"
+                                            :query (ibizaman/mu4e-generate-unread-filter)
+                                            :key ?u)
+                                          ,(make-mu4e-bookmark
+                                            :name  "Recruiting"
+                                            :query "maildir:/Gmail/recruiting"
+                                            :key ?r)
+                                          ,(make-mu4e-bookmark
+                                            :name  "Unread messages all"
+                                            :query "flag:unread AND NOT flag:trashed"
+                                            :key ?i)
+                                          ,(make-mu4e-bookmark
+                                            :name "Today's messages"
+                                            :query "date:today..now"
+                                            :key ?t)
+                                          ,(make-mu4e-bookmark
+                                            :name "Last 7 days"
+                                            :query "date:7d..now AND NOT flag:list AND NOT maildir:/Gmail/recruiting"
+                                            :key ?w)
+                                          ,(make-mu4e-bookmark
+                                            :name "Messages with images"
+                                            :query "mime:image/*"
+                                            :key ?p)
+                                          ,(make-mu4e-bookmark
+                                            :name "Drafts"
+                                            :query "flag:draft"
+                                            :key ?d))))))))
+  (ibizaman/mu4e-set-contexts)
   (require 'smtpmail)
   (setq message-send-mail-function 'smtpmail-send-it
         user-mail-address "ibizapeanut@gmail.com"
