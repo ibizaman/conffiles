@@ -322,6 +322,7 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package git-gutter-fringe+
   :straight t
+  :after git-gutter+
   :config
   (global-git-gutter+-mode)
   (git-gutter-fr+-minimal)
