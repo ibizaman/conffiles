@@ -455,6 +455,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package eyebrowse
   :straight t
   :config
+  (setq eyebrowse-new-workspace t)
   (eyebrowse-mode 1))
 
 (use-package systemd
