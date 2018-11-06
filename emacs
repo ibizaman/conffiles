@@ -204,13 +204,24 @@ Inserted by installing 'org-mode' or when a release is made."
      (sql . t)
      (python . t)
      (shell . t)))
+
+  (progn
+    (defun ibizaman/org-copy-element ()
+      (interactive)
+      (let* ((elem (org-element-at-point))
+             (beg (org-element-property :begin elem))
+             (end (org-element-property :end elem)))
+        (copy-region-as-kill beg end)
+        (goto-char end))))
+
   (setq org-log-done 'time)
   :bind (("C-c j" . outline-next-heading)
          ("C-c k" . outline-previous-heading)
          ("C-c h" . outline-up-heading)
          ("C-c l" . outline-show-subtree)
          :map org-mode-map
-         ("C-c o d" . org-cut-subtree)
+         ("C-c o d" . org-cut-element)
+         ("C-c o c" . ibizaman/org-copy-element)
          ("TAB" . org-cycle)))
 
 (use-package pyenv-mode
