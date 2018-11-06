@@ -177,6 +177,14 @@ Inserted by installing 'org-mode' or when a release is made."
 	magit-push-current-set-remote-if-missing t)
   :bind (("C-x g" . magit-status)))
 
+
+(use-package magithub
+  :straight (magithub :type git :host github :repo "vermiculus/magithub" :branch "master")
+  :after magit
+  :config
+  (magithub-feature-autoinject t)
+  (setq magithub-clone-default-directory "~/github"))
+
 (use-package ob-async
   :straight t)
 (use-package ob-python)
