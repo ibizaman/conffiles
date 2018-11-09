@@ -222,6 +222,8 @@ Inserted by installing 'org-mode' or when a release is made."
         (goto-char end))))
 
   (setq org-log-done 'time)
+
+  (evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
   :bind (("C-c j" . outline-next-heading)
          ("C-c k" . outline-previous-heading)
          ("C-c h" . outline-up-heading)
@@ -229,7 +231,7 @@ Inserted by installing 'org-mode' or when a release is made."
          :map org-mode-map
          ("C-c o d" . org-cut-element)
          ("C-c o c" . ibizaman/org-copy-element)
-         ("TAB" . org-cycle)))
+         ("<tab>" . org-cycle)))
 
 (use-package pyenv-mode
   :straight t
