@@ -421,7 +421,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq org-babel-tmux-session-prefix "ob-"))
 
 (use-package org-jira
-  :straight t)
+  :straight (org-jira :type git :host nil :repo "https://github.com/ahungry/org-jira.git"))
 
 (use-package elm-mode
   :straight t)
