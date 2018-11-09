@@ -238,7 +238,15 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package pyenv-mode
   :straight t
   :config
-  (pyenv-mode))
+  (pyenv-mode)
+  (defun ibizaman/pyenv-virtualenv-create (&optional env name)
+    (interactive (list (completing-read "What python version to use: " (pyenv-mode-versions))
+                       (read-string "Name of the new virtualenv: "))))
+  (ibizaman/define-keymap
+   'pyenv-mode-map
+   `((,(kbd "C-c p p") . pyenv-mode-set)
+     (,(kbd "C-c p u") . pyenv-mode-unset)
+     (,(kbd "C-c p c") . ibizaman/pyenv-virtualenv-create))))
 
 (setq mac-function-key-is-meta t)
 (setq mac-function-modifier 'meta)
