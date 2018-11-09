@@ -502,7 +502,11 @@ Inserted by installing 'org-mode' or when a release is made."
     (defun ibizaman/mu4e-generate-unread-filter ()
       (concat "flag:unread AND NOT flag:trashed AND NOT maildir:/Gmail/recruiting"
               (mapconcat (lambda (v) (concat " AND NOT list:" v))
-                         ibizaman/mu4e-unread-excluded-lists ""))))
+                         ibizaman/mu4e-unread-excluded-lists "")))
+
+    (defun ibizaman/mu4e-get-unread-list-filter-query (wanted-list)
+      (interactive (list (completing-read "List: " ibizaman/mu4e-unread-excluded-lists)))
+      (concat "flag:unread AND NOT flag:trashed AND list:" wanted-list)))
 
   (setq mail-user-agent        'mu4e-user-agent
         mu4e-maildir           "~/Maildir"
@@ -554,6 +558,14 @@ Inserted by installing 'org-mode' or when a release is made."
                                             :name  "Unread messages all"
                                             :query "flag:unread AND NOT flag:trashed"
                                             :key ?i)
+                                          ; Requires the following patch:
+                                          ;          (expr (if (not (functionp expr)) expr
+                                          ;                 (funcall expr)))
+                                          ; in [[file:/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/mu4e-utils.el::(defun%20mu4e-get-bookmark-query%20(kar)]]
+                                          ,(make-mu4e-bookmark
+                                            :name  "Unread list messages"
+                                            :query (lambda () (call-interactively 'ibizaman/mu4e-get-unread-list-filter-query))
+                                            :key ?l)
                                           ,(make-mu4e-bookmark
                                             :name "Today's messages"
                                             :query "date:today..now"
@@ -571,6 +583,7 @@ Inserted by installing 'org-mode' or when a release is made."
                                             :query "flag:draft"
                                             :key ?d))))))))
   (ibizaman/mu4e-set-contexts)
+
   (require 'smtpmail)
   (setq message-send-mail-function 'smtpmail-send-it
         user-mail-address "ibizapeanut@gmail.com"
