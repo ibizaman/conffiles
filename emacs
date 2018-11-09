@@ -449,12 +449,17 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-x f g" . 'counsel-git-grep))
   :config
   (ivy-mode 1)
-  (counsel-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package counsel
+  :straight t
+  :after ivy
+  :config
+  (counsel-mode 1))
 
 
 (use-package helpful
