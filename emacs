@@ -194,14 +194,8 @@ Inserted by installing 'org-mode' or when a release is made."
   (magithub-feature-autoinject t)
   (setq magithub-clone-default-directory "~/github"))
 
-(use-package ob-async
-  :straight t)
-(use-package ob-python)
-(use-package ob-shell)
-
 (use-package org
   :straight t
-  :after ob-python ob-async ob-shell
   :init
   (defun my/org-mode-hook-evil ()
       (setq evil-auto-indent nil))
@@ -234,6 +228,15 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-c o d" . org-cut-element)
          ("C-c o c" . ibizaman/org-copy-element)
          ("<tab>" . org-cycle)))
+
+(use-package ob-async
+  :straight t
+  :after org)
+(use-package ob-python
+  :after org)
+(use-package ob-shell
+  :after org)
+
 
 (use-package pyenv-mode
   :straight t
