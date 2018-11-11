@@ -56,6 +56,10 @@ Inserted by installing 'org-mode' or when a release is made."
                                :weight 'normal
                                :width 'normal)
 
+; Move custom-set-variables and custom-set-faces in different file
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file)
+
 ; Disable GUI
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -507,7 +511,10 @@ Inserted by installing 'org-mode' or when a release is made."
   (require 'mu4e-contrib)
 
   (progn
-    (defvar ibizaman/mu4e-unread-excluded-lists nil)
+    (defcustom ibizaman/mu4e-unread-excluded-lists nil
+      "Mailing lists to be excluded from default unread view."
+      :group 'mu4e
+      :type '(repeat string))
 
     (defun ibizaman/mu4e-add-message-list-to-excluded-lists (msg)
       (let ((list (mu4e-message-field msg :mailing-list)))
@@ -799,9 +806,6 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
   :straight (command-log-mode :type git :host github :repo "ibizaman/command-log-mode" :branch "master"))
 
 
-; Move custom-set-variables and custom-set-faces in different file
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file)
 
 ; Prompt to save customization before quitting
 (add-hook 'kill-emacs-query-functions
