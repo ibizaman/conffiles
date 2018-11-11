@@ -519,9 +519,7 @@ Inserted by installing 'org-mode' or when a release is made."
     (defun ibizaman/mu4e-add-message-list-to-excluded-lists (msg)
       (let ((list (mu4e-message-field msg :mailing-list)))
         (add-to-list 'ibizaman/mu4e-unread-excluded-lists list)
-        (message "Added %s to excluded list" list))
-      (ibizaman/mu4e-set-contexts)
-      (mu4e-context-switch t (mu4e-context-name (mu4e-context-current))))
+        (message "Added %s to excluded list" list)))
 
     (add-to-list 'mu4e-headers-actions
                  '("Exclude list" . ibizaman/mu4e-add-message-list-to-excluded-lists) t)
@@ -575,7 +573,7 @@ Inserted by installing 'org-mode' or when a release is made."
                         ( mu4e-bookmarks .
                                          (,(make-mu4e-bookmark
                                             :name  "Unread messages not list"
-                                            :query (ibizaman/mu4e-generate-unread-filter)
+                                            :query (lambda () (ibizaman/mu4e-generate-unread-filter))
                                             :key ?u)
                                           ,(make-mu4e-bookmark
                                             :name  "Recruiting"
@@ -585,10 +583,6 @@ Inserted by installing 'org-mode' or when a release is made."
                                             :name  "Unread messages all"
                                             :query "flag:unread AND NOT flag:trashed"
                                             :key ?i)
-                                          ; Requires the following patch:
-                                          ;          (expr (if (not (functionp expr)) expr
-                                          ;                 (funcall expr)))
-                                          ; in [[file:/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/mu4e-utils.el::(defun%20mu4e-get-bookmark-query%20(kar)]]
                                           ,(make-mu4e-bookmark
                                             :name  "Unread list messages"
                                             :query (lambda () (call-interactively 'ibizaman/mu4e-get-unread-list-filter-query))
