@@ -195,8 +195,7 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight (magithub :type git :host github :repo "vermiculus/magithub" :branch "master")
   :after magit
   :config
-  (magithub-feature-autoinject t)
-  (setq magithub-clone-default-directory "~/github"))
+  (magithub-feature-autoinject t))
 
 (use-package org
   :straight t
