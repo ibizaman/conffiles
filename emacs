@@ -623,6 +623,9 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (use-package org-mu4e)
 
+(use-package emojify
+  :straight t
+  :hook text-mode)
 
 (use-package slack
   :straight t
