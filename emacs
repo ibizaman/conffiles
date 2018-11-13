@@ -504,7 +504,12 @@ Inserted by installing 'org-mode' or when a release is made."
   (auth-source-pass-enable))
 
 
-(add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")
+; git clone git://github.com/djcb/mu.git
+; cd mu
+; brew install gmime
+; ./autogen.sh && ./configure && make
+; sudo make install
+(add-to-list 'load-path "~/.emacs.d/straight/repos/mu4e/mu4e")
 (use-package mu4e
   :config
   (require 'mu4e-contrib)
