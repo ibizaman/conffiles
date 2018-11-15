@@ -155,8 +155,8 @@ Inserted by installing 'org-mode' or when a release is made."
   :straight t
   :init
   (setq evil-want-C-u-scroll t)
-  (define-key global-map "\C-i" 'universal-argument)
-  (define-key universal-argument-map "\C-i" 'universal-argument-more)
+  (define-key global-map (kbd "C-i") 'universal-argument)
+  (define-key universal-argument-map (kbd "C-i") 'universal-argument-more)
   :config
   (evil-mode 1)
   (global-unset-key (kbd "C-x +")) ; Set to "C-w =" with evil
