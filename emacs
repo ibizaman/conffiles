@@ -499,10 +499,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package pass
   :straight t)
 
-(use-package auth-source
-  :config
-  (setq auth-source-debug t
-        auth-source-do-cache nil))
+(use-package auth-source)
 
 (use-package auth-source-pass
   :straight t
