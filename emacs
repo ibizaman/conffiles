@@ -154,7 +154,13 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package evil
   :straight t
   :init
-  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-u-scroll t
+        ; Warning (evil-collection): Make sure to set
+        ; `evil-want-keybinding' to nil before loading evil or
+        ; evil-collection.  See
+        ; https://github.com/emacs-evil/evil-collection/issues/60 for
+        ; more details.
+        evil-want-keybinding nil)
   (define-key global-map (kbd "C-i") 'universal-argument)
   (define-key universal-argument-map (kbd "C-i") 'universal-argument-more)
   :config
