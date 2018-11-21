@@ -203,6 +203,8 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (magithub-feature-autoinject t))
 
+(define-key text-mode-map (kbd "C-c C-k") #'kill-current-buffer)
+
 (use-package org
   :straight t
   :init
