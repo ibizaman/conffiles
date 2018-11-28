@@ -534,7 +534,11 @@ Inserted by installing 'org-mode' or when a release is made."
                  '("Exclude list" . ibizaman/mu4e-add-message-list-to-excluded-lists) t)
 
     (defun ibizaman/mu4e-generate-unread-filter ()
-      (concat "flag:unread AND NOT flag:trashed AND NOT maildir:/Gmail/recruiting"
+      (concat "flag:unread "
+              "AND NOT flag:trashed "
+              "AND NOT maildir:/Gmail/recruiting "
+              "AND NOT maildir:\"/Gmail/[Google Mail].Trash\" "
+              "AND NOT maildir:\"/Gmail/[Google Mail].Spam\" "
               (mapconcat (lambda (v) (concat " AND NOT list:" v))
                          ibizaman/mu4e-unread-excluded-lists "")))
 
@@ -590,7 +594,10 @@ Inserted by installing 'org-mode' or when a release is made."
                                             :key ?r)
                                           ,(make-mu4e-bookmark
                                             :name  "Unread messages all"
-                                            :query "flag:unread AND NOT flag:trashed"
+                                            :query (concat "flag:unread "
+                                                           "AND NOT flag:trashed"
+                                                           "AND NOT maildir:\"/Gmail/[Google Mail].Trash\" "
+                                                           "AND NOT maildir:\"/Gmail/[Google Mail].Spam\" ")
                                             :key ?i)
                                           ,(make-mu4e-bookmark
                                             :name  "Unread list messages"
