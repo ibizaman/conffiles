@@ -274,6 +274,16 @@ Inserted by installing 'org-mode' or when a release is made."
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
+
+(use-package evil-textobj-syntax
+  :straight t)
+
+(use-package evil-textobj-column
+  :straight t
+  :bind (:map evil-inner-text-objects-map
+         ("c" . evil-textobj-column-word)
+         ("C" . evil-textobj-column-WORD)))
+
 (setq mac-function-key-is-meta t)
 (setq mac-function-modifier 'meta)
 
