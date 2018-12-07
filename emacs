@@ -264,6 +264,10 @@ Inserted by installing 'org-mode' or when a release is made."
      (,(kbd "C-c p u") . pyenv-mode-unset)
      (,(kbd "C-c p c") . ibizaman/pyenv-virtualenv-create))))
 
+
+(use-package sql-indent
+  :straight t)
+
 (setq mac-function-key-is-meta t)
 (setq mac-function-modifier 'meta)
 
