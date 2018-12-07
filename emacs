@@ -501,6 +501,10 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-h v" . #'helpful-variable)
          ("C-h k" . #'helpful-key)))
 
+(progn
+  (global-set-key (kbd "C-h V") #'customize-variable)
+  (global-set-key (kbd "C-h G") #'customize-group))
+
 
 (use-package graphviz-dot-mode
   :straight t)
