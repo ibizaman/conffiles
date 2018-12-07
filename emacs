@@ -268,6 +268,12 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package sql-indent
   :straight t)
 
+(use-package keyfreq
+  :straight t
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
+
 (setq mac-function-key-is-meta t)
 (setq mac-function-modifier 'meta)
 
