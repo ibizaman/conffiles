@@ -831,6 +831,12 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
 (add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
 
 
+(defun insert-under (&rest forms)
+  (save-excursion
+    (move-end-of-line 1)
+    (insert (format "\n%s" forms))))
+
+
 (use-package system-packages
   :straight t)
 
