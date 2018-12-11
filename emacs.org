@@ -1081,6 +1081,406 @@ sudo make install
   :straight (org-jira :type git :host nil :repo "https://github.com/ahungry/org-jira.git"))
 #+END_SRC
 
+* Hydra
+
+#+BEGIN_SRC emacs-lisp
+(use-package hydra
+  :straight t
+  :after ibuffer)
+#+END_SRC
+
+** occur
+#+BEGIN_SRC emacs-lisp
+(progn
+  ;; Keeps focus on *Occur* window, even when when target is visited via RETURN key.
+  ;; See hydra-occur-dwim for more options.
+  (defadvice occur-mode-goto-occurrence (after occur-mode-goto-occurrence-advice activate)
+    (other-window 1)
+    (hydra-occur-dwim/body))
+
+  ;; Used in conjunction with occur-mode-goto-occurrence-advice this helps keep
+  ;; focus on the *Occur* window and hides upon request in case needed later.
+  (defhydra hydra-occur-dwim ()
+    "Occur mode"
+    ("o" occur-dwim "Start occur-dwim" :color red)
+    ("j" occur-next "Next" :color red)
+    ("k" occur-prev "Prev":color red)
+    ("h" delete-window "Hide" :color blue)
+    ("r" (reattach-occur) "Re-attach" :color red))
+
+  (global-set-key (kbd "C-x o") 'hydra-occur-dwim/body))
+#+END_SRC
+
+** dired
+#+BEGIN_SRC emacs-lisp
+(require 'dired)
+
+(defhydra hydra-dired (:hint nil :color pink)
+  "
+_+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
+_C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
+_D_elete           _o_pen other     _u_nmark           _l_ redisplay      _w_ kill-subdir    C-c C-c : commit
+_R_ename           _M_ chmod        _t_oggle           _g_ revert buf     _e_ ediff          C-c ESC : abort
+_Y_ rel symlink    _G_ chgrp        _E_xtension mark   _s_ort             _=_ pdiff
+_S_ymlink          ^ ^              _F_ind marked      _._ toggle hydra   \\ flyspell
+_r_sync            ^ ^              ^ ^                ^ ^                _?_ summary
+_z_ compress-file  _A_ find regexp
+_Z_ compress       _Q_ repl regexp
+
+T - tag prefix
+"
+  ("\\" dired-do-ispell)
+  ("(" dired-hide-details-mode)
+  (")" dired-omit-mode)
+  ("+" dired-create-directory)
+  ("=" diredp-ediff)         ;; smart diff
+  ("?" dired-summary)
+  ("$" diredp-hide-subdir-nomove)
+  ("A" dired-do-find-regexp)
+  ("C" dired-do-copy)        ;; Copy all marked files
+  ("D" dired-do-delete)
+  ("E" dired-mark-extension)
+  ("e" dired-ediff-files)
+  ("F" dired-do-find-marked-files)
+  ("G" dired-do-chgrp)
+  ("g" revert-buffer)        ;; read all directories again (refresh)
+  ("i" dired-maybe-insert-subdir)
+  ("l" dired-do-redisplay)   ;; relist the marked or singel directory
+  ("M" dired-do-chmod)
+  ("m" dired-mark)
+  ("O" dired-display-file)
+  ("o" dired-find-file-other-window)
+  ("Q" dired-do-find-regexp-and-replace)
+  ("R" dired-do-rename)
+  ("r" dired-do-rsynch)
+  ("S" dired-do-symlink)
+  ("s" dired-sort-toggle-or-edit)
+  ("t" dired-toggle-marks)
+  ("U" dired-unmark-all-marks)
+  ("u" dired-unmark)
+  ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
+  ("w" dired-kill-subdir)
+  ("Y" dired-do-relsymlink)
+  ("z" diredp-compress-this-file)
+  ("Z" dired-do-compress)
+  ("q" nil)
+  ("." nil :color blue))
+
+(define-key dired-mode-map (kbd ".") #'hydra-dired/body)
+#+END_SRC
+
+** flycheck
+#+BEGIN_SRC emacs-lisp
+(defhydra hydra-flycheck
+  (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+        :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+        :hint nil)
+  "Errors"
+  ("f"  flycheck-error-list-set-filter                            "Filter")
+  ("j"  flycheck-next-error                                       "Next")
+  ("k"  flycheck-previous-error                                   "Previous")
+  ("gg" flycheck-first-error                                      "First")
+  ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+  ("q"  nil))
+
+(global-set-key (kbd "C-c f") 'hydra-flycheck/body)
+#+END_SRC
+
+** ibuffer
+#+BEGIN_SRC emacs-lisp
+(defhydra hydra-ibuffer-main (:color pink :hint nil)
+  "
+^Mark^         ^Actions^         ^View^          ^Select^              ^Navigation^
+_m_: mark      _D_: delete       _g_: refresh    _q_: quit             _k_:   ↑    _h_
+_u_: unmark    _s_: save marked  _S_: sort       _TAB_: toggle         _RET_: visit
+_*_: specific  _a_: all actions  _/_: filter     _o_: other window     _j_:   ↓    _l_
+_t_: toggle    _._: toggle hydra _H_: help       C-o other win no-select
+"
+  ("m" ibuffer-mark-forward)
+  ("u" ibuffer-unmark-forward)
+  ("*" hydra-ibuffer-mark/body :color blue)
+  ("t" ibuffer-toggle-marks)
+
+  ("D" ibuffer-do-delete)
+  ("s" ibuffer-do-save)
+  ("a" hydra-ibuffer-action/body :color blue)
+
+  ("g" ibuffer-update)
+  ("S" hydra-ibuffer-sort/body :color blue)
+  ("/" hydra-ibuffer-filter/body :color blue)
+  ("H" describe-mode :color blue)
+
+  ("h" ibuffer-backward-filter-group)
+  ("k" ibuffer-backward-line)
+  ("l" ibuffer-forward-filter-group)
+  ("j" ibuffer-forward-line)
+  ("RET" ibuffer-visit-buffer :color blue)
+
+  ("TAB" ibuffer-toggle-filter-group)
+
+  ("o" ibuffer-visit-buffer-other-window :color blue)
+  ("q" quit-window :color blue)
+  ("." nil :color blue))
+
+(defhydra hydra-ibuffer-mark (:color teal :columns 5
+                                     :after-exit (hydra-ibuffer-main/body))
+  "Mark"
+  ("*" ibuffer-unmark-all "unmark all")
+  ("M" ibuffer-mark-by-mode "mode")
+  ("m" ibuffer-mark-modified-buffers "modified")
+  ("u" ibuffer-mark-unsaved-buffers "unsaved")
+  ("s" ibuffer-mark-special-buffers "special")
+  ("r" ibuffer-mark-read-only-buffers "read-only")
+  ("/" ibuffer-mark-dired-buffers "dired")
+  ("e" ibuffer-mark-dissociated-buffers "dissociated")
+  ("h" ibuffer-mark-help-buffers "help")
+  ("z" ibuffer-mark-compressed-file-buffers "compressed")
+  ("b" hydra-ibuffer-main/body "back" :color blue))
+
+(defhydra hydra-ibuffer-action (:color teal :columns 4
+                                       :after-exit
+                                       (if (eq major-mode 'ibuffer-mode)
+                                           (hydra-ibuffer-main/body)))
+  "Action"
+  ("A" ibuffer-do-view "view")
+  ("E" ibuffer-do-eval "eval")
+  ("F" ibuffer-do-shell-command-file "shell-command-file")
+  ("I" ibuffer-do-query-replace-regexp "query-replace-regexp")
+  ("H" ibuffer-do-view-other-frame "view-other-frame")
+  ("N" ibuffer-do-shell-command-pipe-replace "shell-cmd-pipe-replace")
+  ("M" ibuffer-do-toggle-modified "toggle-modified")
+  ("O" ibuffer-do-occur "occur")
+  ("P" ibuffer-do-print "print")
+  ("Q" ibuffer-do-query-replace "query-replace")
+  ("R" ibuffer-do-rename-uniquely "rename-uniquely")
+  ("T" ibuffer-do-toggle-read-only "toggle-read-only")
+  ("U" ibuffer-do-replace-regexp "replace-regexp")
+  ("V" ibuffer-do-revert "revert")
+  ("W" ibuffer-do-view-and-eval "view-and-eval")
+  ("X" ibuffer-do-shell-command-pipe "shell-command-pipe")
+  ("b" nil "back"))
+
+(defhydra hydra-ibuffer-sort (:color amaranth :columns 3)
+  "Sort"
+  ("i" ibuffer-invert-sorting "invert")
+  ("a" ibuffer-do-sort-by-alphabetic "alphabetic")
+  ("v" ibuffer-do-sort-by-recency "recently used")
+  ("s" ibuffer-do-sort-by-size "size")
+  ("f" ibuffer-do-sort-by-filename/process "filename")
+  ("m" ibuffer-do-sort-by-major-mode "mode")
+  ("b" hydra-ibuffer-main/body "back" :color blue))
+
+(defhydra hydra-ibuffer-filter (:color amaranth :columns 4)
+  "Filter"
+  ("m" ibuffer-filter-by-used-mode "mode")
+  ("M" ibuffer-filter-by-derived-mode "derived mode")
+  ("n" ibuffer-filter-by-name "name")
+  ("c" ibuffer-filter-by-content "content")
+  ("e" ibuffer-filter-by-predicate "predicate")
+  ("f" ibuffer-filter-by-filename "filename")
+  (">" ibuffer-filter-by-size-gt "size")
+  ("<" ibuffer-filter-by-size-lt "size")
+  ("/" ibuffer-filter-disable "disable")
+  ("b" hydra-ibuffer-main/body "back" :color blue))
+
+(define-key ibuffer-mode-map (kbd "?") 'hydra-ibuffer-main/body)
+(add-hook 'ibuffer-hook #'hydra-ibuffer-main/body)
+#+END_SRC
+
+** info
+#+BEGIN_SRC emacs-lisp
+(defhydra hydra-info (:color pink
+                             :hint nil)
+  "
+Info-mode:
+_I_ndex(virtual)    _T_OC                            ^ ^^ ^  ^ ^ ^^     _k_/_u_p   ( )
+_i_ndex             _t_op node        Node           _[__h_ + _l__]_      _j_/_m_enu ( ) (C-u for new window)
+_c_opy node name    _a_propos         Top/Final Node _<__t_   ^ ^_>_      _g_oto node^^    (C-u for new window)
+_C_lone buffer      _f_ollow          Level nxt/prev _p_^ ^   ^ ^_n_
+_d_irectory         _b_mkp-jump       History        _H_^ ^   ^ ^_L_      _K_ History^^
+
+_s_earch regex (_S_ case sens) ^^^^   _1_ .. _9_ Pick first .. ninth item in the node's menu.
+"
+  ("j"   Info-menu)              ;; m
+  ("k"   Info-up)                ;; ^
+  ("m"   Info-menu)
+  ("u"   Info-up)
+
+  ("l"   Info-forward-node)
+  ("h"   Info-backward-node)
+  ("]"   Info-forward-node)
+  ("["   Info-backward-node)
+
+  ("t"   Info-top-node)
+  ("<"   Info-top-node)
+  (">"   Info-final-node)
+
+  ("n"   Info-next)
+  ("p"   Info-prev)
+
+  ("K"   Info-history)
+  ("H"   Info-history-back)
+  ("L"   Info-history-forward)
+
+  ("s"   Info-search)
+  ("S"   Info-search-case-sensitively)
+
+  ("g"   Info-goto-node)
+
+  ("f"   Info-follow-reference)
+  ("b"   bmkp-info-jump)
+  ("i"   Info-index)
+  (","   Info-index-next)
+  ("I"   Info-virtual-index)
+
+  ("T"   Info-toc)
+  ("t"   Info-top-node)
+  ("d"   Info-directory)
+  ("c"   Info-copy-current-node-name)
+  ("C"   clone-buffer)
+  ("a"   info-apropos)
+
+  ("1"   Info-nth-menu-item)
+  ("2"   Info-nth-menu-item)
+  ("3"   Info-nth-menu-item)
+  ("4"   Info-nth-menu-item)
+  ("5"   Info-nth-menu-item)
+  ("6"   Info-nth-menu-item)
+  ("7"   Info-nth-menu-item)
+  ("8"   Info-nth-menu-item)
+  ("9"   Info-nth-menu-item)
+
+  ("?"   Info-summary "Info summary")
+  ("y"   Info-help "Info help")
+  ("q"   Info-exit "Info exit" :color blue)
+  ("C-g" nil "cancel" :color blue))
+
+(define-key Info-mode-map (kbd "?") #'hydra-info/body)
+#+END_SRC
+
+** nameses
+#+BEGIN_SRC emacs-lisp
+(defun hydra-nameses-format (value)
+  (truncate-string-to-width (format "%s" value) 15 nil ? t))
+
+(defhydra hydra-nameses (:exit t :hint nil)
+  "
+^Current^: %s(hydra-nameses-format (nameses--current-name))       _s_ave
+      _p_: load %s(hydra-nameses-format nameses-prev-session)  ^^^_n_ew
+      _d_: load                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_k_ remove
+      _r_eset                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_q_uit
+"
+  ("s" nameses-save)
+  ("p" nameses-prev)
+  ("k" nameses-remove :exit nil)
+  ("r" nameses-reset)
+  ("d" nameses-load)
+  ("n" nameses-create)
+  ("q" nil))
+
+(global-set-key (kbd "C-c d") 'hydra-nameses/body)
+#+END_SRC
+
+** org-jira
+#+BEGIN_SRC emacs-lisp
+(progn
+  (defhydra hydra-org-jira-project (:exit t)
+    "Org-jira project"
+    ("g" org-jira-get-projects "refresh"))
+
+  (defhydra hydra-org-jira-board (:exit t)
+    "Org-jira board"
+    ("g" org-jira-get-boards "refresh"))
+
+  (defhydra hydra-org-jira-issue (:exit t)
+    "Org-jira board"
+    ("g" org-jira-get-issues "get all")
+    ("h" org-jira-get-issues-headonly "get all heads")
+    ("v" org-jira-get-issues-by-board "get by board")
+    ("f" org-jira-get-issues-by-fixversion "get by fixversion")
+    ("r" org-jira-refresh-issue "refresh")
+    ("R" org-jira-refresh-issues-in-buffer "refresh all")
+    ("b" org-jira-browse-issue "browse")
+    ("a" org-jira-assign-issue "assign")
+    ("k" org-jira-copy-current-issue-key "copy key")
+    ("w" org-jira-progress-issue "progress")
+    ("n" org-jira-progress-issue-next "progress next")
+    ("u" org-jira-update-issue "update")
+    ("c" org-jira-create-issue "create"))
+
+  (defhydra hydra-org-jira-comment (:exit t)
+    "Org-jira comment"
+    ("c" org-jira-add-comment "add")
+    ("u" org-jira-update-comment "update"))
+
+  (defhydra hydra-org-jira-subtask (:exit t)
+    "Org-jira subtask"
+    ("c" org-jira-create-subtask "create")
+    ("g" org-jira-get-subtasks "refresh"))
+
+  (defhydra hydra-org-jira-todo (:exit t)
+    "Org-jira todo"
+    ("j" org-jira-todo-to-jira "update from todo"))
+
+  (defhydra hydra-org-jira-worklog (:exit t)
+    "Org-jira worklog"
+    ("u" org-jira-update-worklogs-from-org-clocks "update from org clocks"))
+
+
+  (defhydra hydra-org-jira (org-jira-entry-mode-map "C-c j")
+    "Org-jira"
+    ("p" hydra-org-jira-project/body "project" :color blue)
+    ("b" hydra-org-jira-board/body "board" :color blue)
+    ("i" hydra-org-jira-issue/body "issue" :color blue)
+    ("c" hydra-org-jira-comment/body "comment" :color blue)
+    ("s" hydra-org-jira-subtask/body "subtask" :color blue)
+    ("t" hydra-org-jira-todo/body "todo" :color blue)
+    ("w" hydra-org-jira-worklog/body "worklog" :color blue))
+
+  (define-key org-mode-map (kbd "C-c j") 'hydra-org-jira/body))
+#+END_SRC
+
+** debug
+#+BEGIN_SRC emacs-lisp
+(progn
+  (require 'debug)
+  (defhydra hydra-elisp (:exit t :hint nil)
+    "
+^Debug^
+^-----^
+on _e_ntry
+"
+    ("e" debug-on-entry))
+
+  (define-key emacs-lisp-mode-map (kbd "C-c e") 'hydra-elisp/body)
+
+  (defhydra hydra-elisp-debug (:post (quit-windows-on "*Backtrace*")
+:hint nil)
+    "
+_c_ontinue  j_u_mp    _e_val
+_s_tep      _l_ocals  _f_rame        _t_oggle-debug-on-error
+_r_eturn    r_e_cord  _c_lear frame  _q_uit
+"
+    ("c" debugger-continue)
+    ("s" debugger-step-through)
+    ("r" debugger-return-value)
+
+    ("u" debugger-jump)
+    ("l" debugger-toggle-locals)
+    ("e" debugger-record-expression)
+
+    ("e" debugger-eval-expression)
+    ("f" debugger-frame)
+    ("c" debugger-frame-clear)
+
+    ("t" toggle-debug-on-error)
+    ("q" nil)
+    )
+
+  (define-key debugger-mode-map (kbd "?") 'hydra-elisp-debug/body)
+  (add-hook 'debugger-mode-hook #'hydra-elisp-debug/body))
+#+END_SRC
+
 * Work
 #+BEGIN_SRC emacs-lisp
 (progn
