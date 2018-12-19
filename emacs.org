@@ -894,6 +894,12 @@ TODO: slow in org-mode
   :straight t)
 #+END_SRC
 
+** Lua
+#+BEGIN_SRC emacs-lisp
+(use-package lua-mode
+  :straight t)
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
