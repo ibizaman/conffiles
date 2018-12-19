@@ -527,7 +527,7 @@ Inserted by installing 'org-mode' or when a release is made."
 * Eshell
 #+BEGIN_SRC emacs-lisp
 (use-package eshell
-  :hook
+  :config
   (defun ibizaman/eshell-imenu-expression ()
     (setq-local imenu-generic-expression
                 '(("Prompt" " $ \\(.*\\)" 1))))
