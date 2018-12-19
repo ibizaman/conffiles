@@ -1058,6 +1058,12 @@ sudo make install
   (mu4e-maildirs-extension))
 #+END_SRC
 
+* Elfeed
+#+BEGIN_SRC emacs-lisp
+(use-package elfeed
+  :straight t)
+#+END_SRC
+
 * Workspace
 #+BEGIN_SRC emacs-lisp
 (use-package nameses
