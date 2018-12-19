@@ -1508,6 +1508,12 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
   (add-hook 'debugger-mode-hook #'hydra-elisp-debug/body))
 #+END_SRC
 
+* Polymode
+#+BEGIN_SRC emacs-lisp
+(use-package polymode
+  :straight t)
+#+END_SRC
+
 * Work
 #+BEGIN_SRC emacs-lisp
 (progn
