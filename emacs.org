@@ -209,12 +209,14 @@ Start frames maximized
   :config
   (global-highlight-parentheses-mode))
 #+END_SRC
+
 ** Ibuffer
 #+BEGIN_SRC emacs-lisp
 (use-package ibuffer
   :straight t
   :bind (("C-x C-b" . 'ibuffer)))
 #+END_SRC
+
 ** Completion
 #+BEGIN_SRC emacs-lisp
 (use-package ivy
@@ -244,6 +246,7 @@ Start frames maximized
 (use-package emojify
   :straight t)
 #+END_SRC
+
 ** Ediff
 #+BEGIN_SRC emacs-lisp
 (defun ediff-buffer-mode-next-difference ()
@@ -390,6 +393,7 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
 (add-hook 'ediff-prepare-buffer-hook 'enable-ediff-buffer-mode)
 (add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
 #+END_SRC
+
 ** Occur
 #+BEGIN_SRC emacs-lisp
 (progn
@@ -414,6 +418,7 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
         (switch-to-buffer-other-window "*Occur*")
       (hydra-occur-dwim/body) )))
 #+END_SRC
+
 * Org
 ** Install latest version
 
@@ -527,6 +532,7 @@ Inserted by installing 'org-mode' or when a release is made."
                 '(("Prompt" " $ \\(.*\\)" 1))))
   (add-hook 'eshell-mode-hook 'ibizaman/eshell-imenu-expression))
 #+END_SRC
+
 * Layout
 #+BEGIN_SRC emacs-lisp
 (winner-mode)
@@ -881,6 +887,7 @@ TODO: slow in org-mode
 (use-package dockerfile-mode
   :straight t)
 #+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
