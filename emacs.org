@@ -796,6 +796,11 @@ TODO: slow in org-mode
 ** Yaml
 #+BEGIN_SRC emacs-lisp
 (use-package yaml-mode
+  :straight t
+  :config
+  (defun ibizaman/yaml-mode-hook ()
+    (setq-local evil-shift-width yaml-indent-offset))
+  (add-hook 'yaml-mode-hook 'ibizaman/yaml-mode-hook))
 #+END_SRC
 
 ** Html
