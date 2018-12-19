@@ -474,7 +474,8 @@ Inserted by installing 'org-mode' or when a release is made."
    '((emacs-lisp . t)
      (sql . t)
      (python . t)
-     (shell . t)))
+     (shell . t)
+     (dot . t)))
 
   (progn
     (defun ibizaman/org-copy-element ()
