@@ -31,6 +31,7 @@ ln -s ~/.vim/muttrc .muttrc
 ln -s ~/.vim/mailcap .mailcap
 ln -s ~/.vim/psqlrc .psqlrc
 ln -s ~/.vim/emacs .emacs
+ln -s ~/.vim/emacs-custom.el .emacs-custom.el
 #cd .vim
 #git submodule update --init --recursive -- bundle/youcompleteme
 #cd bundle/youcompleteme
