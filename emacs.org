@@ -702,29 +702,6 @@ With truncate-lines, do not split word
   (setq git-gutter-fr+-side 'right-fringe))
 #+END_SRC
 
-* Python
-#+BEGIN_SRC emacs-lisp
-(use-package pyenv-mode
-  :straight t
-  :config
-  (pyenv-mode)
-  (defun ibizaman/pyenv-virtualenv-create (&optional env name)
-    (interactive (list (completing-read "What python version to use: " (pyenv-mode-versions))
-                       (read-string "Name of the new virtualenv: "))))
-  (ibizaman/define-keymap
-   'pyenv-mode-map
-   `((,(kbd "C-c p p") . pyenv-mode-set)
-     (,(kbd "C-c p u") . pyenv-mode-unset)
-     (,(kbd "C-c p c") . ibizaman/pyenv-virtualenv-create))))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package pytest
-  :straight t
-  :bind (("C-c t t" . pytest-one)
-	 ("C-c t m" . pytest-module)))
-#+END_SRC
-
 * SQL
 #+BEGIN_SRC emacs-lisp
 (use-package sql-indent
@@ -787,6 +764,29 @@ TODO: slow in org-mode
 #+END_SRC
 
 * Languages
+** Python
+#+BEGIN_SRC emacs-lisp
+(use-package pyenv-mode
+  :straight t
+  :config
+  (pyenv-mode)
+  (defun ibizaman/pyenv-virtualenv-create (&optional env name)
+    (interactive (list (completing-read "What python version to use: " (pyenv-mode-versions))
+                       (read-string "Name of the new virtualenv: "))))
+  (ibizaman/define-keymap
+   'pyenv-mode-map
+   `((,(kbd "C-c p p") . pyenv-mode-set)
+     (,(kbd "C-c p u") . pyenv-mode-unset)
+     (,(kbd "C-c p c") . ibizaman/pyenv-virtualenv-create))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package pytest
+  :straight t
+  :bind (("C-c t t" . pytest-one)
+	 ("C-c t m" . pytest-module)))
+#+END_SRC
+
 ** Json
 #+BEGIN_SRC emacs-lisp
 (use-package json-mode
