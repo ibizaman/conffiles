@@ -1,0 +1,73 @@
+* embedfile
+#+NAME: embedfile
+#+BEGIN_SRC emacs-lisp :var f='' :var header=nil :var head=0 :export none :results raw drawer
+  (let ((content
+         (let ((raw-content (with-current-buffer (find-file-noselect f) (buffer-substring-no-properties (point-min) (point-max)))))
+           (if (> head 0) (mapconcat 'identity (seq-take (split-string raw-content "\n") head) "\n")
+             raw-content)))
+        (mode (string-remove-suffix "-mode" (symbol-name (with-current-buffer (find-file-noselect f) major-mode)))))
+    (concat "[[" f "][link]]\n"
+            "\n"
+            "#+NAME: " f "\n"
+            "#+BEGIN_SRC " mode (when header (concat " " header)) "\n"
+            content "\n"
+            "#+END_SRC"))
+#+END_SRC
+
+* s3
+#+NAME: s3_ls
+#+BEGIN_SRC shell :var s3path="" recursive="false" :results output
+recursive_arg=
+if [ "$recursive" = "true" ]; then
+    recursive_arg="--recursive"
+fi
+
+aws s3 ls $recursive_arg s3://"$s3path"
+#+END_SRC
+
+#+NAME: s3_file
+#+BEGIN_SRC shell :var s3path="" tmplocation="/tmp/12345" show_content="true" :results output org drawer
+rm -r "$tmplocation"
+mkdir -p "$tmplocation"
+
+recursive=
+if grep -Eq "/$" <<< "$s3path"; then
+    recursive="--recursive"
+fi
+
+echo "#+BEGIN_EXAMPLE bash"
+echo aws s3 cp $recursive s3://"$s3path" "$tmplocation"
+echo "#+END_EXAMPLE bash"; echo
+
+aws s3 cp $recursive s3://"$s3path" "$tmplocation" > "$tmplocation"/_aws_log 2> "$tmplocation"/_aws_error
+
+cd "$tmplocation"
+
+find . -name '*.csv.gz' -exec gunzip '{}' ';'
+
+if [ "$show_content" = "true" ]; then
+    find . -type f -exec bash -c 'echo \#+NAME: $0; echo \#+BEGIN_EXAMPLE; cat $0; echo; echo \#+END_EXAMPLE; echo' {} \; 2>&1
+else
+    find . -type f -print | sort
+fi
+#+END_SRC
+
+
+#+NAME: s3_csv_to_table
+#+BEGIN_SRC shell :var s3path="" tmplocation="/tmp/12345" limit="999"
+rm -r "$tmplocation"
+mkdir -p "$tmplocation"
+
+recursive=
+if grep -Eq "/$" <<< "$s3path"; then
+    recursive="--recursive"
+fi
+
+aws s3 cp $recursive s3://"$s3path" "$tmplocation" > "$tmplocation"/_aws_log 2> "$tmplocation"/_aws_error
+
+cd "$tmplocation"
+
+find . -name '*.csv.gz' -exec gunzip '{}' ';'
+
+find . -name '*.csv' -exec cat '{}' ';' | head -n "$limit" | sed -e 's/|/xxx/g'
+#+END_SRC

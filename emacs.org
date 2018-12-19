@@ -522,6 +522,8 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package ox-hugo
   :straight t
   :after ox)
+
+(org-babel-lob-ingest "~/.vim/emacs-lob.org")
 #+END_SRC
 
 * Eshell
