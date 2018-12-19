@@ -1050,6 +1050,14 @@ sudo make install
   :after org mu4e)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-maildirs-extension
+  :straight t
+  :after mu4e
+  :config
+  (mu4e-maildirs-extension))
+#+END_SRC
+
 * Workspace
 #+BEGIN_SRC emacs-lisp
 (use-package nameses
