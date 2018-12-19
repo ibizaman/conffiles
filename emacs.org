@@ -787,6 +787,15 @@ TODO: slow in org-mode
 	 ("C-c t m" . pytest-module)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package jedi
+  :straight t
+  :config
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+  (jedi:install-server))
+#+END_SRC
+
 ** Json
 #+BEGIN_SRC emacs-lisp
 (use-package json-mode
