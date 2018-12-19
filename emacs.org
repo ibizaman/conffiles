@@ -1535,10 +1535,232 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
     (setq copydata-mode-compiler (concat openmail-project-root "etl/copy_data.py")))
   (require 'ob-copydata nil t)
 
-  (require 'ob-sqlplus nil t))
+  (require 'ob-sqlplus nil t)
+
+  (require 'pm-yaml nil t))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (setenv "PGCONNECT_TIMEOUT" "5")
 #+END_SRC
 
+* In progress
+:PROPERTIES:
+:HEADER-ARGS: :tangle no
+:END:
+** Projects
+#+BEGIN_SRC emacs-lisp
+(defgroup ibizaman/projects nil
+  "Projects."
+  :group 'convenience)
+
+(defcustom ibizaman/projects-list nil
+  "List of projects."
+  :group 'ibizaman/projects
+  :type '(alist :key-type (directory :tag "Project directory")
+                :value-type (group (directory :tag "repository (defaults to project directory)")
+                                   (string :tag "jira-url")
+                                   (boolean :tag "jira-token"))))
+
+(defcustom ibizaman/projects-nameses-prefix "project"
+  "Nameses project prefix."
+  :group 'ibizaman/projects
+  :type 'string)
+
+(defcustom ibizaman/projects-jira-auth-source-prefix "projects/jira/tokens/"
+  "Jira token prefix in auth source."
+  :group 'ibizaman/projects
+  :type 'string)
+
+(defun ibizaman/projects-add (dirpath &optional repo jira jira-token)
+  "Add project with given DIRPATH with NAME with optional JIRA url and REPO.
+
+If JIRA is non empty, it is the url given to jiralib-url.
+
+If REPO is non empty, use that directory as the root for the git
+repo.  Defaults to DIRPATH."
+  (interactive (let* ((dir (directory-file-name (expand-file-name (read-directory-name "Project directory to add: "))))
+                      (repo (directory-file-name (expand-file-name (read-directory-name "Project repo: " dir "." t))))
+                      (jira (read-string "Project jira url: "))
+                      (jira-token (y-or-n-p (format "Jira needs token (stored in %s%s): "
+                                                    ibizaman/projects-jira-auth-source-prefix
+                                                    (ibizaman/projects--safe-dir dir)))))
+                 (list dir repo jira jira-token)))
+  (add-to-list 'ibizaman/projects-list (list dirpath repo jira jira-token)))
+
+(defun ibizaman/projects--project-dir (project)
+  "Return PROJECT dir."
+  (nth 0 project))
+
+(defun ibizaman/projects--project-repo (project)
+  "Return PROJECT repo."
+  (or (nth 1 project)
+      (ibizaman/projects--project-dir project)))
+
+(defun ibizaman/projects--project-jira (project)
+  "Return PROJECT jira url."
+  (nth 2 project))
+
+(defun ibizaman/projects--project-jira-token (project)
+  "Return PROJECT jira token."
+  (auth-source-pass-get 'secret "slack.com/pierre@openmail.co/client-id")
+  (nth 3 project))
+
+(defun ibizaman/projects--safe-dir (dir)
+  "Return project DIR without special characters."
+  (replace-regexp-in-string "/" "_" dir))
+
+(defun ibizaman/projects-find (project-dir)
+  "Find project by PROJECT-DIR."
+  (when (and project-dir
+             (listp ibizaman/projects-list))
+    (seq-find (lambda (project)
+                (string-equal (ibizaman/projects--safe-dir project-dir)
+                              (ibizaman/projects--safe-dir (ibizaman/projects--project-dir project))))
+              ibizaman/projects-list)))
+
+(defun ibizaman/projects-current ()
+  "Get current project."
+  (ibizaman/projects-find (ibizaman/projects--project-dir (ibizaman/projects-task-current))))
+
+(defun ibizaman/projects-load-project (project)
+  "Load PROJECT with previous task."
+  (nameses-load (format "%s-%s" ibizaman/projects-nameses-prefix (ibizaman/projects--safe-dir (ibizaman/projects--project-dir project)))))
+
+(defun ibizaman/projects-load-task (task &optional project)
+  "Load TASK from PROJECT."
+  (let ((project-nameses (ibizaman/projects--project-nameses (or project (ibizaman/projects-current)))))
+    (nameses-load (format "%s-%s-%s" ibizaman/projects-nameses-prefix project-nameses task))))
+
+(defun ibizaman/projects-switch (project-dir)
+  "Switch to project PROJECT-DIR."
+  (interactive (let* ((projects (seq-remove
+                                 (lambda (elem) (eq (car elem) (ibizaman/projects-current)))
+                                 ibizaman/projects-list))
+                      (dir (completing-read "Project to switch to: " projects nil t)))
+                 (list dir)))
+  (let ((project (ibizaman/projects-find project-dir)))
+    (when (not project)
+      (error "Cannot switch to unknown project %s" project-dir))
+    (ibizaman/projects-load-project project)
+    (ibizaman/projects-dashboard)))
+
+(defun ibizaman/projects-dashboard ()
+  "Go to project dashboard."
+  (interactive)
+  (let ((project (ibizaman/projects-current)))
+    (when (not project)
+      (error "No current project"))
+    (delete-other-windows)
+    (ibizaman/projects-show-magit project)
+    (split-window-right)
+    (windmove-right)
+    (ibizaman/projects-show-jira project)))
+
+(defun ibizaman/projects-show-jira (project)
+  "Show jira buffer for PROJECT."
+  (interactive)
+  (when-let* ((jiralib-url (ibizaman/projects--project-jira project)))
+    (let* ((jiralib-token (cons "Cookie" (ibizaman/projects--project-jira-token project)))
+           (default-directory (ibizaman/projects--project-dir project))
+           (projects-file (expand-file-name "projects-list.org" org-jira-working-dir)))
+      (switch-to-buffer (or (find-buffer-visiting projects-file)
+                            (find-file projects-file))))))
+
+(defun ibizaman/projects-show-magit (project)
+  "Show magit buffer for PROJET."
+  (interactive)
+  (let ((default-directory (ibizaman/projects--project-repo project))
+        (pop-up-window nil)
+        (magit--refresh-cache nil))
+    (magit-status)))
+
+(defun ibizaman/projects-task-current (&optional current-name)
+  "Get current project and task.  Optionally give CURRENT-NAME."
+  (let ((name (or current-name (nameses--current-name))))
+    (when name
+      (when (not (string-match (concat "^" ibizaman/projects-nameses-prefix) name))
+        (error "'%s' is not a project handled by Project" name))
+
+      (let ((split (split-string name "-")))
+        (pop split)
+        (list
+         (pop split)
+         (when split
+           (mapconcat 'identity split "-")))))))
+
+(defun ibizaman/projects-task-live-tasks ()
+  "Get list of opened issues and pull requests.
+
+Return a list of cons who's car is the issue or pull request id and
+cdr is the displayable name.
+
+The list contains issues and pull requests sorted by descending
+number."
+  (if-let* ((default-directory (ibizaman/projects--project-repo (ibizaman/projects-current))))
+      (sort (map-apply
+             (lambda (_ pr)
+               (let-alist pr
+                 (let ((name (format "%d %s" .number .title)))
+                   (cons (replace-regexp-in-string " " "_" name) name))))
+             (append (magithub-pull-requests) (magithub-issues)))
+            (lambda (a b) (> (string-to-number (car a)) (string-to-number (car b)))))))
+
+(defun ibizaman/projects-task-switch (task)
+  "Switch to task under project."
+  (interactive (let* ((default-directory (ibizaman/projects--project-repo (ibizaman/projects-current)))
+                      (tasks (ibizaman/projects-task-live-tasks))
+                      (task (completing-read "task: " tasks nil t)))
+                 (list task)))
+  (message "%s" task))
+
+(require 'hydra)
+(defhydra ibizaman/hydra-projects (:hint nil)
+  "
+Projects
+--------
+^On^:   %s(ibizaman/projects--project-dir (ibizaman/projects-current))
+^Task^: %s(or (nth 2 (ibizaman/projects-task-current)) \"-\")
+
+ ^Project^        ^Task^        ^Settings^
+ _p_: switch      ^t^: switch   _c_: configure
+ _d_: dashboard   ^c^: create
+ _a_: add
+"
+  ("p" ibizaman/projects-switch :exit t)
+  ("d" ibizaman/projects-dashboard :exit t)
+  ("a" ibizaman/projects-add :exit t)
+  ("c" (customize-group "ibizaman/projects" t) :exit t))
+
+(global-set-key (kbd "C-c p") #'ibizaman/hydra-projects/body)
+
+;(message "%s" (ibizaman/projects-task-current nil))
+;(message "%s" (ibizaman/projects-task-current "hello"))
+;(message "%s" (ibizaman/projects-task-current "project-one"))
+;(message "%s" (ibizaman/projects-task-current "project-one-task"))
+;(message "%s" (ibizaman/projects-task-current "project-one-task-123"))
+
+;(add-hook 'window-configuration-change-hook
+;          'balance-windows)
+
+;(message "%s" (magit-name-branch "HEAD"))
+;
+;
+;(defun project-new-task (task-name)
+;  (jira
+;
+;
+;(defun project-new-task (task-name)
+;  (magit-fetch-all-no-prune)
+;  (nameses-save)
+;  (magit-branch-and-checkout task-name "origin/master")
+;  (nameses-reset))
+;
+;(defun project-switch-task (task-name)
+;  (nameses-save)
+;  (magit-checkout task-name)
+;  (nameses-reset))
+;
+;(defun project-select-project (project)
+;  (interactive "D")
+#+END_SRC
