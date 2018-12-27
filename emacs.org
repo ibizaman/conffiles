@@ -557,7 +557,101 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package ox-hugo
   :straight t
   :after ox)
+#+END_SRC
 
+** Capture
+I don't know why, but I need this to load =org-mks= and =org-show-all=.
+#+BEGIN_SRC emacs-lisp
+(load (expand-file-name "~/.emacs.d/straight/repos/org/lisp/org-macs.el"))
+(load (expand-file-name "~/.emacs.d/straight/repos/org/lisp/org.el"))
+#+END_SRC
+
+Also, we need to start the server.
+#+BEGIN_SRC emacs-lisp
+(server-start)
+#+END_SRC
+
+*** Protocol
+Inspired from https://orgmode.org/worg/org-contrib/org-protocol.html
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-protocol)
+#+END_SRC
+
+Test (run outside of emacs):
+#+BEGIN_SRC bash :results silent
+emacsclient 'org-protocol://capture?template=t'
+#+END_SRC
+
+Download:
+https://github.com/neil-smithline-elisp/EmacsClient.app
+#+BEGIN_SRC bash
+mkdir -p ~/tmp
+#+END_SRC
+
+#+BEGIN_SRC bash :dir ~/tmp
+curl -LO https://github.com/neil-smithline-elisp/EmacsClient.app/raw/master/EmacsClient.zip
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC bash :dir ~/tmp
+unzip EmacsClient.zip
+#+END_SRC
+
+#+RESULTS:
+| Archive:   | EmacsClient.zip                                                 |
+| creating:  | EmacsClient.app/                                                |
+| creating:  | EmacsClient.app/Contents/                                       |
+| creating:  | EmacsClient.app/Contents/.@/                                    |
+| inflating: | EmacsClient.app/Contents/.@/Info.plist.~1~                      |
+| inflating: | EmacsClient.app/Contents/.@/Info.plist.~2~                      |
+| inflating: | EmacsClient.app/Contents/.@/Info.plist.~3~                      |
+| inflating: | EmacsClient.app/Contents/.@/Info.plist.~4~                      |
+| inflating: | EmacsClient.app/Contents/Info.plist                             |
+| creating:  | EmacsClient.app/Contents/MacOS/                                 |
+| inflating: | EmacsClient.app/Contents/MacOS/EmacsClient                      |
+| inflating: | EmacsClient.app/Contents/PkgInfo                                |
+| creating:  | EmacsClient.app/Contents/Resources/                             |
+| inflating: | EmacsClient.app/Contents/Resources/applet.icns                  |
+| inflating: | EmacsClient.app/Contents/Resources/applet.rsrc                  |
+| creating:  | EmacsClient.app/Contents/Resources/description.rtfd/            |
+| inflating: | EmacsClient.app/Contents/Resources/description.rtfd/TXT.rtf     |
+| inflating: | EmacsClient.app/Contents/Resources/EmacsClient.icns             |
+| creating:  | __MACOSX/                                                       |
+| creating:  | __MACOSX/EmacsClient.app/                                       |
+| creating:  | __MACOSX/EmacsClient.app/Contents/                              |
+| creating:  | __MACOSX/EmacsClient.app/Contents/Resources/                    |
+| inflating: | __MACOSX/EmacsClient.app/Contents/Resources/._EmacsClient.icns  |
+| creating:  | EmacsClient.app/Contents/Resources/Scripts/                     |
+| inflating: | EmacsClient.app/Contents/Resources/Scripts/main.scpt            |
+| creating:  | __MACOSX/EmacsClient.app/Contents/Resources/Scripts/            |
+| inflating: | __MACOSX/EmacsClient.app/Contents/Resources/Scripts/._main.scpt |
+
+#+BEGIN_SRC bash :dir ~/tmp :results output
+rsync -av EmacsClient.app /Applications
+#+END_SRC
+
+#+RESULTS:
+: sending incremental file list
+:
+: sent 484 bytes  received 23 bytes  1,014.00 bytes/sec
+: total size is 345,696  speedup is 681.85
+
+#+BEGIN_SRC bash :dir ~/tmp :results output
+open -a EmacsClient
+#+END_SRC
+
+Add bookmarklet:
+#+BEGIN_SRC javascript
+javascript:(function () {
+    var l = 'org-protocol://capture?template=t' +
+        '&url=' + encodeURIComponent(location.href) +
+        '&title=' + encodeURIComponent(document.title || "[untitled page]") +
+        '&body=' + encodeURIComponent(window.getSelection());
+    console.log(l);
+    location.href = l;
+})();
 #+END_SRC
 
 * Eshell

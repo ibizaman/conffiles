@@ -40,6 +40,28 @@
  '(next-error-recenter (quote (4)))
  '(org-adapt-indentation nil)
  '(org-babel-uppercase-example-markers t)
+ '(org-capture-templates
+   (quote
+    (("w" "Add website entry" entry
+      (file "~/org/websites.org")
+      "* %a :website:
+
+%U %?
+
+%:initial")
+     ("t" "Todo" entry
+      (file+headline "~/org/tasks.org" "Tasks")
+      "* TODO %?
+:PROPERTIES:
+:Added: %U
+:link: %a
+:END:
+
+#+BEGIN_EXAMPLE
+%i
+#+END_EXAMPLE
+"))))
+ '(org-default-notes-file "~/org/notes")
  '(org-edit-src-content-indentation 0)
  '(org-jira-download-dir "~/Downloads/jira")
  '(org-special-ctrl-a/e t)
