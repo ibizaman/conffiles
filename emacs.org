@@ -1044,6 +1044,11 @@ TODO: slow in org-mode
   :straight t)
 #+END_SRC
 
+** Bash
+#+BEGIN_SRC emacs-lisp :tangle no :results silent
+(system-packages-install "shellcheck")
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
