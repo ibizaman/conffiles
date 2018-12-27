@@ -1054,6 +1054,12 @@ TODO: slow in org-mode
 (system-packages-install "hadolint")
 #+END_SRC
 
+** Applescript
+#+BEGIN_SRC emacs-lisp
+(use-package applescript-mode
+  :straight t)
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
