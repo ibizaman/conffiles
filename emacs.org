@@ -514,6 +514,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
   (setq org-log-done 'time)
 
+  (add-hook 'org-capture-prepare-finalize-hook 'org-id-store-link)
+
   (evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
   :bind (("C-c j" . outline-next-heading)
          ("C-c k" . outline-previous-heading)
