@@ -1049,6 +1049,11 @@ TODO: slow in org-mode
 (system-packages-install "shellcheck")
 #+END_SRC
 
+** Docker
+#+BEGIN_SRC emacs-lisp :tangle no :results silent
+(system-packages-install "hadolint")
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
