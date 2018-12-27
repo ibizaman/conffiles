@@ -35,6 +35,7 @@
  '(mu4e-context-policy (quote pick-first))
  '(mu4e-view-auto-mark-as-read nil)
  '(mu4e-view-show-addresses t)
+ '(my-font-size 13)
  '(nameses-ido-mode nil)
  '(next-error-recenter (quote (4)))
  '(org-adapt-indentation nil)
