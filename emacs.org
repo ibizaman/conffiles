@@ -1275,6 +1275,46 @@ sudo make install
   :straight t)
 #+END_SRC
 
+Add all feeds from [[http://planet.emacsen.org/][Planet Emacsen]]:
+#+BEGIN_SRC emacs-lisp
+(defcustom ibizaman/elfeed-planet-emacsen "http://planet.emacsen.org/"
+  "URL for planet Emacsen."
+  :group 'elfeed
+  :type 'string)
+
+(require 'url)
+
+(defun ibizaman/elfeed-pe-update ()
+  "Update `elfeed-feeds' from Planet Emacsen feeds."
+  (interactive)
+  (url-retrieve
+   ibizaman/elfeed-planet-emacsen
+   #'ibizaman/elfeed-pe--update-worker
+   nil t 10))
+
+(defun ibizaman/elfeed-pe--update-worker (&optional status cbargs)
+  (mapc
+   (lambda (feed) (elfeed-add-feed feed))
+   (ibizaman/elfeed-pe--parse-feeds-buffer)))
+
+(defun ibizaman/elfeed-pe--parse-feeds-buffer ()
+  "Parse current buffer and extract rss feeds."
+  (let* ((dom (libxml-parse-html-region (point-min) (point-max)))
+         (sidebar (dom-by-id dom "sidebar"))
+         (sidebar-inner (dom-by-tag sidebar 'ul))
+         (feed-outer-list (nth 6 (dom-children sidebar-inner)))
+         (feed-inner-list (dom-by-tag feed-outer-list 'ul))
+         (elems (dom-by-tag feed-inner-list 'li))
+         (feeds
+          (mapcar
+           (lambda (li)
+             (let* ((links (dom-by-tag li 'a))
+                    (feed-link (nth 1 links)))
+               (dom-attr feed-link 'href)))
+           elems)))
+    feeds))
+#+END_SRC
+
 * Workspace
 #+BEGIN_SRC emacs-lisp
 (use-package nameses
