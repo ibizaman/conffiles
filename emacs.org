@@ -552,6 +552,57 @@ Inserted by installing 'org-mode' or when a release is made."
 
 #+END_SRC
 
+*** Lang=Conf
+Expand variables in conf files.
+
+Inspired from [[file:~/.emacs.d/straight/repos/org/lisp/ob-sql.el::(defun%20org-babel-expand-body:sql%20(body%20params)%20"Expand%20BODY%20according%20to%20the%20values%20of%20PARAMS."%20(org-babel-sql-expand-vars%20body%20(org-babel--get-vars%20params)))][orb-babel-expand-body:sql]] that calls internally [[file:~/.emacs.d/straight/repos/org/lisp/ob-sql.el::(defun%20org-babel-sql-expand-vars%20(body%20vars)%20"Expand%20the%20variables%20held%20in%20VARS%20in%20BODY."%20(mapc%20(lambda%20(pair)%20(setq%20body%20(replace-regexp-in-string%20(format%20"$%25s"%20(car%20pair))%20(let%20((val%20(cdr%20pair)))%20(if%20(listp%20val)%20(let%20((data-file%20(org-babel-temp-file%20"sql-data-")))%20(with-temp-file%20data-file%20(insert%20(orgtbl-to-csv%20val%20'(:fmt%20(lambda%20(el)%20(if%20(stringp%20el)%20el%20(format%20"%25S"%20el)))))))%20data-file)%20(if%20(stringp%20val)%20val%20(format%20"%25S"%20val))))%20body)))%20vars)%20body)][org-babel-sql-expand-vars]]:
+#+BEGIN_EXAMPLE emacs-lisp
+(defun org-babel-expand-body:sql (body params)
+  "Expand BODY according to the values of PARAMS."
+  (org-babel-sql-expand-vars
+   body (org-babel--get-vars params)))
+
+(defun org-babel-sql-expand-vars (body vars)
+  "Expand the variables held in VARS in BODY."
+  (mapc
+   (lambda (pair)
+     (setq body
+	   (replace-regexp-in-string
+	    (format "$%s" (car pair))
+	    (let ((val (cdr pair)))
+              (if (listp val)
+                  (let ((data-file (org-babel-temp-file "sql-data-")))
+                    (with-temp-file data-file
+                      (insert (orgtbl-to-csv
+                               val '(:fmt (lambda (el) (if (stringp el)
+                                                      el
+                                                    (format "%S" el)))))))
+                    data-file)
+                (if (stringp val) val (format "%S" val))))
+	    body)))
+   vars)
+  body)
+#+END_EXAMPLE
+
+TODO: propose this as an enhancement
+#+BEGIN_SRC emacs-lisp
+(defun org-babel-expand-body:conf (body params)
+  "Expand BODY according to the values of vars inside PARAMS.
+
+Values in the form $symbol are expanded to their value from `:var symbol \"value\"'."
+  (mapc
+   (lambda (pair)
+     (setq body
+	   (replace-regexp-in-string
+	    (format "$%s" (car pair))
+	    (let ((val (cdr pair)))
+              (cond ((stringp val) val)
+                    (t (format "%S" val))))
+            body)))
+   (org-babel--get-vars params))
+  body)
+#+END_SRC
+
 ** Export
 #+BEGIN_SRC emacs-lisp
 (use-package ox-hugo
