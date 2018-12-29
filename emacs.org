@@ -950,6 +950,15 @@ TODO: slow in org-mode
 #+END_SRC
 
 * Languages
+** Common
+#+BEGIN_SRC emacs-lisp
+(use-package poporg
+  :straight t
+  :bind (("C-c '" . poporg-dwim)
+         :map poporg-mode-map
+         ("C-c '" . poporg-edit-exit)))
+#+END_SRC
+
 ** Python
 #+BEGIN_SRC emacs-lisp
 (use-package pyenv-mode
