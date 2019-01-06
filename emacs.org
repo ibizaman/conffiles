@@ -1810,6 +1810,20 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
 (setenv "PGCONNECT_TIMEOUT" "5")
 #+END_SRC
 
+* Yequake
+#+BEGIN_SRC emacs-lisp
+(use-package yequake
+  :straight (yequake :type git :host nil :repo "https://github.com/alphapapa/yequake.git")
+  :config
+  (setq yequake-frames
+        '(("Mail" .
+           ((width . 0.75)
+            (height . 0.5)
+            (alpha . 0.95)
+            (buffer-fns . (mu4e))
+            (frame-parameters . ((undecorated . t))))))))
+#+END_SRC
+
 * In progress
 :PROPERTIES:
 :HEADER-ARGS: :tangle no
