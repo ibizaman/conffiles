@@ -95,6 +95,7 @@
  '(ediff-odd-diff-B ((t (:background "#335533"))))
  '(ediff-odd-diff-C ((t (:background "#888833"))))
  '(eyebrowse-mode-line-active ((t (:inherit mode-line-emphasis :inverse-video t))))
+ '(font-lock-warning-face ((t (:background "#202020" :foreground "#ff6523"))))
  '(mu4e-view-body-face ((t (:background "gray10"))))
  '(org-block-begin-line ((t (:inherit org-meta-line :background "#102D3F" :foreground "#3A86B4" :slant normal))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :slant italic))))
