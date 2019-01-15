@@ -727,11 +727,11 @@ javascript:(function () {
 
 (defun org-store-link:customize-open-option (path)
   "Visit the customize variable at PATH."
-  (customize-variable path))
+  (customize-option (intern path)))
 
 (defun org-store-link:customize-open-group (path)
   "Visit the customize group at PATH."
-  (customize-group path))
+  (customize-group (intern path)))
 
 (defun org-store-link:customize-store-link-option ()
   "Store a link to a customize option."
@@ -747,7 +747,7 @@ javascript:(function () {
     (let* ((page (org-store-link:customize-get-page-name))
            (page-type (org-store-link:customize-get-page-type))
            (link-type (symbol-name page-type))
-           (link (format "customize-%s: %s" link-type page))
+           (link (format "customize-%s:%s" link-type page))
            (description (format "Customize %s for %s" link-type page)))
       (when (eq page-type type)
         (org-store-link-props
@@ -766,8 +766,19 @@ javascript:(function () {
 (defun org-store-link:customize-get-page-name ()
   "Extract the page name from the buffer name."
   (if (string-match ": \\(.+\\)\\*" (buffer-name))
-      (match-string 1 (buffer-name))
+      (let* ((str (downcase (match-string 1 (buffer-name)))))
+        (replace-regexp-in-string " " "-" str))
     (error "Cannot create link to this customize page")))
+#+END_SRC
+
+** Elsewhere
+Packages to make org features available in non-org buffers.
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-link-minor-mode
+  :straight (org-link-minor-mode :type git :host github :repo "seanohalpin/org-link-minor-mode" :branch "master")
+  :config
+  (org-link-minor-mode))
 #+END_SRC
 
 * Eshell
