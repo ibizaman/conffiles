@@ -712,6 +712,64 @@ javascript:(function () {
 })();
 #+END_SRC
 
+
+** Links
+#+BEGIN_SRC emacs-lisp
+(require 'org)
+
+(org-link-set-parameters "customize-option"
+                         :follow #'org-store-link:customize-open-option
+                         :store #'org-store-link:customize-store-link-option)
+
+(org-link-set-parameters "customize-group"
+                         :follow #'org-store-link:customize-open-group
+                         :store #'org-store-link:customize-store-link-group)
+
+(defun org-store-link:customize-open-option (path)
+  "Visit the customize variable at PATH."
+  (customize-variable path))
+
+(defun org-store-link:customize-open-group (path)
+  "Visit the customize group at PATH."
+  (customize-group path))
+
+(defun org-store-link:customize-store-link-option ()
+  "Store a link to a customize option."
+  (org-store-link:customize--store-link 'option))
+
+(defun org-store-link:customize-store-link-group ()
+  "Store a link to a customize group."
+  (org-store-link:customize--store-link 'group))
+
+(defun org-store-link:customize--store-link (type)
+  "Store a link to a customize TYPE window."
+  (when (memq major-mode '(Custom-mode))
+    (let* ((page (org-store-link:customize-get-page-name))
+           (page-type (org-store-link:customize-get-page-type))
+           (link-type (symbol-name page-type))
+           (link (format "customize-%s: %s" link-type page))
+           (description (format "Customize %s for %s" link-type page)))
+      (when (eq page-type type)
+        (org-store-link-props
+         :type (format "customize-%s" link-type)
+         :link link
+         :description description)))))
+
+(defun org-store-link:customize-get-page-type ()
+  "Extract the page type (group or option) from the buffer name."
+  (if (string-match "Customize \\(\\S-+\\):" (buffer-name))
+      (pcase (match-string 1 (buffer-name))
+        ("Group" 'group)
+        ("Option" 'option))
+    (error "Cannot create link to this customize page")))
+
+(defun org-store-link:customize-get-page-name ()
+  "Extract the page name from the buffer name."
+  (if (string-match ": \\(.+\\)\\*" (buffer-name))
+      (match-string 1 (buffer-name))
+    (error "Cannot create link to this customize page")))
+#+END_SRC
+
 * Eshell
 #+BEGIN_SRC emacs-lisp
 (use-package eshell
