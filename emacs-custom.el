@@ -6,11 +6,7 @@
  '(auth-source-do-cache t)
  '(compilation-auto-jump-to-first-error t)
  '(compilation-scroll-output (quote first-error))
- '(default-frame-alist
-    (quote
-     ((fullscreen . maximized)
-      (vertical-scroll-bars)
-      (undecorated . t))))
+ '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
  '(dired-dwim-target t)
  '(ediff-autostore-merges t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
