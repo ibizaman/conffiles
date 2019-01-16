@@ -1021,6 +1021,8 @@ TODO: slow in org-mode
 #+END_SRC
 
 * EWW
+
+Add org links to eww pages:
 #+BEGIN_SRC emacs-lisp
 (use-package org-eww)
 #+END_SRC
