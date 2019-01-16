@@ -1450,6 +1450,37 @@ Add all feeds from [[http://planet.emacsen.org/][Planet Emacsen]]:
   :straight (org-jira :type git :host nil :repo "https://github.com/ahungry/org-jira.git"))
 #+END_SRC
 
+* Dired
+From [[https://oremacs.com/2017/03/18/dired-ediff/][abo-abo]]:
+#+BEGIN_SRC emacs-lisp
+(require 'cl)
+
+(defun ibizaman/ediff-files ()
+  (interactive)
+  (lexical-let ((files (dired-get-marked-files))
+        (wnd (current-window-configuration)))
+    (if (<= (length files) 2)
+        (let ((file1 (car files))
+              (file2 (if (cdr files)
+                         (cadr files)
+                       (read-file-name
+                        "file: "
+                        (dired-dwim-target-directory)))))
+          (if (file-newer-than-file-p file1 file2)
+              (ediff-files file2 file1)
+            (ediff-files file1 file2))
+          (add-hook 'ediff-after-quit-hook-internal
+                    (lambda ()
+                      (setq ediff-after-quit-hook-internal nil)
+                      (set-window-configuration wnd))))
+      (error "no more than 2 files should be marked"))))
+
+(define-key dired-mode-map "e" 'ora-ediff-files)
+#+END_SRC
+
+[[customize-group:dired][Customize group for dired]]
+[[customize-group:wdired][Customize group for wdired]]
+
 * Hydra
 
 #+BEGIN_SRC emacs-lisp
