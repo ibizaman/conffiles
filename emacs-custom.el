@@ -79,7 +79,8 @@
    (quote
     ((eval setenv "OVERRIDE_CS_LOCAL" "postgres://timi:postgres@localhost:5432/postgres")
      (eval setenv "OVERRIDE_CS_POSTGRES_TESTING" "postgres://timi:postgres@localhost:5432/postgres"))))
- '(text-mode-hook (quote (turn-on-flyspell text-mode-hook-identify))))
+ '(text-mode-hook (quote (turn-on-flyspell text-mode-hook-identify)))
+ '(wdired-allow-to-change-permissions t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
