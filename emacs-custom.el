@@ -11,6 +11,7 @@
      ((fullscreen . maximized)
       (vertical-scroll-bars)
       (undecorated . t))))
+ '(dired-dwim-target t)
  '(ediff-autostore-merges t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
