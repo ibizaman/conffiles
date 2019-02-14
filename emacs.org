@@ -1198,6 +1198,129 @@ Add org links to eww pages:
   :straight t)
 #+END_SRC
 
+** Go
+Needs:
+#+BEGIN_SRC bash :results output
+go get -u github.com/nsf/gocode
+#+END_SRC
+
+#+BEGIN_SRC bash :results output
+go get -u golang.org/x/tools/cmd/guru
+#+END_SRC
+
+#+BEGIN_SRC bash :results output
+go get github.com/rogpeppe/godef
+#+END_SRC
+
+#+BEGIN_SRC bash :results output
+brew tap alecthomas/homebrew-tap
+brew install gometalinter
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+==> Auto-updated Homebrew!
+Updated 2 taps (homebrew/core and homebrew/cask).
+==> Updated Formulae
+bettercap
+clojure
+confluent-oss
+fd
+istioctl
+libxslt
+miniserve
+newsboat
+plantuml
+sound-touch
+swiftformat
+valabind
+
+==> Tapping alecthomas/tap
+Tapped 1 formula (28 files, 24.6KB).
+==> Installing gometalinter from alecthomas/tap
+==> Downloading https://github.com/alecthomas/gometalinter/releases/download/v3.0.0/gometalinter-3.0.0-darwin-amd64.tar.gz
+==> Downloading from https://github-production-release-asset-2e65be.s3.amazonaws.com/22629932/3d9cc000-2474-11e9-97b7-bf6c704eef1f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20190214%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190214T203859Z&X-Amz-Expires=300&X-Amz-Signature=99a0e15da5e0f1a6cf6fcaa2e4758ce6c47b0bea92120f575ec8e095f4955b5f&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dgometalinter-3.0.0-darwin-amd64.tar.gz&response-content-type=application%2Foctet-stream
+🍺  /usr/local/Cellar/gometalinter/3.0.0: 28 files, 103MB, built in 24 seconds
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash :results output
+gometalinter --install --update
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+Installing:
+  structcheck
+  aligncheck
+  golint
+  interfacer
+  misspell
+  staticcheck
+  dupl
+  gotype
+  safesql
+  unconvert
+  deadcode
+  goconst
+  goimports
+  gosimple
+  unparam
+  unused
+  varcheck
+  errcheck
+  gas
+  gocyclo
+  ineffassign
+  lll
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :straight t
+  :config
+  (require 'go-guru)
+  (add-hook 'go-mode-hook (lambda ()
+                            (add-hook 'before-save-hook 'gofmt-before-save nil t))) ; local hook
+  (subword-mode 1)
+
+  :bind (:map go-mode-map
+         ("C-c C-d" . godoc-at-point)))
+
+(use-package go-eldoc
+  :straight t
+  :after go-mode
+  :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package go-guru
+  :straight t)
+
+(use-package flycheck-gometalinter
+  :straight t
+  :config
+  (flycheck-gometalinter-setup))
+
+(use-package company-go
+  :straight t
+  :after company go-mode
+  :config
+  (add-hook 'go-mode-hook (lambda ()
+                            (set (make-local-variable 'company-backends) (push 'company-go company-backends))
+                            (company-mode))))
+
+(use-package gotest
+  :straight t
+  :after company go-mode
+
+  :bind (:map go-mode-map
+         ("C-c t t" . go-test-current-test)
+         ("C-c t m" . go-test-current-file)
+         ("C-c t p" . go-test-current-project)
+         ("C-c t c" . go-test-current-coverage)
+         ("C-c C-c" . go-run)))
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
