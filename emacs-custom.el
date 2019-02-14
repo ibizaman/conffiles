@@ -92,6 +92,7 @@
  '(ediff-odd-diff-Ancestor ((t (:background "#004151"))))
  '(ediff-odd-diff-B ((t (:background "#335533"))))
  '(ediff-odd-diff-C ((t (:background "#888833"))))
+ '(eldoc-highlight-function-argument ((t (:inherit bold :underline t))))
  '(eyebrowse-mode-line-active ((t (:inherit mode-line-emphasis :inverse-video t))))
  '(font-lock-warning-face ((t (:background "#202020" :foreground "#ff6523"))))
  '(mu4e-view-body-face ((t (:background "gray10"))))
