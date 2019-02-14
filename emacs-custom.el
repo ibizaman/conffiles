@@ -84,6 +84,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#e2e2e5" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Inconsolata"))))
+ '(company-tooltip ((t (:background "#2e5077"))))
+ '(company-tooltip-annotation ((t nil)))
+ '(company-tooltip-common ((t (:foreground "#d73c3f"))))
+ '(company-tooltip-common-selection ((t (:foreground "#921e20"))))
+ '(company-tooltip-selection ((t (:background "#ff9642" :foreground "#202020"))))
  '(ediff-even-diff-A ((t (:background "#553333"))))
  '(ediff-even-diff-Ancestor ((t (:background "#004151"))))
  '(ediff-even-diff-B ((t (:background "#335533"))))
