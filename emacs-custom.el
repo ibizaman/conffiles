@@ -76,6 +76,7 @@
    (quote
     ((eval setenv "OVERRIDE_CS_LOCAL" "postgres://timi:postgres@localhost:5432/postgres")
      (eval setenv "OVERRIDE_CS_POSTGRES_TESTING" "postgres://timi:postgres@localhost:5432/postgres"))))
+ '(tab-width 4)
  '(text-mode-hook (quote (turn-on-flyspell text-mode-hook-identify)))
  '(wdired-allow-to-change-permissions t))
 (custom-set-faces
