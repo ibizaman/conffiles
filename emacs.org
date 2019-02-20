@@ -452,6 +452,17 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
       (hydra-occur-dwim/body) )))
 #+END_SRC
 
+** Compilation
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/compilation-buffer-name (name-of-mode)
+  (let ((prefix (concat "*" (downcase name-of-mode) " ")))
+    (if (string-prefix-p prefix (buffer-name))
+        (buffer-name)
+      (concat prefix (buffer-name) "*"))))
+
+(setq compilation-buffer-name-function #'ibizaman/compilation-buffer-name)
+#+END_SRC
+
 * Org
 ** Install latest version
 
