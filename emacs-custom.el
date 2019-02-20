@@ -87,6 +87,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#e2e2e5" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Inconsolata"))))
+ '(company-scrollbar-bg ((t (:background "#6080a0"))))
+ '(company-scrollbar-fg ((t (:background "#7090ff"))))
  '(company-tooltip ((t (:background "#2e5077"))))
  '(company-tooltip-annotation ((t nil)))
  '(company-tooltip-common ((t (:foreground "#d73c3f"))))
