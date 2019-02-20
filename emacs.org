@@ -1018,13 +1018,6 @@ TODO: slow in org-mode
 
 * Autocompletion
 #+BEGIN_SRC emacs-lisp
-(use-package company-jedi
-  :straight t
-  :init
-  (defun my/python-mode-hook-company-jedi ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook-company-jedi))
-
 (use-package company
   :straight t
   :init
@@ -1076,8 +1069,16 @@ Add org links to eww pages:
   :straight t
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-  (jedi:install-server))
+  (setq jedi:complete-on-dot t))
+
+(use-package company-jedi
+  :straight t
+  :after jedi company
+  :init
+  (defun my/python-mode-hook-company-jedi ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'my/python-mode-hook-company-jedi))
+
 #+END_SRC
 
 ** Json
