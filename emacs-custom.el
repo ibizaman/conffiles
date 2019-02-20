@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-do-cache t)
+ '(company-go-show-annotation t)
  '(compilation-auto-jump-to-first-error t)
  '(compilation-scroll-output (quote first-error))
  '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
