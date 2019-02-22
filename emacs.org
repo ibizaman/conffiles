@@ -965,9 +965,10 @@ With truncate-lines, do not split word
   :straight t
   :after git-gutter+
   :config
-  (global-git-gutter+-mode)
+  (setq git-gutter-fr+-side 'right-fringe)
+  (global-git-gutter+-mode 1)
   (git-gutter-fr+-minimal)
-  (setq git-gutter-fr+-side 'right-fringe))
+  (git-gutter+-toggle-fringe))
 #+END_SRC
 
 * SQL
