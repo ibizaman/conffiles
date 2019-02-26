@@ -62,7 +62,6 @@ There are two things you can do about this warning:
           map)))
 #+END_SRC
 
-Git-grep command
 #+BEGIN_SRC emacs-lisp
 (defun completing-read-simple (prompt alist)
   "Equivalent to (completing-read PROMPT ALIST nil nil (car ALIST) (quote ALIST))."
@@ -280,7 +279,7 @@ If no FONT-SIZE provided, reset the size to its default variable."
   :init (global-unset-key (kbd "C-x f"))
   :bind (("C-s" . 'swiper)
          ("C-x f f" . 'counsel-git)
-         ("C-x f g" . 'counsel-git-grep))
+         ("C-x f g" . 'ibizaman/counsel-git-grep-default))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -288,6 +287,19 @@ If no FONT-SIZE provided, reset the size to its default variable."
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(defun ibizaman/counsel-git-default ()
+  "Find file in the current Git repository with word at point by
+default."
+  (interactive)
+  (counsel-git (word-at-point)))
+
+(defun ibizaman/counsel-git-grep-default ()
+  "Grep for a string in the current git repository with word at
+point by default."
+  (interactive)
+  (counsel-git-grep nil (word-at-point)))
+
 
 (use-package counsel
   :straight t
