@@ -562,6 +562,7 @@ Inserted by installing 'org-mode' or when a release is made."
          ("C-c h" . outline-up-heading)
          ("C-c l" . outline-show-subtree)
          ("C-c c" . org-capture)
+         ("C-c C-l" . org-store-link)
          :map org-mode-map
          ("C-c o d" . org-cut-element)
          ("C-c o c" . ibizaman/org-copy-element)
@@ -1359,7 +1360,9 @@ Installing:
 ** Protobuf
 #+BEGIN_SRC emacs-lisp
 (use-package protobuf-mode
-  :straight t)
+  :straight t
+  :config
+  (unbind-key "C-c C-l" protobuf-mode-map))
 #+END_SRC
 
 * Secrets
