@@ -1356,6 +1356,12 @@ Installing:
          ("C-c C-c" . go-run)))
 #+END_SRC
 
+** Protobuf
+#+BEGIN_SRC emacs-lisp
+(use-package protobuf-mode
+  :straight t)
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
