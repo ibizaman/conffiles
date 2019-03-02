@@ -119,6 +119,16 @@ There are two things you can do about this warning:
 (define-key text-mode-map (kbd "C-c C-k") #'kill-current-buffer)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/compile-at-dir (dir)
+  "Ask for DIR before calling `compile'."
+  (interactive (list
+                (read-directory-name "Directory to run comman in: " "~" nil t (file-name-directory (directory-file-name (magit-git-dir))))))
+  (let ((default-directory dir))
+    (universal-argument)
+    (call-interactively 'compile)))
+#+END_SRC
+
 * General
 ** Whitespace
 #+BEGIN_SRC emacs-lisp
