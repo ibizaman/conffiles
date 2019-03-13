@@ -1606,6 +1606,11 @@ Add all feeds from [[http://planet.emacsen.org/][Planet Emacsen]]:
 #+BEGIN_SRC emacs-lisp
 (use-package eyebrowse
   :straight t
+  :bind (:map eyebrowse-mode-map
+         ("C-c C-w n" . eyebrowse-next-window-config)
+         ("C-c C-w p" . eyebrowse-prev-window-config)
+         ("C-c C-w C-n" . eyebrowse-next-window-config)
+         ("C-c C-w C-p" . eyebrowse-prev-window-config))
   :config
   (setq eyebrowse-new-workspace t)
   (eyebrowse-mode 1))
