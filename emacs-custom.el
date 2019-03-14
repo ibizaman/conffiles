@@ -30,7 +30,9 @@
  '(flycheck-gometalinter-deadline "15s")
  '(flycheck-gometalinter-fast t)
  '(flycheck-gometalinter-vendor nil)
+ '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
+ '(global-git-gutter+-mode t)
  '(hl-paren-background-colors
    (quote
     ("red2" "DarkOrange2" "gold2" "chartreuse2" "DarkSlateGray2" "SlateBlue2")))
@@ -112,6 +114,9 @@
  '(eldoc-highlight-function-argument ((t (:inherit bold :underline t))))
  '(eyebrowse-mode-line-active ((t (:inherit mode-line-emphasis :inverse-video t))))
  '(font-lock-warning-face ((t (:background "#202020" :foreground "#ff6523"))))
+ '(git-gutter+-added ((t (:inherit font-lock-comment-face :weight bold))))
+ '(git-gutter+-deleted ((t (:inherit font-lock-comment-face :weight bold))))
+ '(git-gutter+-modified ((t (:inherit font-lock-comment-face :weight bold))))
  '(mu4e-view-body-face ((t (:background "gray10"))))
  '(org-block-begin-line ((t (:inherit org-meta-line :background "#102D3F" :foreground "#3A86B4" :slant normal))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :slant italic))))
