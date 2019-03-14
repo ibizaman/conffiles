@@ -1617,6 +1617,8 @@ Add all feeds from [[http://planet.emacsen.org/][Planet Emacsen]]:
          ("C-c C-w C-n" . eyebrowse-next-window-config)
          ("C-c C-w C-p" . eyebrowse-prev-window-config))
   :config
+  (add-to-list 'window-persistent-parameters '(window-side . writable))
+  (add-to-list 'window-persistent-parameters '(window-slot . writable))
   (setq eyebrowse-new-workspace t)
   (eyebrowse-mode 1))
 #+END_SRC
