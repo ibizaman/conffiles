@@ -1971,7 +1971,7 @@ _s_earch regex (_S_ case sens) ^^^^   _1_ .. _9_ Pick first .. ninth item in the
 
 (defhydra hydra-nameses (:exit t :hint nil)
   "
-^Current^: %s(hydra-nameses-format (nameses--current-name))       _s_ave
+^Current^: %s(hydra-nameses-format (nameses-current-name))       ^_s_ave
       _p_: load %s(hydra-nameses-format nameses-prev-session)  ^^^_n_ew
       _d_: load                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_k_ remove
       _r_eset                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_q_uit
