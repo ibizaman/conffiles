@@ -935,6 +935,11 @@ With truncate-lines, do not split word
   :bind (:map evil-inner-text-objects-map
          ("c" . evil-textobj-column-word)
          ("C" . evil-textobj-column-WORD)))
+
+(use-package evil-numbers
+  :straight t
+  :bind (("C-c +" . evil-numbers/inc-at-pt)
+         ("C-c -" . evil-numbers/dec-at-pt)))
 #+END_SRC
 
 * Magit
