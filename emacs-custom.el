@@ -9,6 +9,11 @@
  '(compilation-scroll-output (quote first-error))
  '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
  '(dired-dwim-target t)
+ '(display-buffer-alist
+   (quote
+    (("*compilation\\\\*" display-buffer-in-side-window
+      (slot . 0)
+      (side . bottom)))))
  '(ediff-autostore-merges t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
