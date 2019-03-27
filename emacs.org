@@ -1272,7 +1272,11 @@ go get -u golang.org/x/tools/cmd/guru
 #+END_SRC
 
 #+BEGIN_SRC bash :results output
-go get github.com/rogpeppe/godef
+go get -u github.com/rogpeppe/godef
+#+END_SRC
+
+#+BEGIN_SRC bash :results output
+go get -u github.com/go-delve/delve/cmd/dlv
 #+END_SRC
 
 #+BEGIN_SRC bash :results output
@@ -1382,6 +1386,12 @@ Installing:
          ("C-c t p" . go-test-current-project)
          ("C-c t c" . go-test-current-coverage)
          ("C-c C-c" . go-run)))
+
+(use-package ob-go
+  :straight t)
+
+(use-package go-dlv
+  :straight t)
 #+END_SRC
 
 ** Protobuf
