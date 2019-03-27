@@ -1402,6 +1402,11 @@ Installing:
   (unbind-key "C-c C-l" protobuf-mode-map))
 #+END_SRC
 
+** Mongo
+#+BEGIN_SRC emacs-lisp
+(use-package ob-mongo
+  :straight t)
+#+END_SRC
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
