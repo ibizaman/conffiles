@@ -1634,18 +1634,25 @@ Add all feeds from [[http://planet.emacsen.org/][Planet Emacsen]]:
     (call-interactively 'nameses-load)))
 #+END_SRC
 
+I have NO idea why I need that second use-package, but without it the :config section doesn't get executed
 #+BEGIN_SRC emacs-lisp
 (use-package eyebrowse
   :straight t
+  ; :init (message "EYEBROWSE 1")
+  :config
+  ; (message "EYEBROWSE 2")
+  (add-to-list 'window-persistent-parameters '(window-side . writable))
+  (add-to-list 'window-persistent-parameters '(window-slot . writable))
+  (setq eyebrowse-new-workspace t)
+  (eyebrowse-mode)
+  ; (message "EYEBROWSE 3")
   :bind (:map eyebrowse-mode-map
          ("C-c C-w n" . eyebrowse-next-window-config)
          ("C-c C-w p" . eyebrowse-prev-window-config)
          ("C-c C-w C-n" . eyebrowse-next-window-config)
-         ("C-c C-w C-p" . eyebrowse-prev-window-config))
-  :config
-  (add-to-list 'window-persistent-parameters '(window-side . writable))
-  (add-to-list 'window-persistent-parameters '(window-slot . writable))
-  (setq eyebrowse-new-workspace t))
+         ("C-c C-w C-p" . eyebrowse-prev-window-config)))
+
+(use-package eyebrowse)
 #+END_SRC
 
 * Slack
