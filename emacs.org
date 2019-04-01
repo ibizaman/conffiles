@@ -945,15 +945,20 @@ With truncate-lines, do not split word
 
 * Magit
 #+BEGIN_SRC emacs-lisp
+;; Transitional, shouldn't be needed after it can be found in melpa repos
+(use-package transient
+  :straight (transient :type git :host github :repo "magit/transient" :branch "master"))
+
 (use-package magit-gh-pulls
-  :straight t)
+  :straight t
+  :after transient)
 
 (use-package evil-magit
   :straight t)
 
 (use-package magit
   :straight t
-  :after magit-gh-pulls
+  :after (magit-gh-pulls transient)
   :init
   (setq magit-diff-refine-hunk t
 	magit-diff-paint-whitespace t
@@ -987,11 +992,9 @@ With truncate-lines, do not split word
        (list (completing-read "Select lone branch to clean:" (seq-filter 'ibizaman/magit-merged-branchp (ibizaman/magit-lone-branches))))))))
 
 
-(use-package magithub
-  :straight (magithub :type git :host github :repo "vermiculus/magithub" :branch "master")
-  :after magit
-  :config
-  (magithub-feature-autoinject t))
+(use-package forge
+  :straight (forge :type git :host github :repo "magit/forge" :branch "master")
+  :after (magit transient))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
