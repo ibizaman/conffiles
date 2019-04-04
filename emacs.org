@@ -995,6 +995,26 @@ With truncate-lines, do not split word
 (use-package forge
   :straight (forge :type git :host github :repo "magit/forge" :branch "master")
   :after (magit transient))
+
+
+(defun ibizaman/magit-commit-create-WIP ()
+  "Commit non-interactively a WIP commit."
+  (interactive)
+  (ibizaman/magit-commit-create-message "WIP"))
+
+(defun ibizaman/magit-commit-create-message (message)
+  "Commit non-interactively with a given MESSAGE."
+  (interactive)
+  (magit-commit-create (list (concat "-m " message))))
+
+(defun ibizaman/magit-reset-head ()
+  "Reset non-interactively to HEAD^."
+  (interactive)
+  (magit-reset-soft "HEAD^"))
+
+(transient-append-suffix 'magit-commit 'magit-commit-create '("W" "Commit WIP" ibizaman/magit-commit-create-WIP))
+
+(transient-append-suffix 'magit-reset 'magit-reset-worktree '("W" "mixed to HEAD^" ibizaman/magit-reset-head))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
