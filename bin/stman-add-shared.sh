@@ -2,7 +2,7 @@
 
 read -r -d '' usage <<EOF
 usage:
-  $0 add DEVICE_WITH_SHARE NEW_DEVICE
+  $0 add DEVICE_WITH_SHARE NEW_DEVICE [all]
   $0 refresh DEVICE_WITH_SHARE
 EOF
 
@@ -45,6 +45,10 @@ function read_config_file() {
 function add() {
     local device_with_share="$1"
     local new_device="$2"
+    local show_all=false
+    if [ "$3" = "all" ]; then
+        show_all=true
+    fi
     [ -z "$device_with_share" ] && echo "$usage" && exit 1
     [ -z "$new_device" ] && echo "$usage" && exit 1
 
@@ -59,12 +63,14 @@ function add() {
     remaining_folders=()
     for f in "${folders[@]}"; do
         found=false
-        for n in "${new_device_folders[@]}"; do
-            if [[ "$f" =~ $(echo "$n" | cut -f1 -d' ') ]]; then
-                found=true
-                break
-            fi
-        done
+        if [ "$show_all" = false ]; then
+            for n in "${new_device_folders[@]}"; do
+                if [[ "$f" =~ $(echo "$n" | cut -f1 -d' ') ]]; then
+                    found=true
+                    break
+                fi
+            done
+        fi
         if [ "$found" = false ]; then
             remaining_folders+=("$f")
         fi
@@ -92,7 +98,7 @@ if [ "$action" = "refresh" ]; then
         refresh "$d"
     done
 elif [ "$action" = "add" ]; then
-    add "$1" "$2"
+    add "$1" "$2" "$3"
 else
     echo "$usage" && exit 1
 fi
