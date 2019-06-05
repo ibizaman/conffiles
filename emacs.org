@@ -471,6 +471,12 @@ from.  If PUT-SRC is given, use that as the source and do not prompt the user."
 (add-hook 'ediff-cleanup-hook 'disable-all-ediff-buffer-mode)
 #+END_SRC
 
+Always expand org file when diffing them
+[[https://www.reddit.com/r/emacs/comments/b7at5a/how_to_magit_diff_in_org_files/ejqox3j/]]
+#+BEGIN_SRC emacs-lisp
+(add-hook 'ediff-prepare-buffer-hook #'show-all)
+#+END_SRC
+
 ** Occur
 #+BEGIN_SRC emacs-lisp
 (progn
