@@ -82,6 +82,19 @@
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-tab-acts-natively t)
  '(org-src-window-setup (quote current-window))
+ '(picasm-assembler-program (quote mpasmx))
+ '(picasm-db-file "~/.emacs.d/straight/repos/picasm/picasm-db.el")
+ '(picasm-gpasm-program "gpasm")
+ '(picasm-includes
+   (quote
+    ("." "/Applications/microchip/mplabx/v5.20/mpasmx/")))
+ '(picasm-mpasmx-harness-dir "~/.emacs.d/straight/repos/picasm/")
+ '(picasm-mpasmx-program "/Applications/microchip/mplabx/v5.20/mpasmx/mpasmx")
+ '(picasm-mplinkx-program "/Applications/microchip/mplabx/v5.20/mpasmx/mplink")
+ '(picasm-pk2cmd-program "~/Projects/pic-radio/bin/pk2cmd")
+ '(picasm-pk2devicefile "~/Projects/pic-radio/bin/")
+ '(picasm-show-assembler-output t)
+ '(picasm-use-default-keybindings nil)
  '(pyenv-mode t)
  '(pytest-cmd-flags "-x -s -vv")
  '(safe-local-variable-values

@@ -1386,6 +1386,11 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   :straight t)
 #+END_SRC
 
+** PICASM
+#+BEGIN_SRC emacs-lisp
+(use-package picasm
+  :straight (picasm :type git :host github :repo "rswarbrick/picasm" :branch "master"))
+#+END_SRC
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
