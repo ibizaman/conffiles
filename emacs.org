@@ -1666,10 +1666,16 @@ From [[https://oremacs.com/2017/03/18/dired-ediff/][abo-abo]]:
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
 
-(defun ibizaman/ediff-files ()
+(defun ibizaman/frame-filenames ()
+  (mapcar 'buffer-file-name
+          (mapcar 'window-buffer
+                  (window-list))))
+
+(defun ibizaman/ediff-files (&optional files quit-hook)
   (interactive)
-  (lexical-let ((files (dired-get-marked-files))
-        (wnd (current-window-configuration)))
+  (lexical-let ((files (or files (dired-get-marked-files) (ibizaman/frame-filenames)))
+                (quit-hook quit-hook)
+                (wnd (current-window-configuration)))
     (if (<= (length files) 2)
         (let ((file1 (car files))
               (file2 (if (cdr files)
@@ -1683,6 +1689,7 @@ From [[https://oremacs.com/2017/03/18/dired-ediff/][abo-abo]]:
           (add-hook 'ediff-after-quit-hook-internal
                     (lambda ()
                       (setq ediff-after-quit-hook-internal nil)
+                      (when quit-hook (funcall quit-hook))
                       (set-window-configuration wnd))))
       (error "no more than 2 files should be marked"))))
 
