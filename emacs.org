@@ -2142,6 +2142,65 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
             (frame-parameters . ((undecorated . t))))))))
 #+END_SRC
 
+* Syncthing
+** Handle sync conflicts
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/syncthing-resolve-conflicts (directory)
+  "Resolve all conflicts under given DIRECTORY."
+  (interactive "D")
+  (let ((all (ibizaman/syncthing--get-sync-conflicts directory))
+        (chosen (ibizaman/syncthing--pick-a-conflict all)))
+    (ibizaman/syncthing-resolve-conflict chosen)))
+
+
+(defun ibizaman/syncthing-show-conflicts-dired (directory)
+  "Open dired buffer at DIRECTORY showing all syncthing conflicts."
+  (interactive "D")
+  (find-name-dired directory "*.sync-conflict-*"))
+
+
+(defun ibizaman/syncthing-resolve-conflict-dired (&optional arg)
+  "Resolve conflict of first marked file in dired or close to point with ARG."
+  (interactive "P")
+  (let ((chosen (car (dired-get-marked-files nil arg))))
+    (ibizaman/syncthing-resolve-conflict chosen)))
+
+
+(defun ibizaman/syncthing-resolve-conflict (conflict)
+  "Resolve CONFLICT file using ediff."
+  (let* ((normal (ibizaman/syncthing--get-normal-filename conflict)))
+    (ibizaman/ediff-files
+     (list conflict normal)
+     `(lambda ()
+       (when (y-or-n-p "Delete conflict file? ")
+         (kill-buffer (get-file-buffer ,conflict))
+         (delete-file ,conflict))))))
+
+
+(defun ibizaman/syncthing--get-sync-conflicts (directory)
+  "Return a list of all sync conflict files in a DIRECTORY."
+  (directory-files-recursively directory "\\.sync-conflict-"))
+
+
+(defvar ibizaman/syncthing--conflict-history
+  "Completion conflict history")
+
+(defun ibizaman/syncthing--pick-a-conflict (conflicts)
+  "Let user choose the next conflict from CONFLICTS to investigate."
+  (completing-read "Choose the conflict to investigate: " conflicts
+                   nil t nil ibizaman/syncthing--conflict-history))
+
+
+(defun ibizaman/syncthing--get-normal-filename (conflict)
+  "Get non-conflict filename matching the given CONFLICT."
+  (replace-regexp-in-string "\\.sync-conflict-.*\\(\\..*\\)$" "\\1" conflict))
+
+
+; (message (ibizaman/syncthing--get-normal-filename "hello.sync-conflict-.1234.hs"))
+
+
+; (message "%s" (ibizaman/syncthing--get-sync-conflicts "~/Projects/mesh"))
+#+END_SRC
 * In progress
 :PROPERTIES:
 :HEADER-ARGS: :tangle no
