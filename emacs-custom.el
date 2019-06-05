@@ -34,12 +34,9 @@
  '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
  '(global-git-gutter+-mode t)
- '(hl-paren-background-colors
-   (quote
-    ("red2" "DarkOrange2" "gold2" "chartreuse2" "DarkSlateGray2" "SlateBlue2")))
  '(hl-paren-colors
    (quote
-    ("gray100" "gray100" "gray100" "gray100" "gray100" "gray100")))
+    ("red2" "DarkOrange2" "gold2" "chartreuse2" "DarkSlateGray2" "SlateBlue2")))
  '(ibizaman/mu4e-unread-excluded-lists
    (quote
     ("055beefeabea5aa48a0c0bc74.107657.list-id.mcsv.net" "80fc49ec84df168e48c00c18a.307193.list-id.mcsv.net" "faa8eb4ef3a111cef92c4f3d4.583821.list-id.mcsv.net" "baron.PyCQA.github.com" "codalist.coda.cs.cmu.edu" "42-hackerspaces.be" "elixir.elixir-lang.github.com" "elodie.jmathai.github.com" "redbaron.PyCQA.github.com" "password-store.lists.zx2c4.com" "emacs-devel.gnu.org")))
