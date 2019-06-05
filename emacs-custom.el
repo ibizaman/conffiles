@@ -29,10 +29,7 @@
    (quote
     (term-mode erc-mode eshell-mode geiser-repl-mode gud-mode inferior-apl-mode inferior-caml-mode inferior-emacs-lisp-mode inferior-j-mode inferior-python-mode inferior-scheme-mode inferior-sml-mode internal-ange-ftp-mode prolog-inferior-mode reb-mode shell-mode slime-repl-mode wdired-mode)))
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
- '(flycheck-gometalinter-deadline "15s")
- '(flycheck-gometalinter-fast t)
- '(flycheck-gometalinter-tests t)
- '(flycheck-gometalinter-vendor nil)
+ '(flycheck-golangci-lint-tests t)
  '(flycheck-popup-tip-error-prefix ">> ")
  '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
