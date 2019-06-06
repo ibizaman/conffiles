@@ -9,6 +9,9 @@
  '(compilation-auto-jump-to-first-error t)
  '(compilation-scroll-output (quote first-error))
  '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
+ '(desktop-restore-eager t)
+ '(desktop-restore-in-current-display nil)
+ '(desktop-save-hook (quote (tramp-cleanup-all-connections)))
  '(dired-dwim-target t)
  '(display-buffer-alist
    (quote
