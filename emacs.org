@@ -205,16 +205,6 @@ If no FONT-SIZE provided, reset the size to its default variable."
   :straight (command-log-mode :type git :host github :repo "ibizaman/command-log-mode" :branch "master"))
 #+END_SRC
 
-** Menu
-#+BEGIN_SRC emacs-lisp
-(defun ibizaman/evil-collection-imenu-setup ()
-  "Set up `evil' bindings for `imenu'."
-  (evil-define-key 'normal 'global
-    "gt" 'counsel-semantic-or-imenu))
-
-(ibizaman/evil-collection-imenu-setup)
-#+END_SRC
-
 ** Customization
 #+BEGIN_SRC emacs-lisp
 ; Move custom-set-variables and custom-set-faces in different file
@@ -936,6 +926,13 @@ With truncate-lines, do not split word
   :config
   (evil-mode 1)
   (global-unset-key (kbd "C-x +")) ; Set to "C-w =" with evil
+
+  (defun ibizaman/evil-collection-imenu-setup ()
+  "Set up `evil' bindings for `imenu'."
+  (evil-define-key 'normal 'global
+      "gt" 'counsel-semantic-or-imenu))
+
+  (ibizaman/evil-collection-imenu-setup)
   )
 
 (use-package evil-collection
