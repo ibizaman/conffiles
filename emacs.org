@@ -536,6 +536,13 @@ Always expand org file when diffing them
          ("M-S-n" . ahs-forward-definition)))
 #+END_SRC
 
+** Split shell
+#+BEGIN_SRC emacs-lisp
+(use-package bifocal
+  :straight t
+  :config
+  (bifocal-global-mode 1))
+#+END_SRC
 * Org
 ** Install latest version
 
