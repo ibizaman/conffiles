@@ -524,6 +524,18 @@ Always expand org file when diffing them
 (setq compilation-buffer-name-function #'ibizaman/compilation-buffer-name)
 #+END_SRC
 
+** Highlight Symbol
+#+BEGIN_SRC emacs-lisp
+(use-package auto-highlight-symbol
+  :straight t
+  :config
+  (global-auto-highlight-symbol-mode 1)
+  :bind (("M-p" . ahs-backward)
+         ("M-n" . ahs-forward)
+         ("M-S-p" . ahs-backward-definition)
+         ("M-S-n" . ahs-forward-definition)))
+#+END_SRC
+
 * Org
 ** Install latest version
 

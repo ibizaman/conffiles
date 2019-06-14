@@ -4,6 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(adaptive-fill-regexp "[ 	]*\\([-–/!|#%;>*·•‣⁃◦]+[ 	]*\\)*")
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.3)
  '(auth-source-do-cache t)
  '(company-go-show-annotation t)
  '(compilation-auto-jump-to-first-error t)
