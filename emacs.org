@@ -288,7 +288,7 @@ If no FONT-SIZE provided, reset the size to its default variable."
   :after magit
   :init (global-unset-key (kbd "C-x f"))
   :bind (("C-s" . 'swiper)
-         ("C-x f f" . 'counsel-git)
+         ("C-x f f" . 'ibizaman/counsel-git-default)
          ("C-x f g" . 'ibizaman/counsel-git-grep-default))
   :config
   (ivy-mode 1)
@@ -298,18 +298,29 @@ If no FONT-SIZE provided, reset the size to its default variable."
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
 
+(defun ibizaman/relevant-directory ()
+  "Return the relevant directory for current buffer."
+  (or default-directory
+      (buffer-file-name (current-buffer))))
+
 (defun ibizaman/counsel-git-default ()
-  "Find file in the current Git repository with word at point by
-default."
+  "Find file in the current relevant directory with word at point by default."
   (interactive)
-  (counsel-git (word-at-point)))
+  (let ((search-term (thing-at-point 'word t)))
+    (if-let ((dir (ibizaman/relevant-directory))
+             (git-root (vc-git-root dir)))
+        (counsel-git search-term)
+      (counsel-file-jump search-term (read-directory-name "Root for finding file: ")))))
 
 (defun ibizaman/counsel-git-grep-default ()
-  "Grep for a string in the current git repository with word at
-point by default."
+  "Grep for a string in the current relevant directory with word at point by default."
   (interactive)
-  (counsel-git-grep nil (word-at-point)))
-
+  (let ((search-term (thing-at-point 'word t)))
+    (if-let ((dir (ibizaman/relevant-directory))
+             (git-root (vc-git-root dir)))
+        (counsel-git-grep nil search-term)
+      (let ((default-directory (read-directory-name "Root for grepping: ")))
+        (counsel-grep search-term)))))
 
 (use-package counsel
   :straight t
