@@ -39,6 +39,7 @@
  '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
  '(global-git-gutter+-mode t)
+ '(gofmt-command "goimports")
  '(hl-paren-background-colors (quote nil))
  '(hl-paren-colors
    (quote
