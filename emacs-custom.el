@@ -36,6 +36,7 @@
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(flycheck-golangci-lint-tests t)
  '(flycheck-popup-tip-error-prefix ">> ")
+ '(flycheck-relevant-error-other-file-show nil)
  '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
  '(global-git-gutter+-mode t)
