@@ -1152,6 +1152,26 @@ TODO: slow in org-mode
   (add-hook 'after-init-hook 'global-company-mode)
   :config
   (evil-define-key 'insert 'global (kbd "<tab>") 'company-complete))
+
+
+
+(use-package company-emoji
+  :straight t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-emoji))
+
+(use-package company-lsp
+  :straight t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-lsp))
+
+(use-package company-quickhelp
+  :straight t
+  :after company
+  :config
+  (company-quickhelp-mode))
 #+END_SRC
 
 * EWW
