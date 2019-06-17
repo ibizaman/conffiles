@@ -543,6 +543,16 @@ Always expand org file when diffing them
   :config
   (bifocal-global-mode 1))
 #+END_SRC
+** Dired Sidebar
+#+BEGIN_SRC emacs-lisp
+(use-package dired-sidebar
+  :straight t
+  :commands (dired-sidebar-toggle-sidebar)
+  :bind (("C-c C-d" . dired-sidebar-toggle-sidebar)
+         :map org-mode-map
+         ("C-c C-d" . dired-sidebar-toggle-sidebar)))
+#+END_SRC
+
 * Org
 ** Install latest version
 
@@ -1361,7 +1371,7 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   (subword-mode 1)
 
   :bind (:map go-mode-map
-         ("C-c C-d" . godoc-at-point)))
+         ("C-h C-g" . godoc-at-point)))
 
 (use-package go-eldoc
   :straight t
