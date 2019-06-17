@@ -39,6 +39,7 @@
  '(git-gutter+-hide-gutter t)
  '(global-command-log-mode t)
  '(global-git-gutter+-mode t)
+ '(hl-paren-background-colors (quote nil))
  '(hl-paren-colors
    (quote
     ("red2" "DarkOrange2" "gold2" "chartreuse2" "DarkSlateGray2" "SlateBlue2")))
