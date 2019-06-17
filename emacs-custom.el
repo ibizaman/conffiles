@@ -95,6 +95,7 @@
  '(picasm-mplinkx-program "/Applications/microchip/mplabx/v5.20/mpasmx/mplink")
  '(picasm-pk2cmd-program "~/Projects/pic-radio/bin/pk2cmd")
  '(picasm-pk2devicefile "~/Projects/pic-radio/bin/")
+ '(picasm-require-comment nil)
  '(picasm-show-assembler-output t)
  '(picasm-use-default-keybindings nil)
  '(pyenv-mode t)
