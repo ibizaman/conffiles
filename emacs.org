@@ -1186,7 +1186,7 @@ Add org links to eww pages:
 #+END_SRC
 
 ** Python
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package pyenv-mode
   :straight t
   :config
