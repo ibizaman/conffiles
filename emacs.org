@@ -1098,12 +1098,6 @@ With truncate-lines, do not split word
   (git-gutter+-toggle-fringe))
 #+END_SRC
 
-* SQL
-#+BEGIN_SRC emacs-lisp
-(use-package sql-indent
-  :straight t)
-#+END_SRC
-
 * Linting
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
@@ -1460,6 +1454,12 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 (use-package picasm
   :straight (picasm :type git :host github :repo "rswarbrick/picasm" :branch "master"))
 #+END_SRC
+** SQL
+#+BEGIN_SRC emacs-lisp
+(use-package sql-indent
+  :straight t)
+#+END_SRC
+
 * Secrets
 #+BEGIN_SRC emacs-lisp
 (use-package pass
