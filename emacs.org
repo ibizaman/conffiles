@@ -1495,6 +1495,14 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   (auth-source-pass-enable))
 #+END_SRC
 
+** Makefile
+#+BEGIN_SRC emacs-lisp
+(use-package makefile-executor
+  :straight t
+  :config
+  (add-hook 'makefile-mode-hook 'makefile-executor-mode))
+#+END_SRC
+
 * Email
 
 Install instructions:
