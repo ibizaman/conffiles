@@ -83,6 +83,31 @@ There are two things you can do about this warning:
     (insert (format "\n%s" forms))))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/relevant-directory ()
+  "Return the relevant directory for current buffer."
+  (or default-directory
+      (buffer-file-name (current-buffer))))
+
+(defun ibizaman/project-root ()
+  "Get project root, if any."
+    (if-let ((dir (ibizaman/relevant-directory))
+             (git-root (vc-git-root dir)))
+        git-root
+      nil))
+
+(defun ibizaman/find-in-project-root-regexp (regexp)
+  "Find files matching REGEXP in root directory."
+  (let ((root-dir (ibizaman/project-root)))
+
+    (when (not root-dir)
+      (error "No project root"))
+
+    (mapcar
+     (lambda (el) (file-relative-name el root-dir))
+     (directory-files-recursively root-dir regexp))))
+#+END_SRC
+
 ** Expand region
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
@@ -297,11 +322,6 @@ If no FONT-SIZE provided, reset the size to its default variable."
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   (setq magit-completing-read-function 'ivy-completing-read))
-
-(defun ibizaman/relevant-directory ()
-  "Return the relevant directory for current buffer."
-  (or default-directory
-      (buffer-file-name (current-buffer))))
 
 (defun ibizaman/counsel-git-default ()
   "Find file in the current relevant directory with word at point by default."
