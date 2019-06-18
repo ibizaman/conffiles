@@ -510,7 +510,9 @@ Always expand org file when diffing them
   (defun reattach-occur ()
     (if (get-buffer "*Occur*")
         (switch-to-buffer-other-window "*Occur*")
-      (hydra-occur-dwim/body) )))
+      (hydra-occur-dwim/body) ))
+
+  (global-set-key (kbd "M-s o") 'occur-dwim))
 #+END_SRC
 
 ** Compilation
