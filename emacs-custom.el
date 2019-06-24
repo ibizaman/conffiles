@@ -82,7 +82,11 @@
 "))))
  '(org-default-notes-file "~/org/notes")
  '(org-edit-src-content-indentation 0)
+ '(org-id-link-to-org-use-id (quote create-if-interactive-and-no-custom-id))
  '(org-jira-download-dir "~/Downloads/jira")
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-eww org-gnus org-id org-info org-irc org-mhe org-rmail org-w3m)))
  '(org-special-ctrl-a/e t)
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-tab-acts-natively t)
