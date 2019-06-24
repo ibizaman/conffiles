@@ -155,6 +155,12 @@ There are two things you can do about this warning:
 #+END_SRC
 
 * General
+** Temp directory
+#+BEGIN_SRC emacs-lisp
+(make-directory "~/.emacs.d/tmp")
+(setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
+#+END_SRC
+
 ** Whitespace
 #+BEGIN_SRC emacs-lisp
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
