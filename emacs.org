@@ -1427,7 +1427,11 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 (use-package flycheck-golangci-lint
   :straight t
   :hook
-  (go-mode . flycheck-golangci-lint-setup))
+  (go-mode . flycheck-golangci-lint-setup)
+  :config
+  (flycheck-add-next-checker 'golangci-lint 'go-gofmt)
+  (flycheck-add-next-checker 'golangci-lint 'go-build)
+  (flycheck-add-next-checker 'golangci-lint 'go-test))
 
 (use-package company-go
   :straight t
