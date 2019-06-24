@@ -2260,6 +2260,69 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
             (frame-parameters . ((undecorated . t))))))))
 #+END_SRC
 
+* Launcher
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/pass-frame (&optional _switch)
+  "Complete pass names in a dedicated frame."
+  (interactive)
+
+  (ibizaman/ivy-frame
+   "Choose a password:"
+   (password-store-list)
+   (lambda (entry)
+     (password-store--run "show" "--clip" entry))))
+
+(defun ibizaman/ivy-frame (prompt elems action)
+  "Show a frame to auto-complete ELEMS using PROMPT.
+
+Then run ACTION with given selected element as argument."
+  (with-current-buffer (get-buffer-create "*modal*")
+    (let ((frame (make-frame '((auto-raise . t)
+                               (background-color . "DeepSkyBlue3")
+                               (cursor-color . "MediumPurple1")
+                               (font . "Menlo 15")
+                               (foreground-color . "#eeeeec")
+                               (height . 20)
+                               (internal-border-width . 20)
+                               (left . 0.33)
+                               (left-fringe . 0)
+                               (line-spacing . 3)
+                               (menu-bar-lines . 0)
+                               (minibuffer . only)
+                               (right-fringe . 0)
+                               (tool-bar-lines . 0)
+                               (top . 48)
+                               (undecorated . t)
+                               (unsplittable . t)
+                               (vertical-scroll-bars . nil)
+                               (width . 110)))))
+      (set-face-attribute 'ivy-minibuffer-match-face-1 frame
+                          :background nil
+                          :foreground nil)
+      (set-face-attribute 'ivy-minibuffer-match-face-2 frame
+                          :background nil
+                          :foreground "orange1")
+      (set-face-attribute 'ivy-minibuffer-match-face-3 frame
+                          :background nil
+                          :foreground "orange1")
+      (set-face-attribute 'ivy-minibuffer-match-face-4 frame
+                          :background nil
+                          :foreground "orange1")
+      (set-face-attribute 'ivy-current-match frame
+                          :background "#ffc911"
+                          :foreground "red")
+      (set-face-attribute 'minibuffer-prompt frame
+                          :foreground "grey")
+      (let ((ivy-height 20)
+            (ivy-count-format ""))
+        (raise-frame)
+        (ivy-read prompt elems
+                  :action action
+                  :unwind (lambda ()
+                            (delete-frame)
+                            (other-window 1)))))))
+#+END_SRC
+
 * Syncthing
 ** Handle sync conflicts
 #+BEGIN_SRC emacs-lisp
