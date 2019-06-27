@@ -8,7 +8,7 @@
  '(ahs-idle-interval 0.3)
  '(auth-source-do-cache t)
  '(company-go-show-annotation t)
- '(compilation-auto-jump-to-first-error t)
+ '(compilation-auto-jump-to-first-error nil)
  '(compilation-scroll-output (quote first-error))
  '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
  '(desktop-restore-eager t)
