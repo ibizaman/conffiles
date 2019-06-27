@@ -17,7 +17,13 @@
  '(dired-dwim-target t)
  '(display-buffer-alist
    (quote
-    (("*compilation\\\\*" display-buffer-in-side-window
+    (("^\\*Flycheck" display-buffer-in-side-window
+      (slot . 1)
+      (side . bottom))
+     ("Test\\*$" display-buffer-in-side-window
+      (slot . 0)
+      (side . right))
+     ("^\\*compilation" display-buffer-in-side-window
       (slot . 0)
       (side . bottom)))))
  '(ediff-autostore-merges t)
