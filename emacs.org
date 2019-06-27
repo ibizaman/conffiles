@@ -1412,6 +1412,14 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
                             (add-hook 'before-save-hook 'gofmt-before-save nil t))) ; local hook
   (subword-mode 1)
 
+  ; Fix regexp for finding errors
+  (setq compilation-error-regexp-alist-alist
+        (assq-delete-all 'go-test compilation-error-regexp-alist-alist))
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(go-test "^\\(?:[ 	]\\)+\\([^():	\n]+?\\):\\([0-9]+\\):" 1 2)
+               t)
+  (pushnew 'go-test compilation-error-regexp-alist)
+
   :bind (:map go-mode-map
          ("C-h C-g" . godoc-at-point)))
 
