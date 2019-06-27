@@ -119,6 +119,7 @@
      (eval setenv "OVERRIDE_CS_POSTGRES_TESTING" "postgres://timi:postgres@localhost:5432/postgres"))))
  '(tab-width 4)
  '(text-mode-hook (quote (turn-on-flyspell text-mode-hook-identify)))
+ '(use-file-dialog nil)
  '(wdired-allow-to-change-permissions t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
