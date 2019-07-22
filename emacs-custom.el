@@ -97,6 +97,7 @@
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-tab-acts-natively t)
  '(org-src-window-setup (quote current-window))
+ '(password-store-password-length 40)
  '(picasm-assembler-program (quote mpasmx))
  '(picasm-db-file "~/.emacs.d/straight/repos/picasm/picasm-db.el")
  '(picasm-gpasm-program "gpasm")
