@@ -581,6 +581,17 @@ Always expand org file when diffing them
          ("C-c C-d" . dired-sidebar-toggle-sidebar)))
 #+END_SRC
 
+** Processes
+#+BEGIN_SRC emacs-lisp
+(defun ibizaman/process-menu-add-bindings()
+  "Add bindings to process-menu-mode."
+    (define-key process-menu-mode-map (kbd "g r") 'list-processes)
+    (define-key process-menu-mode-map (kbd "x") 'process-menu-delete-process)
+    (evil-define-key 'normal process-menu-mode-map (kbd "x") 'process-menu-delete-process))
+
+(add-hook 'process-menu-mode-hook 'ibizaman/process-menu-add-bindings)
+#+END_SRC
+
 * Org
 ** Install latest version
 
