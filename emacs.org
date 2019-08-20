@@ -1322,7 +1322,8 @@ Add org links to eww pages:
 (use-package elm-mode
   :straight t
   :config
-  (add-hook 'elm-mode-hook #'ibizaman/elm-mode-hook))
+  (add-hook 'elm-mode-hook #'ibizaman/elm-mode-hook)
+  (add-hook 'elm-mode-hook #'elm-format-on-save-mode))
 
 (use-package flycheck-elm
   :straight t
