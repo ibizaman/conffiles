@@ -157,7 +157,7 @@ There are two things you can do about this warning:
 * General
 ** Temp directory
 #+BEGIN_SRC emacs-lisp
-(make-directory "~/.emacs.d/tmp")
+(make-directory "~/.emacs.d/tmp" t)
 (setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
 #+END_SRC
 
