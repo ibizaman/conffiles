@@ -1171,8 +1171,10 @@ TODO: slow in org-mode
 
 (use-package ispell
   :config
-  (setq ispell-program-name "hunspell"
-        ispell-local-dictionary "fr"))
+  (when (executable-find "hunspell")
+    (setq ispell-program-name "hunspell"
+          ispell-really-hunspell t
+          ispell-dictionary "en_US")))
 #+END_SRC
 
 * Autocompletion
