@@ -47,6 +47,12 @@
  '(global-command-log-mode t)
  '(global-git-gutter+-mode t)
  '(gofmt-command "goimports")
+ '(haskell-hoogle-url "http://localhost:65000/?hoogle=%s")
+ '(haskell-mode-hook
+   (quote
+    (capitalized-words-mode haskell-decl-scan-mode haskell-indent-mode haskell-indentation-mode)))
+ '(haskell-mode-stylish-haskell-path "~/.local/bin/brittany")
+ '(haskell-stylish-on-save t)
  '(hl-paren-background-colors (quote nil))
  '(hl-paren-colors
    (quote
