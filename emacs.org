@@ -1448,6 +1448,24 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   :config
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
+
+(defun ibizaman/go-install-dwim()
+  "Install current buffer."
+  (interactive)
+  (shell-command "go install ./..."))
+
+
+(defun ibizaman/go-generate-dwim()
+  "Generate go code from current buffer's directory."
+  (interactive)
+  (shell-command "go generate -v ./..."))
+
+
+(defun ibizaman/go-doc-serve()
+  "Install current buffer."
+  (interactive)
+  (start-process-shell-command "*godoc serve*" "*godoc serve*" "godoc -http=:6060")
+  (browse-url "http://localhost:6060"))
 (use-package go-guru
   :straight t)
 
