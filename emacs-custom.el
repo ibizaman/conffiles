@@ -9,7 +9,7 @@
  '(auth-source-do-cache t)
  '(company-go-show-annotation t)
  '(compilation-auto-jump-to-first-error nil)
- '(compilation-scroll-output (quote first-error))
+ '(compilation-scroll-output t)
  '(default-frame-alist (quote ((fullscreen . maximized) (undecorated))))
  '(desktop-restore-eager t)
  '(desktop-restore-in-current-display nil)
