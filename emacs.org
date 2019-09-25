@@ -785,12 +785,6 @@ Values in the form $symbol are expanded to their value from `:var symbol \"value
 #+END_SRC
 
 ** Capture
-I don't know why, but I need this to load =org-mks= and =org-show-all=.
-#+BEGIN_SRC emacs-lisp
-(load (expand-file-name "~/.emacs.d/straight/repos/org/lisp/org-macs.el"))
-(load (expand-file-name "~/.emacs.d/straight/repos/org/lisp/org.el"))
-#+END_SRC
-
 No need to start the server manually here as we use a daemon:
 [[id:498ba909-6d1b-44a6-b583-afb406d6347f][dots.org/Emacs]]
 
