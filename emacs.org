@@ -1,3 +1,7 @@
+My emacs config
+
+#+PROPERTY: HEADER-ARGS+ :comments no :tangle emacs.el
+
 * Bootstrapping
 ** Straight
 #+BEGIN_SRC emacs-lisp
@@ -769,7 +773,11 @@ I don't know why, but I need this to load =org-mks= and =org-show-all=.
 No need to start the server manually here as we use a daemon:
 [[id:498ba909-6d1b-44a6-b583-afb406d6347f][dots.org/Emacs]]
 
+
 *** Protocol
+:PROPERTIES:
+:HEADER-ARGS: :tangle no
+:END:
 Inspired from https://orgmode.org/worg/org-contrib/org-protocol.html
 
 #+BEGIN_SRC emacs-lisp
@@ -854,6 +862,7 @@ javascript:(function () {
 
 
 ** Links
+Add links to customize groups and options:
 #+BEGIN_SRC emacs-lisp
 (require 'org)
 
@@ -1395,6 +1404,11 @@ Add org links to eww pages:
 #+END_SRC
 
 ** Go
+*** Install instructions
+:PROPERTIES:
+:HEADER-ARGS: :tangle no
+:END:
+
 Needs:
 #+BEGIN_SRC bash :results output
 go get -u github.com/nsf/gocode
@@ -1417,6 +1431,7 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 #+END_SRC
 
 
+*** Config
 #+BEGIN_SRC emacs-lisp
 (use-package go-mode
   :straight t
@@ -1557,8 +1572,10 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 #+END_SRC
 
 * Email
-
-Install instructions:
+** Install instructions
+:PROPERTIES:
+:HEADER-ARGS: :tangle no
+:END:
 #+BEGIN_SRC bash
 git clone git://github.com/djcb/mu.git
 cd mu
@@ -1567,6 +1584,7 @@ brew install gmime
 sudo make install
 #+END_SRC
 
+** Config
 #+BEGIN_SRC emacs-lisp :tangle no
 (add-to-list 'load-path "~/.emacs.d/straight/repos/mu4e/mu4e")
 (use-package mu4e
