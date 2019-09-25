@@ -1193,9 +1193,13 @@ TODO: slow in org-mode
 (use-package ispell
   :config
   (when (executable-find "hunspell")
+    (setenv "DICPATH" (expand-file-name "~/Library/Spelling/"))
     (setq ispell-program-name "hunspell"
           ispell-really-hunspell t
-          ispell-dictionary "en_US")))
+          ispell-dictionary "en_US")
+    (ispell-set-spellchecker-params)
+    (ispell-hunspell-add-multi-dic "en_US,francais")))
+
 #+END_SRC
 
 * Autocompletion
