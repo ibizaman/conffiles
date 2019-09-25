@@ -26,7 +26,6 @@
      ("^\\*compilation" display-buffer-in-side-window
       (slot . 0)
       (side . bottom)))))
- '(ediff-autostore-merges t)
  '(ediff-merge-split-window-function (quote split-window-horizontally))
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
