@@ -44,6 +44,61 @@ There are two things you can do about this warning:
 (package-initialize)
 #+END_SRC
 
+* Evil
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :straight t
+  :init
+  (setq evil-want-C-u-scroll t
+        ; Warning (evil-collection): Make sure to set
+        ; `evil-want-keybinding' to nil before loading evil or
+        ; evil-collection.  See
+        ; https://github.com/emacs-evil/evil-collection/issues/60 for
+        ; more details.
+        evil-want-keybinding nil)
+  (define-key global-map (kbd "C-i") 'universal-argument)
+  (define-key universal-argument-map (kbd "C-i") 'universal-argument-more)
+  :config
+  (evil-mode 1)
+  (global-unset-key (kbd "C-x +")) ; Set to "C-w =" with evil
+
+  (defun ibizaman/toggle-value (sym)
+    "Toggle SYM assuming it is a boolean."
+    (set sym (not (symbol-value sym))))
+
+
+  (defun ibizaman/evil-collection-imenu-setup ()
+  "Set up `evil' bindings for `imenu'."
+  (evil-define-key 'normal 'global
+      "gt" 'counsel-semantic-or-imenu))
+
+  (ibizaman/evil-collection-imenu-setup)
+  )
+
+(use-package evil-collection
+  :straight t
+  :after evil
+  :config
+  (evil-collection-init))
+
+(use-package evil-textobj-syntax
+  :straight t)
+
+(use-package evil-textobj-column
+  :straight t
+  :bind (:map evil-inner-text-objects-map
+         ("c" . evil-textobj-column-word)
+         ("C" . evil-textobj-column-WORD)))
+
+(use-package evil-numbers
+  :straight t
+  :bind (("C-c +" . evil-numbers/inc-at-pt)
+         ("C-c -" . evil-numbers/dec-at-pt)))
+#+END_SRC
+
+#+RESULTS:
+: evil-numbers/dec-at-pt
+
 * System
 ** Mac
 #+BEGIN_SRC emacs-lisp
@@ -998,52 +1053,6 @@ With truncate-lines, do not split word
         mode-line-end-spaces))
 #+END_SRC
 
-* Evil
-#+BEGIN_SRC emacs-lisp
-(use-package evil
-  :straight t
-  :init
-  (setq evil-want-C-u-scroll t
-        ; Warning (evil-collection): Make sure to set
-        ; `evil-want-keybinding' to nil before loading evil or
-        ; evil-collection.  See
-        ; https://github.com/emacs-evil/evil-collection/issues/60 for
-        ; more details.
-        evil-want-keybinding nil)
-  (define-key global-map (kbd "C-i") 'universal-argument)
-  (define-key universal-argument-map (kbd "C-i") 'universal-argument-more)
-  :config
-  (evil-mode 1)
-  (global-unset-key (kbd "C-x +")) ; Set to "C-w =" with evil
-
-  (defun ibizaman/evil-collection-imenu-setup ()
-  "Set up `evil' bindings for `imenu'."
-  (evil-define-key 'normal 'global
-      "gt" 'counsel-semantic-or-imenu))
-
-  (ibizaman/evil-collection-imenu-setup)
-  )
-
-(use-package evil-collection
-  :straight t
-  :after evil
-  :config
-  (evil-collection-init))
-
-(use-package evil-textobj-syntax
-  :straight t)
-
-(use-package evil-textobj-column
-  :straight t
-  :bind (:map evil-inner-text-objects-map
-         ("c" . evil-textobj-column-word)
-         ("C" . evil-textobj-column-WORD)))
-
-(use-package evil-numbers
-  :straight t
-  :bind (("C-c +" . evil-numbers/inc-at-pt)
-         ("C-c -" . evil-numbers/dec-at-pt)))
-#+END_SRC
 
 * Magit
 #+BEGIN_SRC emacs-lisp
