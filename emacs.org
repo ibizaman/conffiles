@@ -1061,16 +1061,12 @@ With truncate-lines, do not split word
 (use-package transient
   :straight (transient :type git :host github :repo "magit/transient" :branch "master"))
 
-(use-package magit-gh-pulls
-  :straight t
-  :after transient)
-
 (use-package evil-magit
   :straight t)
 
 (use-package magit
   :straight t
-  :after (magit-gh-pulls transient)
+  :after transient
   :init
   (setq magit-diff-refine-hunk t
 	magit-diff-paint-whitespace t
