@@ -1146,6 +1146,10 @@ TODO: slow in org-mode
   (setq flyspell-issue-message-flag nil)  ; speedup checking entire buffer
   )
 
+(use-package flyspell-popup
+  :straight t
+  :after flyspell)
+
 (use-package ispell
   :config
   (when (executable-find "hunspell")
