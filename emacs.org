@@ -1102,7 +1102,10 @@ With truncate-lines, do not split word
 
 (use-package forge
   :straight (forge :type git :host github :repo "magit/forge" :branch "master")
-  :after (magit transient))
+  :after (magit transient)
+  :config
+  (push '("ibizaman.github.com" "api.github.com" "github.com" forge-github-repository)
+        forge-alist))
 
 
 (defun ibizaman/magit-commit-create-WIP ()
