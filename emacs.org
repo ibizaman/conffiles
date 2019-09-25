@@ -2259,7 +2259,8 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
 #+END_SRC
 
 * Work
-#+BEGIN_SRC emacs-lisp
+** OpenMail
+#+BEGIN_SRC emacs-lisp :tangle no
 (progn
   (setq openmail-project-root (expand-file-name "~/Projects/OpenMail/OpenMail/"))
   (add-to-list 'load-path (concat openmail-project-root "tools/emacs/"))
@@ -2284,9 +2285,10 @@ _r_eturn    r_e_cord  _c_lear frame  _q_uit
   (require 'pm-yaml nil t))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (setenv "PGCONNECT_TIMEOUT" "5")
 #+END_SRC
+
 
 * Yequake
 #+BEGIN_SRC emacs-lisp
@@ -2427,6 +2429,7 @@ Then run ACTION with given selected element as argument."
 
 ; (message "%s" (ibizaman/syncthing--get-sync-conflicts "~/Projects/mesh"))
 #+END_SRC
+
 * In progress
 :PROPERTIES:
 :HEADER-ARGS: :tangle no
