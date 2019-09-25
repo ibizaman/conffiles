@@ -1884,7 +1884,7 @@ From [[https://oremacs.com/2017/03/18/dired-ediff/][abo-abo]]:
 #+END_SRC
 
 ** dired
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (require 'dired)
 
 (defhydra hydra-dired (:hint nil :color pink)
@@ -1942,7 +1942,7 @@ T - tag prefix
 #+END_SRC
 
 ** flycheck
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (defhydra hydra-flycheck
   (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
         :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
@@ -1959,7 +1959,7 @@ T - tag prefix
 #+END_SRC
 
 ** ibuffer
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (defhydra hydra-ibuffer-main (:color pink :hint nil)
   "
 ^Mark^         ^Actions^         ^View^          ^Select^              ^Navigation^
@@ -2056,11 +2056,10 @@ _t_: toggle    _._: toggle hydra _H_: help       C-o other win no-select
   ("b" hydra-ibuffer-main/body "back" :color blue))
 
 (define-key ibuffer-mode-map (kbd "?") 'hydra-ibuffer-main/body)
-(add-hook 'ibuffer-hook #'hydra-ibuffer-main/body)
 #+END_SRC
 
 ** info
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (defhydra hydra-info (:color pink
                              :hint nil)
   "
@@ -2154,7 +2153,7 @@ _s_earch regex (_S_ case sens) ^^^^   _1_ .. _9_ Pick first .. ninth item in the
 #+END_SRC
 
 ** org-jira
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (progn
   (defhydra hydra-org-jira-project (:exit t)
     "Org-jira project"
@@ -2213,7 +2212,7 @@ _s_earch regex (_S_ case sens) ^^^^   _1_ .. _9_ Pick first .. ninth item in the
 #+END_SRC
 
 ** debug
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (progn
   (require 'debug)
   (defhydra hydra-elisp (:exit t :hint nil)
