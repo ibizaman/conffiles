@@ -654,6 +654,14 @@ Always expand org file when diffing them
 (add-hook 'process-menu-mode-hook 'ibizaman/process-menu-add-bindings)
 #+END_SRC
 
+** Info
+#+BEGIN_SRC emacs-lisp
+(global-evil-collection-unimpaired-mode -1)
+(evil-collection-unimpaired-mode -1)
+(evil-define-key 'normal Info-mode-map (kbd "]") #'Info-forward-node)
+(evil-define-key 'normal Info-mode-map (kbd "[") #'Info-backward-node)
+#+END_SRC
+
 * Org
 
 ** Configure
