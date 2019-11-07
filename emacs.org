@@ -1590,6 +1590,32 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
          (format "--parallel=\"%s\"" go-test-args-parallel)))
 
 
+     (defvar go-test-args-coverprofile nil
+       "Go test arg --coverprofile")
+
+     (defun go-test-args-coverprofile-toggle ()
+       "Toggle coverprofile argument."
+       (go-test-args--toggle-str 'go-test-args-coverprofile))
+
+     (defun go-test-args-coverprofile-arg ()
+       "Get coverprofile argument."
+       (if (null go-test-args-coverprofile) ""
+         (format "--coverprofile=\"%s\"" go-test-args-coverprofile)))
+
+
+     (defvar go-test-args-coverpkg nil
+       "Go test arg --coverpkg=")
+
+     (defun go-test-args-coverpkg-toggle ()
+       "Toggle coverpkg argument."
+       (go-test-args--toggle-list 'go-test-args-coverpkg ()))
+
+     (defun go-test-args-coverpkg-arg ()
+       "Get coverpkg argument."
+       (if (null go-test-args-coverpkg) ""
+         (format "--coverpkg=\"%s\"" (mapconcat 'identity (symbol-value 'go-test-args-coverpkg) ","))))
+
+
      (defun go-test-args--set-global-var ()
        "Set go-test-args from variables toggled in this module."
        (let* ((allvalues `(,(go-test-args-tags-arg)
@@ -1597,7 +1623,9 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
                            ,(go-test-args-parallel-arg)
                            ,(go-test-args-verbose-arg)
                            ,(go-test-args-race-arg)
-                           ,(go-test-args-cpu-arg)))
+                           ,(go-test-args-cpu-arg)
+                           ,(go-test-args-coverprofile-arg)
+                           ,(go-test-args-coverpkg-arg)))
               (nonnil (seq-filter (lambda (elem) (not (or (null elem) (equal elem ""))))
                                   allvalues)))
          (setq go-test-args (mapconcat 'identity nonnil " "))))
@@ -1629,18 +1657,27 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
            (set var number)))
        (go-test-args--set-global-var))
 
+     (defun go-test-args--toggle-str (var)
+       (let ((value (read-string "Enter a value (leave empty to unset the argument): ")))
+         (if (equal value "")
+             (set var nil)
+           (set var value)))
+       (go-test-args--set-global-var))
+
      (defhydra go-test-args-hydra (:hint nil)
        "
-_T_ags:       %`go-test-args-tags
-_C_ount:      %`go-test-args-count
-_P_arallel:   %`go-test-args-parallel
-_v_erbose:    %`go-test-args-verbose
-_r_ace:       %`go-test-args-race
-cp_u_:        %`go-test-args-cpu
+_T_ags:            %`go-test-args-tags
+_C_ount:           %`go-test-args-count
+_P_arallel:        %`go-test-args-parallel
+_v_erbose:         %`go-test-args-verbose
+_r_ace:            %`go-test-args-race
+cp_u_:             %`go-test-args-cpu
+c_o_verprofile:    %`go-test-args-coverprofile
+coverp_k_g:        %`go-test-args-coverpkg
 
 go-test-args: %s(symbol-value 'go-test-args)
 
-_t_: run current _t_est   _b_: run current _b_enchmark   _c_: run coverage
+_t_: run current _t_est   _b_: run current _b_enchmark   _O_: show coverage
 _f_:      ... in _f_ile   _B_:           ^^... in file
 _p_:   ... in _p_ackage   _N_:        ^^... in package
 "
@@ -1650,6 +1687,8 @@ _p_:   ... in _p_ackage   _N_:        ^^... in package
        ("v" (go-test-args-verbose-toggle))
        ("r" (go-test-args-race-toggle))
        ("u" (go-test-args-cpu-toggle))
+       ("o" (go-test-args-coverprofile-toggle))
+       ("k" (go-test-args-coverpkg-toggle))
 
        ("t" (go-test-current-test) :color blue)
        ("f" (go-test-current-file) :color blue)
@@ -1657,7 +1696,7 @@ _p_:   ... in _p_ackage   _N_:        ^^... in package
        ("b" (go-test-current-benchmark) :color blue)
        ("B" (go-test-current-file-benchmarks) :color blue)
        ("N" (go-test-current-project-benchmarks) :color blue)
-       ("c" (go-test-current-coverage) :color blue))
+       ("O" (go-coverage) :color blue))
 
      (define-key go-mode-map (kbd "C-c t") 'go-test-args-hydra/body)))
 #+END_SRC
