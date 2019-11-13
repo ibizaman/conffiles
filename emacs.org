@@ -1434,8 +1434,7 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   (pushnew 'go-test compilation-error-regexp-alist)
 
   ; GOROOT needs to be set explicitly for go-guru.
-  (async-let ((goroot (shell-command-to-string "go env GOROOT")))
-    (setenv "GOROOT" goroot))
+  (setenv "GOROOT" (string-trim (shell-command-to-string "go env GOROOT")))
   (setenv "GOPATH" (expand-file-name "~/go"))
 
   :bind (:map go-mode-map
