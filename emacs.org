@@ -341,7 +341,14 @@ If no FONT-SIZE provided, reset the size to its default variable."
         ;; " "
         ;; %l print the current line number
         ;; %c print the current column
-        (line-number-mode ("%l" (column-number-mode ":%c")))))
+        (line-number-mode ("%l" (column-number-mode ":%c")))
+        (:eval (flycheck-mode-line-status-text))
+        ))
+
+(use-package flycheck-color-mode-line
+  :straight t
+  :config
+  (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 #+END_SRC
 
 ** Keyfreq
